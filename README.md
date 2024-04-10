@@ -28,7 +28,7 @@ M2_HOME=/Path-to-my-maven-install (ex: /opt/java/apache-maven-3.9.6)
 -All of the m3xxx scripts call the m3 script.
 
 ### SDKMan (https://sdkman.io/install):
-- I am a HUGE FAN of SDKMan.  Many of these commands were implemented before (I discoverd) SDKMan.
+- I am a HUGE FAN of SDKMan.  Many of these commands were implemented before (I discovered) SDKMan.
 - Therefore, the setXXX commands are obsoleted by the use of SDKMan, but are provided if needed.
 
 ## Helpful Hints:
