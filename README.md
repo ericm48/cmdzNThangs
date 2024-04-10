@@ -12,7 +12,9 @@ These are provided as-is.
 
 ## Notes:
 - 10-Apr-2024: Initial implementation.
-- 10-Apr-2024: For maven items, (ie m3 stuff), make sure you have the following evars set in your command-line enviro (Either Windows or Bash):
+- 10-Apr-2024: For maven items, (ie m3 stuff), make sure you have the following evars set in your command-line enviro (Either Windows/MAC-OS/Bash).
+
+Below are my MAC-OS evars:
 
 M2_USER=/Path-to-my/settings.xml  (ex. /Users/foo-user/data/maven-3.x/my-name/settings.xml)
 
