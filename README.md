@@ -27,8 +27,9 @@ M2_HOME=/Path-to-my-maven-install (ex: /opt/java/apache-maven-3.9.6)
 ### Maven Items:
 -All of the m3xxx scripts call the m3 script.
 
-### SDKMan:
--These commands where implemented before sdkman was implemented. Therefore the setXXX commands are replaced by the use of sdkman.   
+### [SDKMan] (https://sdkman.io/install):
+-I am a HUGE FAN of SDKMan.  Many of these commands were implemented before SDKMan.
+-Therefore, the setXXX commands are obsoleted by the use of SDKMan, but are provided if needed.
 
 ## Helpful Hints:
 -Because of the way some ./mvnw wrappers work (or not), you probably will want to create a sym-link to CENTRALIZED .m2 folder.  This will save you extraneous downloads of depenancies to redundant locations.  
