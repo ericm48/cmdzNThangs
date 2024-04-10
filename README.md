@@ -31,7 +31,7 @@ M2_HOME=/Path-to-my-maven-install (ex: /opt/java/apache-maven-3.9.6)
 -These commands where implemented before sdkman was implemented. Therefore the setXXX commands are replaced by the use of sdkman.   
 
 ## Helpful Hints:
--Because of the way some mvnw wrappers work (or not), you probably will want to create a sym-link to CENTRALIZED .m2 folder.  This will save you extraneous downloads of depenancies to redundant locations.  
+-Because of the way some ./mvnw wrappers work (or not), you probably will want to create a sym-link to CENTRALIZED .m2 folder.  This will save you extraneous downloads of depenancies to redundant locations.  
 
 On my MAC-os implementations, I've made my centralized .m2 location under:
 ```
