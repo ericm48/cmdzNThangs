@@ -1,0 +1,8 @@
+#!/bin/bash
+#  Call maven's profiles list all
+#
+
+# set -x
+
+m3 help:all-profiles  $1 $2 $3 $4 $5 $6
+

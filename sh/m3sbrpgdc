@@ -1,0 +1,6 @@
+#!/bin/bash
+#  Execute spring-boot run w/other params
+#
+
+m3 spring-boot:run -Dspring.profiles.active="test,pgdevcloud" $1 $2 $3 $4 $5 $6  | tee ./logs/mvnOut-m3sbr-pgdc.txt
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+#  Call maven's dependency:resolve-plugins
+#
+
+m3  $1 $2 $3 $4 $5 $6 dependency:resolve-plugins
+
+
+

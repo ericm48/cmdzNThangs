@@ -1,0 +1,8 @@
+#!/bin/bash
+#  Call maven's test w/UT
+#
+
+# set -x
+
+m3 test -D"test=*UT"  -D"failIfNoTests=false" $1 $2 $3 $4 $5 $6  | tee ./logs/mvnOut-m3UTs.txt
+

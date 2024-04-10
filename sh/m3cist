@@ -1,0 +1,5 @@
+#!/bin/bash
+#  Call maven's clean compile package install
+#
+
+m3 clean install -D"skipTests=true"

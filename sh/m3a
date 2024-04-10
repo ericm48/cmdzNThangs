@@ -1,0 +1,5 @@
+#!/bin/bash
+#  Call maven's clean compile package install
+#
+
+m3 clean compile package install -DHOME=$HOME

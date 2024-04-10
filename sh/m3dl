@@ -1,0 +1,5 @@
+#!/bin/bash
+#  Call maven's dependency list
+#
+
+m3 $1 dependency:list

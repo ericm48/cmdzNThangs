@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+#  Wrapper for mvn
+#
+
+# set -x
+
+if [ $# -gt 0 ]
+then
+	export M2_GLOBAL=
+	export M2_USER=
+	
+	export M2_GLOBAL="${M2_HOME}/conf/settings.xml"
+	export M2_USER="${M2_DATA}/eric/settings.xml"
+
+	mvn -gs ${M2_GLOBAL} -s ${M2_USER} -DHOME=$HOME $1 $2 $3 $4 $5 $6 $7 $8 $9
+
+else
+	echo
+	echo
+	echo 'Usage: m3 [maven options]'
+	echo
+	echo
+fi
+
+
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+#  Set path to java 1.8.0-40
+#
+echo "Setting Java TO jdk1.8.0_40........."
+export JAVA_HOME=
+export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home'
+
+export PATH="${JAVA_HOME}/bin:${PATH}"

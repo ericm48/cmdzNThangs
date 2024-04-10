@@ -1,0 +1,16 @@
+#!/bin/bash
+#  Set path to mvn 3.2.3
+#
+export M2_HOME=
+export M2_HOME="/apps/java/apache-maven-3.2.3"
+
+export M2_DATA=
+export M2_DATA="/data/maven-3.x"
+
+export MAVEN_OPTS=
+# export MAVEN_OPTS="-Xms256m -Xmx512m"
+
+# export repository.server=
+# export repository.server="relap-dev5511.nam.nsroot.net:8081"
+
+export PATH="${M2_HOME}/bin:${PATH}"

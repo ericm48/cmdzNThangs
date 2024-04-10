@@ -1,0 +1,7 @@
+#!/bin/bash
+#  Call maven's clean compile package install, as profile ias-service-test
+#
+
+# set -x
+
+m3 clean compile package install -D"skipTests=true" -Pias-service-test $1 $2 $3 $4 $5 $6

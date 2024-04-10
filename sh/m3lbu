@@ -1,0 +1,8 @@
+#!/bin/bash
+#  Call maven's liquibase:update
+#
+
+m3 liquibase:update $1 $2 $3 $4 $5 $6
+
+
+

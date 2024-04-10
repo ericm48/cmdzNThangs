@@ -1,0 +1,6 @@
+#!/bin/bash
+#  Call maven's liquibase:diff
+#
+
+m3 liquibase:diff $1 $2 $3 $4 $5 $6
+
