@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Script to KILL Dangling Docker Images & Containers
+
+# set -x
+
+# Kills All Docker Containers
+
+#  echo ""
+#  echo "---->Forcefully Deleting ALL DOCKER CONTAINERS!!!"
+#	 echo ""
+#  docker rm `docker ps --no-trunc -aq`
+	
+	echo ""
+	echo "---->Forcefully Deleting ALL Dangling Docker Images!!!"
+	echo ""
+	docker rmi -f $(docker images --filter "dangling=true")

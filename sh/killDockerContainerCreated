@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Script to Kill Docker that have been Created [ only ]..
+# set -x
+
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo "Deletes Docker Containers.  Will do multiple.  Be Careful!"
+   			echo " "
+   			echo " "
+
+   			echo "Usage:   $0 container_name1 container_name2 ..."
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}   
+  
+  docker rm `docker ps -aq -f  status=created`

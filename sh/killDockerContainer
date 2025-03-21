@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# Script to Kill Docker Containers One or many...
+# set -x
+# Kills All Docker Containers
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo "Deletes Docker Containers.  Will do multiple.  Be Careful!"
+   			echo " "
+   			echo " "
+
+   			echo "Usage:   $0 container_name1 container_name2 ..."
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}   
+  
+  
+	if [ $# -lt 1 ] 
+		then
+			usage
+			exit 1
+	fi
+
+	
+	for i do
+
+			echo ""
+			echo "Deleting $i"
+			docker rm `docker ps -aq -f  name="$i"`
+  		
+	done

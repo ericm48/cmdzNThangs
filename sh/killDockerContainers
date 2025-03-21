@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Script to KILL ALL DOCKER IMAGES & CONTAINERS
+
+# set -x
+
+# Kills All Docker Containers
+
+	echo ""
+  echo "---->Forcefully Deleting ALL DOCKER CONTAINERS!!!"
+	echo ""
+	docker rm `docker ps --no-trunc -aq`
