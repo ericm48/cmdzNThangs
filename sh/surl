@@ -1,0 +1,209 @@
+#!/bin/bash
+#  Script files that are used to pull URLS out of *URLs.*, StatusFY files.
+#   Will display in sorted or chronological order.
+#
+#  -Need to enhance to also go after *URL.txt files as well, across multiple directories.
+#
+
+# set -x
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0 S-sorted, C-Chrono J-JobsOnly [needle1] [needle2] [needleN]...."
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}
+
+
+   	if [ $# -lt 2 ]
+   		then
+				usage
+   	fi
+
+		maxArgz=0
+		maxArgz=$#
+
+   	gPATH=''
+  	gPATH='/bin/grep'
+
+  	gPARAM=''
+  	gPARAM='-irn'
+
+  	sPARAM=""
+
+		tFileRoot=''
+		tFileRoot='/data/txt/GcodeNResultsTemp'		
+		tfileSuffix='.txt'
+
+  	tFile1=''
+  	tFile1='/data/txt/GcodeNResultsTemp1.txt'
+
+		tSearchDir1=''
+		tSearchDir1='/data/txt'
+
+		tSearchDir2=''
+		tSearchDir2='/data/vm-data/data/txt'
+		
+		tCategory=''
+		
+
+		# FIX ME!! H2 use these below as a variable..derefernce globbing
+		
+		# Ignore this..goto command line
+  	#targetFile=
+   	#targetFile='--include StatusFY*.txt --include ./notes/JobHunt*.txt'     	
+   	#targetFile='--include StatusFY*.txt --include ./notes/JobHunt*.txt'     	
+
+  	rFileWild=''
+  	rFileWild='/data/txt/GcodeNResults*.txt'
+ 
+		rm -fv "$rFileWild"
+
+  	rFile=''
+  	rFile='/data/txt/GcodeNResults.txt'
+  	rFile2=''
+  	rFile2='/data/txt/GcodeNResults2.txt'
+  	rFile3=''
+  	rFile3='/data/txt/GcodeNResults3.txt'
+
+		rm -f "$rFile"
+		rm -f "$rFile2"
+		rm -f "$rFile3"
+
+  	# Declare an array of string with type
+  	searchKeyz=()
+		
+		baseSearchKey=''
+		baseSearchkey='http'  
+		
+		i=0
+		for argz in "$@"
+	
+		do
+		    #echo "Here be Arg.$i: $argz"
+		 
+		 		if [ $i -eq 0 ]
+		   		then
+						case "$argz" in
+						
+						    C)
+										sPARAM='-r'
+						        ;;
+						        
+						    c)
+						    		sPARAM='-r'
+						        ;;
+						            
+						    J)
+										sPARAM='-r'						    
+				    				tCategory='JobsOnly'
+						        ;;
+						            
+						    j)
+										sPARAM='-r'				    				
+				    				tCategory='JobsOnly'
+						        ;;						        
+
+						    S)
+						    		sPARAM=''
+						        ;;
+						            
+						    s)
+						    		sPARAM=''
+						        ;;
+						        
+	    
+						    *)
+						    		echo "Invalid Option: $var"
+						    		usage
+						    		exit 77		
+						        ;;
+						esac	
+						   
+				else
+				  searchKeyz+=($argz)
+				  
+				fi	   
+		   
+				((i=i+1))
+		   
+		done		
+	
+		#echo "i be: $i"
+	
+		#
+		# Default First Pass...
+		#
+
+		tFileN=''
+		tFileX=''
+
+		i=1
+		
+		tFileN="$tFileRoot$i$tfileSuffix"
+		
+   	if [[ $tCategory == "JobsOnly" ]]
+   		then	
+   		
+	 			$gPATH $gPARAM --include "JobHunt*.txt" $baseSearchkey $tSearchDir1 $tSearchDir2 >$tFileN		
+		
+			else
+		
+	 			$gPATH $gPARAM --include "StatusFY*.txt" --include "JobHunt*.txt" --include "*URLs.txt"    $baseSearchkey $tSearchDir1 $tSearchDir2 >$tFileN
+	 	fi
+		
+			
+		for sNeedle in "${searchKeyz[@]}"
+		do
+				#echo " "
+		   	#echo "sNeedle be: $sNeedle"
+				#echo " "
+
+				((j=i+1))
+				
+				tFileX="$tFileRoot$j$tfileSuffix"
+				#echo "tFileX: $tFileX"
+				
+  	  	$gPATH $gPARAM $sNeedle $tFileN >$tFileX
+	
+				((i=i+1))
+
+				tFileN="$tFileRoot$i$tfileSuffix"
+				#echo "tFileN: $tFileN" 				
+		   
+		done
+
+   	if [[ $tCategory == "JobsOnly" ]] 
+			then
+
+				# Trim to FileName of JobHunt...		
+				cat $tFileX | sed 's/^.*JobHunt/JobHunt/' >$rFile2
+			
+			else
+
+				# Trim to FileName of StatusFY...		
+				cat $tFileX | sed 's/^.*StatusFY/StatusFY/' >$rFile2
+				
+				# Debuggin sed purposes
+				# cp $tFileX $rFile2
+		
+		fi
+
+	
+		# Then Sort Reverse (by file name, DSC, then line# ASC)...
+		#sPARAM='-t: -g -k1,1r'
+	
+		sPARAM='-t: -g -k1,1r -k2,2 -k3,3'
+	
+		sort $sPARAM $rFile2 >$rFile3
+  
+	  u "$rFile3" >/dev/null 2>&1 &	  
+	
+	  cd "$curDir"
+  	
+	  exit 0
+
