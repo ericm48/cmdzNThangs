@@ -1,0 +1,19 @@
+#!/bin/bash
+#  Wrapper to the find command..
+#
+
+# set -x
+
+  if [ $# -lt 1 ] 
+   	then
+   		echo " "
+   		echo " "
+   		echo " "
+   		echo "Usage: $0 file-mask pattern to find"
+   		echo " "
+   		echo " "
+   		echo " "
+   		exit 1
+   fi
+
+	 find . -name $1
