@@ -1,0 +1,17 @@
+#!/bin/bash
+# Launches Sublime-Text from command-line with target params (file names).
+#
+
+# MAC
+# open -a /Applications/UltraEdit.app/Contents/MacOS/UltraEdit $* > /dev/null 2>&1 &
+
+# Linux
+
+	#/apps/sublime_text_3/sublime_text "$*" &
+	
+	#/apps/sublime_text_3/sublime_text "$*"
+	
+	/opt/sublime_text/sublime_text "$*" &
+	
+	setSublimeTextTopWindow 
+
