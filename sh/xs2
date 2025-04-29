@@ -1,0 +1,138 @@
+#!/bin/bash
+#
+# Command load UltraEdit from an input file.
+#
+
+#set -x
+
+# UBU-os
+targetLoadFile=
+targetLoadFile='/data/vm-data/data/txt/UltraEditLoadFileUBU.txt'
+
+# UBU-os
+targetApp=
+targetApp='uex '
+
+# UBU-os
+launchCommand=
+launchCommand=$targetApp
+
+i=0
+k=0
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo "Launch UltraEdit [ target editor ] and load a list of files from a TextFile."
+   			echo " "
+   			echo " "
+
+   			echo "Usage:   $0 [ -f someOtherFile ]"
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}
+
+
+arg_parse() {
+	
+	for (( i=1; i<=$#; i++)); do
+	
+	
+		case ${!i} in
+		
+		  -f)
+		  		# File name should follow the -f flag
+		  	  k=$(($i+1))
+				 	targetLoadFile="${!k}"
+				 	break
+				 	;;		
+	
+	    -H)
+					usage
+					exit 3
+	        ;;
+	
+	    -h)
+					usage
+					exit 3
+					;;
+	
+	    --H)
+					usage
+					exit 3
+	        ;;
+	
+	    --h)
+					usage
+					exit 3
+					;;
+	
+	    -help)
+					usage
+					exit 3
+	        ;;
+	
+	    --help)
+					usage
+					exit 3
+					;;
+			
+			*)
+					#echo "[$i]: ${!i}"
+		
+		
+		esac
+	
+	  
+	done
+
+}
+
+load_launch_editor() {
+
+	lineIn=
+
+  i=0;
+	while read lineIn; do
+	  
+	  #echo "$lineIn"	  
+	  # Ignore lines if they start with comment..
+	  
+ 		if [ -n "$lineIn" ] 
+	  	then
+
+			  if [[ ${lineIn:0:1} != "#" ]] 
+					then	 
+					  # Lauch Editor on target file...
+					  
+						#open -a /Applications/UltraEdit.app/Contents/MacOS/UltraEdit $lineIn > /dev/null 2>&1 &
+						
+						$launchCommand $lineIn > /dev/null 2>&1 &
+				    # To increment index
+				    # by 1, i=i+1
+				    i=`expr $i + 1`
+						
+			  fi
+			  			  
+		fi
+	  
+	done <$targetLoadFile
+
+	echo "FilesLoaded: $i"
+	echo ""	
+
+}
+
+
+	arg_parse "$@"
+
+	echo ""
+  echo "Using File: $targetLoadFile...."
+	echo ""
+
+	load_launch_editor
+	
+
+	exit 0

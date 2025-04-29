@@ -1,0 +1,159 @@
+#!/bin/bash
+#
+# Launches the many Finderz....
+#
+
+	#set -x
+	#set -f
+
+usage(){
+		echo " "
+		echo " "
+		echo "Usage: $0 "
+		echo " "
+		echo " "
+
+		exit 1
+}
+
+	T_VOL_OD=''
+	T_VOL_OD='/Users/emanley/OneDrive thecompany'
+
+	T_VOL_GD=''
+	T_VOL_GD='/Volumes/GoogleDrive/My Drive'
+
+	T_VOL_MACBAK=''
+	T_VOL_MACBAK='/Volumes/MacBAKII'
+
+	T_VOL_FLASH=''
+	T_VOL_FLASH='/Volumes/KING-GREY'
+
+
+	if [ -d "$T_VOL_OD" ]
+	then
+		open -g -a /System/Library/CoreServices/Finder.app "$T_VOL_OD"
+	fi
+	
+	if [ -d "$T_VOL_GD" ]
+	then
+		open -g -a /System/Library/CoreServices/Finder.app "$T_VOL_GD"
+	fi
+
+	if [ -d "$T_VOL_MACBAK" ]
+	then
+		open -g -a /System/Library/CoreServices/Finder.app "$T_VOL_MACBAK"
+	fi
+
+	if [ -d "$T_VOL_FLASH" ]
+	then
+		open -g -a /System/Library/CoreServices/Finder.app "$T_VOL_FLASH"
+	fi
+	
+
+	# Remember max of 15 of theses...
+
+	open -g -a /System/Library/CoreServices/Finder.app /
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley
+
+	
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/logs/thecompany/clients
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/html/thecompany
+
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/outlook/thecompany
+
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pdf/eric
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pdf/thecompany
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pdf/thecompany/expenses
+	
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pdf/thecompany/MAPBU/clients
+
+	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pptx/thecompany
+	
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/ssl/thecompany
+	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/winword/thecompany	
+  #open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/winword/thecompany/MAPBU	
+	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/xlsx/thecompany
+#	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/xlsx/thecompany/MAPBU/clients
+
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/yaml/thecompany
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/yaml/eric
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/json
+	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/images/thecompany/screenshots
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/inet
+
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/txt
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/txt/notes
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/txt/demos
+
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/miro/thecompany
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/zip
+
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/master
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/forkz	
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/eric/master
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/eric/forkz
+	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/thecompany/master
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/thecompany/forkz
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/microsoft/master
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/azure/microsoft/forkz
+
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/cs/eric/master
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/cs/eric/forkz	
+
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/docker/eric/master
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/docker/thecompany/clients	
+
+ 	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/gha/eric/master
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/java
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/java/eric
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/java/thecompany	
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/thecompany/master	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/thecompany/forkz
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/thecompany/master/k8-examples
+	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/eric/master/k8-impls
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/eric/forkz
+
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/3rdParty
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/3rdParty/master
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/3rdParty/forkz
+	
+	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/k8/thecompany/master/k8-examples/pez-vcenter	
+	
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/sh
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/tap/thecompany/master
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/vscode
+
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/yaml-yml/thecompany/master
+	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/dev2/yaml-yml/thecompany/forkz
+
+	# Opt
+	open -g -a /System/Library/CoreServices/Finder.app /opt
+	open -g -a /System/Library/CoreServices/Finder.app /opt/java
+	open -g -a /System/Library/CoreServices/Finder.app /opt/thecompany
+	
+	# Library
+	open -g -a /System/Library/CoreServices/Finder.app /Library/Java/JavaVirtualMachines
+	
+
+
+
+
+
