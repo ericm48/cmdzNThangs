@@ -67,18 +67,13 @@ usage(){
 	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pdf/thecompany
 	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pdf/thecompany/expenses
 	
-	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pdf/thecompany/MAPBU/clients
-
-	
 	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/pptx/thecompany
 	
 	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/ssl/thecompany
 	
 	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/winword/thecompany	
-  #open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/winword/thecompany/MAPBU	
-	
+  	
 	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/xlsx/thecompany
-#	open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/xlsx/thecompany/MAPBU/clients
 
 	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/yaml/thecompany
 	#open -g -a /System/Library/CoreServices/Finder.app /Users/emanley/data/yaml/eric
