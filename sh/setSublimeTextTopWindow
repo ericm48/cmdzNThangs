@@ -1,0 +1,5 @@
+#!/bin/bash
+# Brings Sublime Text to ForeFront 
+#
+
+xdotool search --name sublime_text windowactivate
