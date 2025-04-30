@@ -1,0 +1,55 @@
+#!/bin/bash
+#  Script file that launches Google Chrome from UltraEdit
+#
+#
+
+#set -x
+   
+usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0 targetURL"
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}   
+
+ 
+	if [ $# -lt 0 ] 
+  		then
+				usage
+	fi
+
+  doubleSlash="//"
+   	
+  # echo "ClipBoard: "   	    
+  
+  #	
+  # Below works good with xargs, now just yank the training // slashes
+  #
+  # targetURL = pbpaste | egrep -o 'https?://[^ ]+' | xargs
+  
+  # MAC Version 	
+  #  targetURL=$(pbpaste | egrep -o 'https?://[^ ]+' | xargs)
+  	
+  targetURL=$(xsel --clipboard | egrep -o 'https?://[^ ]+' | xargs)  	  	
+#  echo "URL 1: $targetURL"   	    	
+  
+  targetURL=${targetURL%$doubleSlash}  
+  # echo " URL 2: $targetURL"   	
+	
+  targetURL=$(echo "$targetURL" | xargs)	
+  # echo " URL 3: $targetURL""||"   	
+	
+  # Use this one, as it has the double quotes...which resolves to a single quote when it hits the command processor.
+
+  # MAC
+  #  open -a "/Applications/Google Chrome.app" "$targetURL"
+	
+  firefox "$targetURL" >/dev/null	&
+
+  setFireFoxTopWindow
+   	
+  exit 0
