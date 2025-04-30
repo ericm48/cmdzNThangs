@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<project 	name="Eric's ANT Utils" 
+		default="init" 
+		basedir="." 
+		xmlns:ac="antlib:net.sf.antcontrib">
+
+   <description> Eric's Java Utilities </description>
+
+    
+	<property file="./build.properties" 										/>
+	<property file="./test.properties" 										/>
+	<property environment="env"													/>
+
+	<property name="build.dir" 						value="${build.directory}" 		/>   	
+	<property name="files.key"						value="${target.files}" 		/>   	
+  	
+    
+	<property name="build.lib.dir" 						value="${build.directory}/lib" 		/>
+  	<property name="build.source.dir" 					value="${build.dir}/src" 		/>
+  	<property name="build.doc.dir" 						value="${build.dir}/doc" 		/>
+
+  	<property name="projects.dir" 						value="${base.dir}/projects" 		/>
+
+
+  	<property name="source.dir" 						value="${base.dir}/src"			/> 
+  	<property name="source.lib.dir" 					value="${base.dir}/lib"			/> 
+  	
+  	<property name="release.dir" 						value="${build.dir}/release" 		/>
+  	<property name="output.dir" 						value="${build.dir}/bin" 		/>
+
+
+	<property name="filter.value.CC" 					value="CC"				/>
+	<property name="filter.value.was7" 					value="was7.dataSource"			/>		
+
+	
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>				
+
+	<!--  For future reference
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	  <classpath>
+	    <pathelement location="/usr/share/java/lib/ant-contrib-0.3.jar"/>
+	  </classpath>
+	</taskdef>								
+	-->
+	
+	
+	<!--	
+			Default Classpath
+	-->
+
+	<path id="default.class.path">
+		<pathelement location="${websphere.home}/lib/j2ee.jar" 									/>		
+		<pathelement location="${websphere.home}/plugins/com.ibm.ws.runtime_6.1.0.jar" 	/>		
+	</path>
+		
+
+
+	<!--
+			Target: INIT
+	-->     
+		
+
+	<target name="init"
+   	 	description="Initializes Build Script, Creates Needed Directories">
+
+		    
+      	<echo message="Entered: init"/>
+      	<!-- Create the time stamp -->
+      	<tstamp/>
+      
+		<echo> 										</echo>		
+		<echo>        Project Name: ${ant.project.name}		</echo>
+		<echo> 										</echo>
+		<echo> 										</echo>
+		<echo>      Base Directory: ${basedir} 				</echo>
+		<echo> 										</echo>						
+		<echo>            base.dir: ${base.dir} 			</echo>		
+		<echo>  Projects Directory: ${projects.dir} 			</echo>		
+		<echo>     Build Directory: ${build.dir} 			</echo>
+		<echo>    Source Directory: ${source.dir}			</echo>
+		<echo>       Lib Directory: ${source.lib.dir}		</echo>		
+		<echo> 										</echo>
+		<echo>      Java Directory: ${env.JAVA_HOME}			</echo>				
+		<echo>        M2 Directory: ${env.M2_HOME}			</echo>						
+		<echo>       Ant Directory: ${env.ANT_HOME}			</echo>								
+		<echo> WebSphere Directory: ${env.WEBSPHERE_HOME}		</echo>		
+		<echo> 										</echo>		
+		<echo> 										</echo>		
+		<echo> 										</echo>		
+				
+		<!--
+		<echo>  Projects Directory: ${build.projects.dir} 	</echo>
+		<echo> Build Lib Directory: ${build.lib.dir} 		</echo>		
+		-->
+ 
+		<!-- Make sure we have a place to build the code -->
+
+		<!--
+
+	    		<mkdir dir="${build.dir}"		/>     	
+	    		<mkdir dir="${build.source.dir}"	/>        	    	
+	    		<mkdir dir="${build.lib.dir}"		/>       
+	    		<mkdir dir="${build.doc.dir}" 	/>
+	    	
+	    		<mkdir dir="${output.dir}"		/>    	
+	      	<mkdir dir="${release.dir}"		/>    
+    		-->
+    
+    
+	</target>
+
+
+  	<!--
+					    Target: copy.dirz
+  	-->
+  	<target name="copy.dirz" description="Sync's 2 directories (and children) from target from source" depends="init" >
+
+		<echo>										</echo>
+		<echo>Entering copy.dirz							</echo>
+		<echo>										</echo>
+
+		<property name="copy.source.dir" 					value="C:\temp\d2\dirSource" />
+		<property name="copy.target.dir" 					value="C:\temp\d2\dirTarget" />		
+
+		<echo>										</echo>
+		<echo>  SourceDir:	${copy.source.dir}				</echo>				
+		<echo>  TargetDir:	${copy.target.dir}				</echo>				
+		<echo>										</echo>
+		<echo>										</echo>		
+		<echo>										</echo>
+				
+
+	   	<patternset id="copy.patterns">	
+		   <include name="**/*.*"						/>  	   	
+	    	</patternset>
+
+	    	<copy todir="${copy.target.dir}" preservelastmodified="true" >
+		      	<fileset dir="${copy.source.dir}">
+		        		<patternset refid="copy.patterns"/>
+		      	</fileset>
+	    	</copy>            
+
+
+	</target>
+
+  	<!--
+					    Target: copy.dirz2
+  	-->
+  	<target name="copy.dirz2" description="Sync's 2 directories with a mask (and children) from target from source" depends="init" >
+
+		<echo>										</echo>
+		<echo>Entering copy.dirz2							</echo>
+		<echo>										</echo>
+
+		<property name="copy.source.dir" 					value="C:\temp\d2\dirSource" />
+		<property name="copy.target.dir" 					value="C:\temp\d2\dirTarget" />
+		<property name="copy.file.mask"						value="*.*" />		
+
+		<echo>										</echo>
+		<echo>  SourceDir:	${copy.source.dir}					</echo>				
+		<echo>  TargetDir:	${copy.target.dir}					</echo>				
+		<echo>   FileMask:	${copy.file.mask}					</echo>						
+		<echo>										</echo>
+		<echo>										</echo>		
+		<echo>										</echo>
+				
+
+	   	<patternset id="copy.patterns">	
+		   <include name="${copy.file.mask}"						/>  	   	
+	    	</patternset>
+
+	    	<copy todir="${copy.target.dir}" preservelastmodified="true" >
+		      	<fileset dir="${copy.source.dir}">
+		        	<patternset refid="copy.patterns"/>
+		      	</fileset>
+	    	</copy>            
+
+
+	</target>
+
+
+  	<!--
+					    Target: try.this2
+  	-->
+  	<target name="try.this2" description="Test Target in Ant" depends="init">
+
+		<echo>Entering try.this2							</echo>
+
+
+		
+		<property file="./test.properties" />
+
+		<!--
+		<loadproperties>
+			<file file="./test.properties"/>
+		</loadproperties>
+		-->
+		    
+		
+
+		<ac:propertyselector property="p.list.CC" 
+						 delimiter=","
+						 match="${filter.value.CC}\.(.*)" 
+						 select="\1" 
+						 casesensitive="false" />
+		
+		
+		
+		<echo> P List The First Time.... </echo>
+		<echo> </echo>
+		
+		<!--
+		<ac:for list="${p.list}" param="lineout">
+		      <sequential>  
+		        	<echo>Property Keys: @{lineout}</echo>  
+		      </sequential>  
+
+		</ac:for>
+		-->
+
+	    	<foreach   list="${p.list.CC}"	                
+	                target="dump.line.CC"
+	                param="lineout2" />
+
+
+		<ac:propertyselector property="p.list.was7" 
+						 delimiter=","
+						 match="${filter.value.was7}\.(.*)" 
+						 select="\1" 
+						 casesensitive="false" />
+		
+		
+		
+		<echo> P List The Second Time.... </echo>
+		<echo> </echo>
+		
+		<!--
+		<ac:for list="${p.list}" param="lineout">
+		      <sequential>  
+		        	<echo>Property Keys: @{lineout}</echo>  
+		      </sequential>  
+
+		</ac:for>
+		-->
+
+	    	<foreach   list="${p.list.was7}"	                
+	                target="dump.line.was7"
+	                param="lineout2" />
+
+	
+	</target>
+
+
+  	<!--
+					    Target: try.this
+  	-->
+  	<target name="try.this" description="Test Target in Ant" depends="init">
+
+		<echo>Entering try.this							</echo>
+		
+		<echo message="The first seven letters of the alphabet are:"/>
+
+		<ac:for list="aa,bb,cc,dd,ee,ff,gg" param="letter">  
+		      <sequential>  
+		        	<echo>Letter: @{letter}</echo>  
+		      </sequential>  
+		</ac:for>  
+
+	</target>
+
+	    
+
+
+
+  	<!--
+    Target: CLEAN.FILES
+  	-->     
+  
+  	<target name="clean.files" description="Cleans Wildcard of Files Passed In." depends="init">
+    
+		<echo message="Entered: clean.class" />            
+    
+		<delete dir="${base.dir}" verbose="true" quiet="false" includeemptydirs="true" >
+			 <include name="**/*/${files.key}"/>			 
+		</delete>
+    
+    
+    
+  	</target>   
+
+
+  	<!--
+    Target: CLEAN.STUFF2
+  	-->     
+  
+  	<target name="clean.stuff2" description="Cleans STUFF2.ZIP." depends="init">
+    
+		<echo message="Entered: clean.stuff2" />            
+    
+		<delete dir="${release.dir}" verbose="true" quiet="false" includeemptydirs="true" >
+			 <include name="**/stuff2.zip"/>			 
+		</delete>
+    
+    
+    
+  	</target>   
+
+
+  	<!--
+    Target: BUILD.STUFF2
+  	-->     
+  
+  	<target name="build.stuff2" description="Builds Stuff2.zip file" depends="init, clean.stuff2">
+    
+		<echo message="Entered: build.stuff2" />            
+    
+    
+	   <zip destfile="${release.dir}/stuff2.zip">
+
+
+			<!--
+			  Works
+			-->
+			
+			<!--
+	
+
+		   Exclude List
+         E:WordPad2 -add -rec -excl=*.class -excl=*.pdb -excl=*.zip -excl=gwt*.jar -excl=*ojdbc*.jar -excl=junit*.jar -excl=spring*.jar -excl=struts*.jar -excl=log*.jar -excl=c:\data\ppt\*.pdf -path=root %zFile%  @c:\data\txt\PPCList2.txt >%oFile%
+			
+			dev/java/ws10/Projects/BaseJars/core-3.2.3.v_686_R32x.jar
+			dev/java/ws11/Projects/BaseLibrary/core-3.2.3.v_686_R32x.jar
+			dev/java/ws11_W/Projects/BaseLibrary/core-3.2.3.v_686_R32x.jar
+			dev/java/WS7/Projects/AdsService/WebRoot/WEB-INF/lib/com.ibm.ws.runtime_6.1.0.jar
+			dev/java/WS7/Projects/WebServiceCommons/lib/com.ibm.jaxws.thinclient_6.1.0.jar
+			ClearCaseStorage/views/zmm0362_view7/ERC_Comp/Projects-MyEclipse/ErcTesting/Releases/1.0.0/ERC_TEST_EAR.ear
+			ClearCaseStorage/views/zmm0362_view7/ERC_Comp/Projects-MyEclipse/ErcTesting/Releases/1.1.0/ERC_TEST_EAR.ear
+			ClearCaseStorage/views/zmm0362_view7/ERC_Comp/Projects-MyEclipse/ErcTesting/build/release/ERC_TEST_HARNESS.ear
+			ClearCaseStorage/views/zmm0362_view7/ERC_Comp/Projects-MyEclipse/ErcTesting/Releases/ERC_TEST_HARNESS_EAR.ear
+
+			dev/eclipse/ws3/wwj/worldwind.jar
+			
+			
+			-->
+			
+			<!-- /data/winword -->
+    		<zipfileset dir="/data/winword" prefix="data/winword">
+    		     
+    		     <include name="**/*.*" 																		/>    		     
+    		     
+    		     <exclude name="**/SAPManual.doc" 															/>
+    		     <exclude name="**/JCOE_LDAPTestADUserGroupMaintenance.doc" 						/>    		     
+    		     <exclude name="**/JCOE_MyEclipseBlueFullInstall7.5.0.doc" 						/>    		        		     
+    		     <exclude name="**/MEBInstallersOnWinXPSP2_ScreenShots.doc" 						/>    		         		     
+    		     <exclude name="**/DCGeoSpatialDeploymentInstructions.doc" 						/>    		         		     
+    		     <exclude name="**/ApplicationArchitectureSpecification20070125.doc" 			/>    		     
+    		     <exclude name="**/ApplicationArchitectureSpecification20071011.doc" 			/>    		     
+    		     
+    		     
+			</zipfileset>    		     
+			
+			
+			<!--
+    		<zipfileset dir="/dev/eclipse" prefix="dev/eclipse">
+    		     
+    		     <include name="**/*.html" 																	/>   
+    		     <include name="**/*.java" 																	/>   
+    		     <include name="**/.project"																	/>       		     
+    		     <include name="**/.classpath"																/>       		     
+    		     
+    		     <exclude name="**/*.class" 																	/>    		     
+
+    		     <exclude name="**/worldwind.jar" 															/>
+				  <exclude name="**/gwt*.jar" 																/>
+    		     <exclude name="**/ojdbc*.jar" 																/>
+    		     <exclude name="**/junit*.jar" 																/>
+    		     <exclude name="**/spring*.jar" 															/>
+    		     <exclude name="**/struts*.jar" 															/>    		         		     
+    		     <exclude name="**/log*.jar" 																/>    		         		     
+    		         		     
+    		     
+			</zipfileset>    		     
+			-->
+			
+			
+			
+
+		 
+  	  </zip>    
+    
+    
+    
+  	</target>   
+
+
+
+
+
+
+
+
+    
+</project>
