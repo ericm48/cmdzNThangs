@@ -20,7 +20,8 @@ HISTFILESIZE=2000
 # Path Handling
 #
 export JAVA_HOME=
-export JAVA_HOME='/opt/sdkman/candidates/java/current'
+#export JAVA_HOME='/opt/sdkman/candidates/java/current'
+export JAVA_HOME='/Users/dks0794897/apps/sdkman/candidates/java/current'
 
 export DOCKER_HOST_IP=
 export DOCKER_HOST_IP="172.17.0.1"
@@ -29,7 +30,8 @@ export M2_DATA=
 export M2_DATA=/Users/dks0794897/data/maven-3.x
 
 export M2_HOME=
-export M2_HOME='/opt/sdkman/candidates/maven/current'
+#export M2_HOME='/opt/sdkman/candidates/maven/current'
+export M2_HOME='/Users/dks0794897/apps/sdkman/candidates/maven/current'
 
 export ANT_HOME=
 export ANT_HOME=/Users/dks0794897/apps/java/apache-ant-1.8.4
@@ -123,13 +125,13 @@ export TERRAFORM_HOME=/Users/dks0794897/apps/hashicorp/terraform-0.12.28
 export CRICTL_CLI=
 export CRICTL_CLI='/Users/dks0794897/apps/crictl-v1.24.1/bin'
 
-#export COMPDIR=$(pkg-config --variable=completionsdir bash-completion)
+export COMPDIR=$(pkg-config --variable=completionsdir bash-completion)
 
 export KUBECTX_CURRENT_FGCOLOR=$(tput setaf 6) # blue text
 export KUBECTX_CURRENT_BGCOLOR=$(tput setaf 7) # white background
 
 export SDKMAN_DIR=
-export SDKMAN_DIR='/opt/sdkman'
+export SDKMAN_DIR='/Users/dks0794897/apps/sdkman'
 
 export CARVEL_DIR=
 export CARVEL_DIR='/Users/dks0794897/apps/carvel'
@@ -151,20 +153,23 @@ export GIT_USER='ericm33-gd'
 # Docker Stuff
 export NO_COLOR=
 export NO_COLOR=1
+export DH_HOME=
+export DH_HOME='YjkzN2NlM2ItOGVmYi00NWRmLWExOGMtYTBmZDI3OTI4ZTBhCg=='
+export DH_Y=$(echo $DH_HOME | base64 --decode )
 
-export H5_HOME=
-export H5_HOME='SDB0c3AzcjgwOCohCg=='
+# Correct MAC-OS Things Here:
 
-export H5_Y=
-export H5_Y=$(echo $H5_HOME | base64 --decode)
-
+export HOMEBREW_PREFIX=
+export HOMEBREW_PREFIX='/opt/homebrew'
 
 #
 # Main PATH HERE!
 #
 
-export PATH=.:/Users/dks0794897/dev2/sh:$JAVA_HOME/bin:$M2_HOME/bin:$CARVEL_DIR/bin:$ANT_HOME/bin:$K8_HNS_CLI:$K8_MINIKUBE:$KPACK_DIR:$HELM_DIR:$FLUX_DIR:$K9S_CLI:$REPLICATED_CLI:$TERRAFORM_HOME:$GO_DIR/bin:$GOBIN:$K8_CUSTOM:$K8_KUSTOMIZE:$PIVOTAL:$VAULT_DIR:$KIND_DIR:$HEY_DIR:$CRICTL_CLI:$SDKMAN_DIR:$PATH
+export PATH=.:/Users/dks0794897/dev2/sh:$JAVA_HOME/bin:$M2_HOME/bin:$CARVEL_DIR/bin:$ANT_HOME/bin:$K8_HNS_CLI:$K8_MINIKUBE:$KPACK_DIR:$HELM_DIR:$FLUX_DIR:$K9S_CLI:$GO_DIR/bin:$GOBIN:$K8_CUSTOM:$K8_KUSTOMIZE:$KIND_DIR:$CRICTL_CLI:$SDKMAN_DIR:${HOMEBREW_PREFIX}/opt/openssl/bin:$PATH
 
+# this is weird.
+#${HOMEBREW_PREFIX}/opt/openssl/bin:   should be: export HOMEBREW_PREFIX='/opt/homebrew'
 
 #
 # Some K8s Things.
@@ -236,17 +241,21 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
+#
 # Kube Prompt
+#
+
+# ThePrompts
 
 KUBE_PS1_SYMBOL_USE_IMG='false'
 KUBE_PS1_NS_COLOR='yellow'
 KUBE_PS1_SYMBOL_COLOR='cyan'
 
 # K8s Only
-# PS1='\u@\h:$(kube_ps1)\>'
+#PS1='\u@\h:$(kube_ps1)\>'
 
 # Git Only
-# PS1='\u@\h:$(__git_ps1)\>'
+#PS1='\u@\h:$(__git_ps1)\>'
 
 # K8s + git
 PS1='\u@\h:$(kube_ps1)$(__git_ps1 " (%s)")\>'
@@ -362,7 +371,7 @@ alias dld='docker login --username=ericm24 -p $DH_Y'
 alias dlh3="docker login -u admin harbor03.aws.ericm48.net  -p $H3_Y"
 alias dlh4="docker login -u admin harbor04.azure.csp-si-tiger.net  -p $H4_Y"
 
-alias dlgd="docker login -u eericmanley re-artifactory.gdotkubenp.com -p $H5_Y"
+
 
 
 #
@@ -413,6 +422,8 @@ fi
 
 # set -f
 
+# bash-completion stuff:
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -424,23 +435,39 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Original Place for most MACs
 # source /usr/share/bash-completion/bash_completion
 
-# source <(kubectl completion bash)
+#
+# Wonky DCSG Setup via homebrew
+#
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+source <(kubectl completion bash)
 
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 
 # Reset the k alias for autocompletion (both lines below).
 
 alias k='kubectl'
-#complete -F __start_kubectl k
+complete -F __start_kubectl k
 
+# Normal:
 #source /opt/sdkman/bin/sdkman-init.sh
 
+source "/Users/dks0794897/apps/sdkman/bin/sdkman-init.sh"
+
 # Try this
-#sdk use java 22.0.2-librca
+sdk use java 22.0.2-librca
 
 # Add ssh-agent for git
+#/Users/dks0794897/.ssh/id_ed25519
 
-#eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
+# direnv
+eval "$(direnv hook bash)"
+
+# ssh
+eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
+
+
 
