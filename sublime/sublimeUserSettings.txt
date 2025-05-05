@@ -1,0 +1,27 @@
+// SublimeSettings:
+{
+  "color_scheme": "Monokai.sublime-color-scheme",
+  "font_size": 15,
+  "theme": "Default Dark.sublime-theme",
+  "hot_exit": true,
+  "word_wrap": false,
+  "tab_size": 2,  
+  "translate_tabs_to_spaces": true,
+  "detect_indentation": false,
+
+  "open_files_in_new_window": false,
+
+  "tab_completion": false,
+
+  "auto_complete": false,
+  "auto_indent": false,
+  "auto_complete_commit_on_tab": false,
+  "auto_match_enabled": false,
+
+  "spell_check": false,
+  "ignored_packages":
+  [
+    "Vintage",
+  ],
+}
+    
