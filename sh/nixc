@@ -1,0 +1,185 @@
+#!/bin/bash
+#  Script files that are used to pull URLS out of *Command*, StatusFY files.
+#   Will display in sorted or chronological order.
+#
+#  -Need to enhance to also go after *Command*.txt files as well.
+#
+
+# set -x
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0 S-sorted, C-Chrono [needle1] [needle2] [needle3]"
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}
+
+   	if [ $# -lt 2 ]
+   		then
+				usage
+   	fi
+
+   	gPATH=''
+  	gPATH='/bin/grep'
+
+  	gPARAM=''
+  	gPARAM='-ir'
+
+  	sPARAM=""
+
+  	tFile1=''
+  	tFile1='/data/txt/GcodeNResultsTemp1.txt'
+
+  	tFile2=''
+  	tFile2='/data/txt/GcodeNResultsTemp2.txt'
+
+  	tFile3=''
+  	tFile3='/data/txt/GcodeNResultsTemp3.txt'
+
+  	tFile4=''
+  	tFile4='/data/txt/GcodeNResultsTemp4.txt'
+
+
+		tSearchDir=''
+		tSearchDir='/data/vm-data/data/txt'
+
+
+		# **** THIS IS NOT USED HERE!!!  ITS FURTHER BELOW!!!
+  	targetFile=
+  	targetFile='--include *Command*.txt --include StatusFY*.txt'
+
+		rm -f "$tFile1"
+		rm -f "$tFile2"
+		rm -f "$tFile3"
+		rm -f "$tFile4"
+
+
+  	rFile=''
+  	rFile='/data/txt/GcodeNResults.txt'
+  	rFile2=''
+  	rFile2='/data/txt/GcodeNResults2.txt'
+  	rFile3=''
+  	rFile3='/data/txt/GcodeNResults3.txt'
+
+		rm -f "$rFile"
+		rm -f "$rFile2"
+		rm -f "$rFile3"
+		rm -f "$rFile4"
+
+  	sKeyCommand='UnixCommand'
+
+  	sKey=''
+  	sFlag=''
+  	cFlag=''
+
+	  sNeedle1=$2
+
+	  sNeedle2=$3
+
+	  sNeedle3=$4
+
+  	rm -f "$rFile"
+  	rm -f "$tFile1"
+  	rm -f "$tFile2"
+  	rm -f "$tFile3"
+  	rm -f "$tFile4"
+
+
+  	if [ ! -f "$gPATH" ]
+			then
+	   		gPATH="/dev2/sh/grepO.exe"
+	   		gPARAM=""
+	   		gPARAM="-id"
+		fi
+
+
+		if [ \( "$1" = "S" \) -o \( "$1" = "s" \) ]
+			then
+
+				sPARAM=''
+
+		elif [ \( "$1" == "C" \) -o \( "$1" == "c" \) ]
+		then
+			sPARAM='-r'
+
+		else
+				echo "Invalid Argument: $1!!!  Needs to be either s or c"
+				exit 33
+		fi
+
+  #
+  # First Pass...pull all lines with UnixCommand in them...
+  #
+  $gPATH $gPARAM --include "*Command*.txt" --include "StatusFY*.txt" $sKeyCommand $tSearchDir >$tFile1
+
+
+	#
+	# Second Pass...pull all lines that match the needle1 passed in...
+	#
+	$gPATH $gPARAM $sNeedle1 $tFile1 >$tFile2
+
+	#
+	# Third Pass...Now search for Needle2, if present..
+	#
+	if [ -z "$sNeedle2" ]
+		then
+			cp $tFile2 $rFile
+
+	  else
+	  	$gPATH $gPARAM $sNeedle2 $tFile2 >$tFile3
+
+  fi
+
+	#
+	# Fourth Pass...Now search for Needle3, if present..
+	#
+	if [ -z "$sNeedle2" ]
+	  then
+			echo ''
+	  else
+
+			if [ -z "$sNeedle3" ]
+				then
+					cp $tFile3 $rFile
+
+			  else
+			  	$gPATH $gPARAM $sNeedle3 $tFile3 >$tFile4
+					cp $tFile4 $rFile
+
+  		fi
+
+	fi
+
+	# ToDo: Figure out how to make compound match for sed, ie Keep the portion of all lines that either begin with:
+	#  Status or contain Command in the name.
+	#  Command // that'll be tricky...as the 'URL' is in the tail of filename...
+
+	# Trim to Status...
+	cat $rFile | sed 's/^.*Status/Status/' >$rFile2
+
+	# Then Sort Reverse (by file name, DSC, then line# ASC)...
+	#sPARAM='-t: -g -k1,1r'
+
+	sPARAM='-t: -g -k1,1r -k2,2 -k3,3'
+
+	sort $sPARAM $rFile2 >$rFile3
+
+
+  #
+  # Lastly, launch UE on the finished file.
+  #
+  
+  # MAC Version
+  # open -a /Applications/UltraEdit.app/Contents/MacOS/UltraEdit "$rFile" >/dev/null 2>&1 &
+  
+  u "$rFile" >/dev/null 2>&1 &	  
+
+  cd "$curDir"
+
+  #setUltraEditTopWindow 
+  	
+  exit 0
