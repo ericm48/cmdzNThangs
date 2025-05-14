@@ -108,18 +108,18 @@ usage(){
 		fi
 
   #
-  # First Pass...pull all lines with UnixCommand in them...
+  # Base Pass...pull all lines with UnixCommand in them...
   #
   $gPATH $gPARAM --include "*Command*.txt" --include "StatusFY*.txt" $sKeyCommand $tSearchDir >$tFile1
 
 
 	#
-	# Second Pass...pull all lines that match the needle1 passed in...
+	# First Pass...pull all lines that match the needle1 passed in...
 	#
 	$gPATH $gPARAM $sNeedle1 $tFile1 >$tFile2
 
 	#
-	# Third Pass...Now search for Needle2, if present..
+	# Second Pass...Now search for Needle2, if present..
 	#
 	if [ -z "$sNeedle2" ]
 		then
@@ -131,9 +131,9 @@ usage(){
   fi
 
 	#
-	# Fourth Pass...Now search for Needle3, if present..
+	# Third Pass...Now search for Needle3, if present.. (Yes check needle2 AGAIN!)
 	#
-	if [ -z "$sNeedle3" ]
+	if [ -z "$sNeedle2" ]
 	  then
 			echo ''
 	  else
@@ -163,6 +163,7 @@ usage(){
 	sPARAM='-t: -g -k1,1r -k2,2 -k3,3'
 
 	sort $sPARAM $rFile2 >$rFile3
+	cp $rFile3 $rFile
 
 
   #
