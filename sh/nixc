@@ -85,13 +85,6 @@ usage(){
 
 	  sNeedle3=$4
 
-#  	rm -f "$rFile"
-#  	rm -f "$tFile1"
-#  	rm -f "$tFile2"
-#  	rm -f "$tFile3"
-#  	rm -f "$tFile4"
-
-
   	if [ ! -f "$gPATH" ]
 			then
 	   		gPATH="/dev2/sh/grepO.exe"
