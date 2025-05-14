@@ -64,6 +64,9 @@ usage(){
   	rFile2='/data/txt/GcodeNResults2.txt'
   	rFile3=''
   	rFile3='/data/txt/GcodeNResults3.txt'
+  	rFile4=''
+  	rFile4='/data/txt/GcodeNResults4.txt'
+
 
 		rm -f "$rFile"
 		rm -f "$rFile2"
@@ -82,11 +85,11 @@ usage(){
 
 	  sNeedle3=$4
 
-  	rm -f "$rFile"
-  	rm -f "$tFile1"
-  	rm -f "$tFile2"
-  	rm -f "$tFile3"
-  	rm -f "$tFile4"
+#  	rm -f "$rFile"
+#  	rm -f "$tFile1"
+#  	rm -f "$tFile2"
+#  	rm -f "$tFile3"
+#  	rm -f "$tFile4"
 
 
   	if [ ! -f "$gPATH" ]
@@ -137,7 +140,7 @@ usage(){
 	#
 	# Fourth Pass...Now search for Needle3, if present..
 	#
-	if [ -z "$sNeedle2" ]
+	if [ -z "$sNeedle3" ]
 	  then
 			echo ''
 	  else
