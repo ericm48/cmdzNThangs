@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# Script that sync's selected files & dirs from local machine to flash drive...
+#
+#		set -x
+
+		usage(){
+		  echo " "
+		  echo " "
+		  echo " "
+		  echo " "
+		  echo " "
+		  echo "Usage $0 targetDir, sourceDir, fileMaskInclude, fileMaskExclude"
+		  echo " "
+		  echo " "
+		  echo " "
+		  echo syncBackDir3 /targetDir /sourceDir **/*.IncludeThisSuffix **/*.ExcludeThatSuffix
+		  echo " "
+		  exit 1
+		}   
+
+
+		if [ $# -lt 2 ] 
+			then
+				usage
+				exit 1
+		fi
+
+   	export ANT_FILE=
+   	export ANT_FILE=/dev2/eric/ant/eric_utils.xml
+
+   	export SRC_DIR=
+   	export TAR_DIR=
+   	export FILE_MASK_INC=**/*.*
+   	export FILE_MASK_EXC=*.zoobie 
+   	export OUT_FILE=
+   	export OUT_FILE=/data/txt/syncBackDirLOG3.txt
+   
+ 		if [ -n "$1" ]
+ 			then
+ 				export TAR_DIR="$1"
+		else
+				usage
+				exit 1
+		fi  
+  
+ 		if [ -n "$2" ]
+ 			then
+ 				export SRC_DIR="$2"
+ 				
+ 				
+		else
+				usage
+				exit 1
+		fi  
+   
+ 		if [ -n "$3" ]
+ 			then
+ 				export FILE_MASK_INC="$3"
+		fi   
+   
+   
+  	if [ -n "$4" ]
+ 			then
+ 				export FILE_MASK_EXC="$4"
+		fi   
+  
+	  # Run It      
+   	ant -buildfile "$ANT_FILE" -v -Dcopy.target.dir="$TAR_DIR" -Dcopy.source.dir="$SRC_DIR" -Dcopy.include.mask="$FILE_MASK_INC"  -Dcopy.exclude.mask="$FILE_MASK_EXC"  copy.dirz2
