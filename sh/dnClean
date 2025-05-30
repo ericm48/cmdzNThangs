@@ -1,0 +1,25 @@
+#!/bin/bash
+# Clears up a lot of dotNet intermediate files from build that suck up disk space
+#
+ 
+#set -x
+ 
+usage(){
+    echo " "
+    echo " "
+    echo " "
+    echo "Usage:   $0 -Removes all ./bin, ./obj folders, sub-folders found beneath current directory."
+    echo "            --help/-H/-h -Show this help Screen."
+    echo " "
+    echo " "
+exit 1
+}
+ 
+if [ "$1" == "--help" ] || [  "$1" == "--H" ] || [ "$1" == "--h" ] || [  "$1" == "-H" ] || [ "$1" == "-h" ]
+  then
+    usage
+fi
+ 
+ 
+find $PWD -iname obj -exec rm -rfv {} \;
+find $PWD -iname bin -exec rm -rfv {} \;
