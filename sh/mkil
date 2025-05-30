@@ -1,0 +1,31 @@
+#!/bin/bash 
+# Enhanced filtering from docker images with grep
+
+#set -x
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo "Enhanced minikube images filtering"
+   			echo " "
+   			echo " "
+
+   			echo "Usage:   $0 spring  -Filters results with grep on arg"
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}   
+
+	theCommand='minikube image list '
+
+	if [ $# -gt 0 ]
+		then			
+		
+			$theCommand |grep "$@"					
+	else
+			
+		$theCommand
+		
+	fi
+  

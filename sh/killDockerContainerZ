@@ -1,0 +1,284 @@
+#!/bin/bash
+# Clears up intermediately build docker images.  
+#
+ 
+#set -x
+ 
+usage(){
+    echo " "
+    echo " "
+    echo " "
+    echo "Usage:   $0 -Default remotes all INTERMEDIATE images/layers that have tags as <none>:<none>"
+    echo " 							**Note: name and tag are IMPLIED wildcards."    
+		echo " "    
+    echo "--help/-H/-h -Show this help Screen."
+		echo "--dry-run    -Show Images that WOULD be deleted."
+		echo " "    		
+    echo " "
+    echo " Example: $0                            -Removes ALL Images of <none>:<none>"
+    echo " "
+    echo " Example: $0 spring latest              -Removes ALL Images that contain spring in name, and latest in tag"
+    echo " "
+    echo " Example: $0 spring latest --dry-run    -Shows List ALL Images that contain spring in name, and latest in tag"
+    echo " "
+    echo " "
+    echo " "        
+    echo " "
+exit 1
+}
+ 
+	if [ "$1" == "--help" ] || [  "$1" == "--H" ] || [ "$1" == "--h" ] || [  "$1" == "-H" ] || [ "$1" == "-h" ]
+	  then
+	    usage
+	fi
+ 
+	maxArgz=0
+	maxArgz=$#
+
+	targetName=
+	targetTag=
+	
+	theListCommand='docker images'
+	
+	tFile1=
+	tFile1='/data/txt/killDockerImagesTemp1.txt'
+
+	dryRun=
+	targetName="<none>"
+  targetTag="<none>"
+	
+	i=0
+	
+ 	if [ $# -eq 0 ]
+ 		then
+			targetName="<none>"
+			 targetTag="<none>"
+			 	  dryRun="YES"
+	fi		
+
+	if [ $# -eq 1 ]
+		then
+		  if [[ $1 == "--dry-run" ]]
+				then
+					targetName="<none>"
+					targetTag="<none>"					
+			else
+				targetName="$1"
+		   	targetTag="<none>"
+		  fi
+	fi
+
+	if [ $# -eq 2 ]
+		then
+			targetName="$1"
+		   targetTag="$2"
+	fi
+	
+	#
+	# Yeah, logically this would be 3, but nix converts it to 7
+	#
+	if [ $# -eq 3 ]
+		then
+			targetName="$1"
+		   targetTag="$2"
+			 	  dryRun="YES"	   
+	fi
+
+	#
+	#	 Asterisk must be quoted!
+	#
+
+	if [ $# -gt 3 ]
+		then
+			echo ""
+			echo "Asterisk detected!!  Please enclose asterisks in double-quotes!"
+			echo ""
+			usage
+			
+			exit 4
+
+	fi
+	
+	#exit 44
+
+	i=0
+
+	#
+	# if dryRun is YES at this point, they just ran the command w/o params.  
+	# As a safety just run in --dry-run mode.
+	#
+		
+	if [[ $# -eq 0 ]] && [[ $dryRun == "YES" ]]
+		then
+			echo ""
+			echo "** NO PARAMS Detected! **"
+			echo "  Operating in --dry-run Mode..."
+			echo ""
+			echo "  Default Search is: <none>:<none"			
+			echo ""
+			echo ""
+			echo ""						
+		
+	else
+		
+			for argz in "$@"
+			do
+			    #echo "Here be Arg.$i: $argz"
+			 
+					case "$argz" in
+					
+					    --dry-run)
+									dryRun="YES"
+									
+									# 
+									if [ $# -eq 2 ]
+										then
+											targetTag="<none>"
+									fi
+											
+					        ;;
+					esac	   
+					((i=i+1))
+			   
+			done			
+
+	fi
+
+	rm $tFile1 >/dev/null 2>&1
+	
+	# Base Pass Get a list of ALL docker images....
+	
+	echo " "
+	echo "Searching For Images That Match/Contain: $targetName:$targetTag"
+	echo " "
+	
+	#exit 77
+	
+	#
+	# Base Pass
+	#
+	$theListCommand > $tFile1
+	
+	# Now, Iterate the file looking for matches on name & tag
+	i=0
+	
+	while read lineZ; do
+	
+		# Debuggin
+	  #echo "$lineZ"
+
+		# Skip header line..
+		if [ $i -gt 1 ]
+			then
+			  nameIn=
+			  tagIn=
+			  imageIDIn=
+			  imageSizeIn=
+			  theCommand=
+			  
+				     nameIn=$(echo $lineZ | cut -d ' ' -f 1)
+				      tagIn=$(echo $lineZ | cut -d ' ' -f 2)
+			    imageIDIn=$(echo $lineZ | cut -d ' ' -f 3)				 
+			  imageSizeIn=$(echo $lineZ | cut -d ' ' -f 7)				 			  
+
+			  #echo "     nameIn Be: |$nameIn|"			  
+			  #echo "      tagIn Be: |$tagIn|"			  
+ 			  #echo "  imageIDIn Be: |$imageIDIn|"				
+ 			  #echo "imageSizeIn Be: |$imageSizeIn|"				
+
+				#echo " The Image BE: $nameIn:$tagIn $imageIDIn $imageSizeIn"
+
+				# ToDo: Add sum on image sizes that meet filter criteria (ie space-saved).
+
+				while true; do
+				
+					#
+					# Name: Specified && Tag: Wild
+					#					
+					if [[ $nameIn =~ "$targetName" ]] && [[ "$targetTag" == \* ]]
+						then
+							if [[ $dryRun != "YES" ]]
+								then
+									theCommand="docker rmi -f $imageIDIn"
+									echo "Deleting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"
+								
+							else
+									echo "Targeting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"								
+							fi
+					fi
+					
+					#
+					# Name: Wild && Tag: Specified
+					#					
+					if [[ "$targetName" == \* ]] && [[ $tagIn =~ "$targetTag" ]]
+						then
+							if [[ $dryRun != "YES" ]]
+								then
+									theCommand="docker rmi -f $imageIDIn"
+									echo "Deleting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"
+								
+							else
+									echo "Targeting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"								
+							fi
+					fi
+				
+					#
+					# Name: Wild && Tag: Wild
+					#					
+					if [[ "$targetName" == \* ]] && [[ "$targetTag" == \* ]]
+						then
+							if [[ $dryRun != "YES" ]]
+								then
+									theCommand="docker rmi -f $imageIDIn"
+									echo "Deleting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"
+								
+							else
+									echo "Targeting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"								
+							fi
+					fi				
+				
+					#
+					# Name: Specified && Tag: Specified
+					#					
+					if [[ $nameIn =~ "$targetName" ]] && [[ $tagIn =~ "$targetTag" ]]
+						then						  
+							if [[ $dryRun != "YES" ]]
+								then
+									theCommand="docker rmi -f $imageIDIn"
+									echo "Deleting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"
+								
+							else
+									echo "Targeting Image: $nameIn:$tagIn $imageIDIn $imageSizeIn"								
+							fi
+					fi
+
+					
+					#
+					# IF dry-run is OFF && the command is set, we execute it.
+					#
+					
+					if [[ $theCommand != "" ]] && [[ $dryRun != "YES" ]]
+						then
+							# Kill the image
+							#echo "SSSSHHHHHeeeeeBang......"							
+
+							$theCommand
+					fi							
+					
+					# Safety purposes
+					break;
+					
+				done
+
+		fi			  
+
+		((i=i+1))
+				
+		#if [ $i -eq 3 ]
+	  #	then			
+		#		exit 88			
+		#fi
+				
+	done <$tFile1
+	
+	exit 0
