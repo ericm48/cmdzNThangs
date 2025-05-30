@@ -1,0 +1,58 @@
+#!/bin/bash
+# Process backup files locally, in order of:  CycleLocal, BackItUp, YankStuff.....
+#
+
+
+# set -x
+
+usage(){
+   			echo " "
+   			echo " "
+			  echo "Usage $0 ParentDirectory, ChildDirectoryNameSeed, MaxFolders"
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}   
+  
+	if [ $# -lt 3 ] 
+		then
+			usage
+			exit 1
+	fi
+
+	export MAXFOLDERS=
+	export MAXFOLDERS=$3
+
+	#
+	# Hammer the last Folder	
+	#
+	
+	rm "$1$2$3"
+	
+	
+	#
+	# Now step thru from the ending renaming each one to +1 from what it was.
+	#
+	
+	x=$MAXFOLDERS
+	while [ $x -ge 1 ]
+	do
+  		
+  		y=$(( $x - 1 ))  		
+
+			# echo "Hammer:  $1/$2$y $1/$2$x"
+  		
+			mv $1/$2$y $1/$2$x
+
+  		x=$(( $x - 1 ))
+	done	
+	
+
+	#
+	# Now, rename last file to first seed which is 1 ....
+	#      
+	mv $1/$2 $1/$2'1'
+		
+	# echo "Last Hammer:  " $1/$2 $1/$2'1'
+	

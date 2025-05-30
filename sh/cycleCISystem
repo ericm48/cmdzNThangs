@@ -1,0 +1,153 @@
+#!/bin/bash
+#
+# Script that will:
+#
+#   1.  Pulls latest Source from git.
+#		2.  Shut down Docker CI System.
+#   3.  Optional: Delete data for that docker-app-volume.
+#		4.  Remove Existing Docker-Containers (Leaves Data-Volumes As-Is Default).
+#   5.  Remove Dangling Docker-Containers
+#
+#   6.  Rebuilds Docker Images:
+#          Jenkins
+#          Others?
+#
+#   7.  Re-Starts Docker Containers
+#
+# set -x
+
+usage(){
+   		echo " "
+   		echo " "
+   		echo " "
+			echo "Usage:   $0 gitPassword [hammerJenkinsData, hammerNexusData, hammerVarLibDockerVolumes]"
+   		echo " "
+   		echo " "
+   		echo " "
+   		exit 1
+}   
+
+  
+   if [ $# -lt 1 ] 
+   	then
+   	
+   		usage
+   		
+   fi
+   
+   tLogFile=
+   tLogFile="/data/txt/cycleCISystemLog.txt"
+   
+	 tPassword=
+	 tPassword=$1	 
+
+	 rm "$tLogFile"
+	 
+	 cd /dev2/ansible/mservice/master/rm-monitoring
+	 
+	 echo " "
+	 echo "Updating From git....."
+   echo " "
+   
+   git remote set-url origin https://RMJenkinsBuilder:"$tPassword"@github.com/CenturyLinkCloud/rm-monitoring.git
+
+	 ret=$?
+	 
+	 if ! test "$ret" -eq 0
+	  then
+		    echo >&2 "command failed with exit status $ret"
+		    exit 1
+	 fi   
+	 
+   git pull | tee -a "$tLogFile"
+
+	 ret=${PIPESTATUS[0]}
+	 
+	 if ! test "$ret" -eq 0
+	  then
+		    echo >&2 "command failed with exit status $ret"
+		    exit 1
+	 fi   
+   
+	 echo " "
+	 echo "Shutting Down CI System...."
+   echo " "
+	 		   
+	 dockerCITools stop | tee -a "$tLogFile"
+
+	 for i do
+
+			 case "$i" in 
+			     hammerJenkinsData)
+			       echo " "
+			       echo "*** Deleting Jenkins Volume!!! ***"
+			       echo " "
+			       rm -rfv /mnt/dockervolumes/data/jenkins | tee -a "$tLogFile"
+			       mkdir -p /mnt/dockervolumes/data/jenkins | tee -a "$tLogFile"			       
+			       ;;
+			     hammerNexusData)
+			       echo " "
+			       echo "*** Deleting Nexus Volume!!! ***"
+			       echo " "
+			       rm -rfv /mnt/dockervolumes/data/nexus | tee -a "$tLogFile"
+			       mkdir -p /mnt/dockervolumes/data/nexus | tee -a "$tLogFile"			       
+			       ;;
+			     hammerGitlabData)
+			       echo " "
+			       echo "*** Deleting Gitlab Volume!!! ***"
+			       echo " "
+			       rm -rfv /mnt/dockervolumes/data/gitlab | tee -a "$tLogFile"
+			       mkdir -p /mnt/dockervolumes/data/gitlab | tee -a "$tLogFile"
+			       ;;			       
+			     hammerPostgresqlData)
+			       echo " "
+			       echo "*** Deleting Postgresql Volume!!! ***"
+			       echo " "
+			       rm -rfv /mnt/dockervolumes/data/postgresql | tee -a "$tLogFile"
+			       mkdir -p /mnt/dockervolumes/data/postgresql | tee -a "$tLogFile"
+			       ;;		       
+			     hammerRedisData)
+			       echo " "
+			       echo "*** Deleting Redis Volume!!! (includes postgres, redis too!) ***"
+			       echo " "
+			       rm -rfv /mnt/dockervolumes/data/redis | tee -a "$tLogFile"
+			       mkdir -p /mnt/dockervolumes/data/redis | tee -a "$tLogFile"
+			       ;;
+			     hammerVarLibDockerVolumes)
+			       echo " "
+			       echo "*** Deleting Internal Docker Volumes!!! ***"
+			       echo " "
+			       rm -rfv /var/lib/docker/volumes | tee -a "$tLogFile"
+			       mkdir -p /var/lib/docker/volumes | tee -a "$tLogFile"			       
+			       ;;
+			    *)
+       esac
+       
+	 done
+
+	 echo " "
+	 echo "Remove Existing Containers...."
+   echo " "
+	 
+	 killDockerDanglerz | tee -a "$tLogFile"
+
+	 cd /dev2/ansible/mservice/master/rm-monitoring/docker/docker-ci-tool-stack-master
+	 
+	 echo " "
+	 echo "Rebuilding Jenkins..."
+   echo " "
+	 
+	 docker-compose build jenkins | tee -a "$tLogFile"
+	 
+	 echo " "
+	 echo "Rebuilding Nexus..."
+   echo " "
+	 
+	 docker-compose build nexus | tee -a "$tLogFile"
+
+	 echo " "
+	 echo "Re-Starting CI System...."
+   echo " "
+
+	 dockerCITools start | tee -a "$tLogFile" &
+
