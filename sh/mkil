@@ -9,7 +9,6 @@ usage(){
    			echo "Enhanced minikube images filtering"
    			echo " "
    			echo " "
-
    			echo "Usage:   $0 spring  -Filters results with grep on arg"
    			echo " "
    			echo " "

@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+#  Show active maven profiles
+#
+
+m3 help:active-profiles "$@"

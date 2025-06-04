@@ -1,0 +1,184 @@
+#!/bin/bash
+# Cycle image via maven profile to minikube internal docker
+#
+ 
+#set -x
+ 
+usage(){
+    echo " "
+    echo " "
+    echo " "
+    echo "Usage:   $0  [ localImageName:Tag, prefix ]   -Pushes local image to internal minikube docker repo."
+    echo "                                              -Will retag with prefix, if provided.  Slash Implied."
+		echo " "		
+		echo " Example $0  mycr.io/baseimage:0.0.1"
+		echo " "		
+		echo " "								
+		echo " **Note: export MK_IMAGE_PUSH_TARGET=localImageName:Tag  -Will run with this value."
+		echo " **Note: export MK_IMAGE_PUSH_TARGET_PREFIX=sprincloud   -Will run with this value."		
+		echo " "    				
+		echo " "    
+    echo "--help/-H/-h -Show this help Screen."
+    echo " "        
+    echo " "
+exit 1
+}
+ 
+	if [ "$1" == "--help" ] || [  "$1" == "--H" ] || [ "$1" == "--h" ] || [  "$1" == "-H" ] || [ "$1" == "-h" ]
+	  then
+	    usage
+	fi
+ 
+	maxArgz=0
+	maxArgz=$#
+
+	targetImage=
+	targetImagePrefix=
+	targetTag=
+	
+	theListCommand='docker images'
+	
+	tFile1=
+	tFile1='/data/txt/mkImagePushTemp1.txt'
+	
+	if [[ $maxArgs -eq 0 ]]
+		then
+		
+		if [[ -z "${MK_IMAGE_PUSH_TARGET}" ]]
+			then
+			
+				# export MK_IMAGE_PUSH_TARGET="spring-cloud-kubernetes-consumer-service:3.3.2-SNAPSHOT"
+				# export MK_IMAGE_PUSH_TARGET_PREFIX="springcloud"
+
+				echo "No Target Image!"
+				echo "Please export a value to: MK_IMAGE_PUSH_TARGET"
+				echo "or"
+				echo "pass in on command line.."
+			
+				usage
+				exit 33
+			
+			else
+				targetImage=$MK_IMAGE_PUSH_TARGET
+		fi
+		
+	else
+		targetImage=$1
+	fi
+	
+	# Find the colon 
+	i=$(expr index "$targetImage" ":")
+	
+	# Separate name & tag	
+	targetTag=${targetImage:i}
+	
+	# Subtract 1
+	((i=i-1))
+	targetImage=${targetImage:0:i}
+	
+	if [[ $maxArgs -eq 2 ]]
+		then		
+			# Add the slash
+			targetImagePrefix="$2/"
+			
+		else
+			if [[ -n "${MK_IMAGE_PUSH_TARGET_PREFIX}" ]]
+				then
+					targetImagePrefix="$MK_IMAGE_PUSH_TARGET_PREFIX/"
+			fi
+		
+	fi
+	
+	echo "TargetImage: $targetImage:$targetTag"
+	echo "Prefix: $targetImagePrefix"
+	echo "Becomes: $targetImagePrefix$targetImage:$targetTag"
+
+	# If prefix is specified, tag the image (from imageID) with new name prefix + imageName:tag
+	
+	rm $tFile1
+	
+	# Base Pass, get all images.
+	
+	$theListCommand > $tFile1
+
+  i=0
+	while read lineZ; do
+
+		# Debuggin
+	  #echo "$lineZ"
+	
+		# Skip header line..
+		if [ $i -gt 0 ]
+			then
+			  nameIn=
+			  tagIn=
+			  imageIDIn=
+			  imageSizeIn=
+			  theCommand=
+			  
+				     nameIn=$(echo $lineZ | cut -d ' ' -f 1)
+				      tagIn=$(echo $lineZ | cut -d ' ' -f 2)
+			    imageIDIn=$(echo $lineZ | cut -d ' ' -f 3)				 
+			  imageSizeIn=$(echo $lineZ | cut -d ' ' -f 7)				 			  
+	
+			  #echo "     nameIn Be: |$nameIn|"			  
+			  #echo "      tagIn Be: |$tagIn|"			  
+			  #echo "  imageIDIn Be: |$imageIDIn|"				
+			  #echo "imageSizeIn Be: |$imageSizeIn|"
+	
+				#echo " The Image BE: $nameIn:$tagIn $imageIDIn $imageSizeIn"
+	
+				# ToDo: Add a sum on image sizes that meet filter criteria (ie space-saved).
+	
+
+				#
+				# Name: Specified && Tag: Specified
+				#					
+				if [[ $nameIn == "$targetImage" ]] && [[ $tagIn == "$targetTag" ]]				
+					then						  
+						theCommand="docker tag $imageIDIn $targetImagePrefix$targetImage:$targetTag"
+						
+						echo "Executing: "
+						echo "$theCommand"
+						
+						$theCommand
+						
+						break
+				fi
+	
+		fi			  
+	
+		((i=i+1))
+				
+		#if [ $i -eq 3 ]
+	  #	then			
+		#		exit 88			
+		#fi
+			
+	done <$tFile1
+		
+	# Now, remove & add to minikube
+
+	mkDockerPrefix=
+	mkDockerPrefix="docker.io/"
+	
+	# Delete the mk/docker.io prefix'd
+	theCommand="minikube image  rm $mkDockerPrefix$targetImagePrefix$targetImage:$targetTag"
+	echo "Executing:"
+	echo $theCommand
+	$theCommand
+
+	# Delete the other one...	
+	#theCommand="minikube image  rm $targetImagePrefix$targetImage:$targetTag"
+	#echo "Executing:"
+	#echo $theCommand
+	#$theCommand
+
+	# Now add it..	
+	theCommand="minikube cache add $targetImagePrefix$targetImage:$targetTag"
+	echo "Executing:"
+	echo $theCommand
+	$theCommand
+	
+	exit 0
+	
