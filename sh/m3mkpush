@@ -1,0 +1,8 @@
+#!/bin/bash
+#  Execute spring-boot run w/other params
+#
+
+m3ast -P build-img "$@"
+
+mkImagePush
+

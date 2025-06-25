@@ -41,14 +41,11 @@ exit 1
 	tFile1=
 	tFile1='/data/txt/mkImagePushTemp1.txt'
 	
-	if [[ $maxArgs -eq 0 ]]
+	if [[ $maxArgz -eq 0 ]]
 		then
 		
 		if [[ -z "${MK_IMAGE_PUSH_TARGET}" ]]
 			then
-			
-				# export MK_IMAGE_PUSH_TARGET="spring-cloud-kubernetes-consumer-service:3.3.2-SNAPSHOT"
-				# export MK_IMAGE_PUSH_TARGET_PREFIX="springcloud"
 
 				echo "No Target Image!"
 				echo "Please export a value to: MK_IMAGE_PUSH_TARGET"
@@ -76,7 +73,7 @@ exit 1
 	((i=i-1))
 	targetImage=${targetImage:0:i}
 	
-	if [[ $maxArgs -eq 2 ]]
+	if [[ $maxArgz -eq 2 ]]
 		then		
 			# Add the slash
 			targetImagePrefix="$2/"
@@ -92,6 +89,9 @@ exit 1
 	echo "TargetImage: $targetImage:$targetTag"
 	echo "Prefix: $targetImagePrefix"
 	echo "Becomes: $targetImagePrefix$targetImage:$targetTag"
+
+
+	#exit 10
 
 	# If prefix is specified, tag the image (from imageID) with new name prefix + imageName:tag
 	
@@ -154,31 +154,59 @@ exit 1
 	  #	then			
 		#		exit 88			
 		#fi
-			
+
 	done <$tFile1
+
+	#export MK_IMAGE_PUSH_SKIP_MINIKUBE="true"
+	#export MK_IMAGE_PUSH_SKIP_DOCKER_HUB="true"
 		
 	# Now, remove & add to minikube
 
-	mkDockerPrefix=
-	mkDockerPrefix="docker.io/"
+	if [[ -n "${MK_IMAGE_PUSH_SKIP_MINIKUBE}" ]]
+		then
+			echo "Skipping Minikube Push..."
+			
+		else
+			mkDockerPrefix=
+			mkDockerPrefix="docker.io/"
+			
+			# Delete the mk/docker.io prefix'd
+			theCommand="minikube image  rm $mkDockerPrefix$targetImagePrefix$targetImage:$targetTag"
+			echo "Executing:"
+			echo $theCommand
+			$theCommand
+			
+			# Delete the other one...	
+			#theCommand="minikube image  rm $targetImagePrefix$targetImage:$targetTag"
+			#echo "Executing:"
+			#echo $theCommand
+			#$theCommand
+			
+			# Now add to minikube...
+			theCommand="minikube cache add $targetImagePrefix$targetImage:$targetTag"
+			echo "Executing:"
+			echo $theCommand
+			$theCommand
+					
+	fi
+
+	# Now add to docker hub...
 	
-	# Delete the mk/docker.io prefix'd
-	theCommand="minikube image  rm $mkDockerPrefix$targetImagePrefix$targetImage:$targetTag"
-	echo "Executing:"
-	echo $theCommand
-	$theCommand
-
-	# Delete the other one...	
-	#theCommand="minikube image  rm $targetImagePrefix$targetImage:$targetTag"
-	#echo "Executing:"
-	#echo $theCommand
-	#$theCommand
-
-	# Now add it..	
-	theCommand="minikube cache add $targetImagePrefix$targetImage:$targetTag"
-	echo "Executing:"
-	echo $theCommand
-	$theCommand
+	if [[ -n "${MK_IMAGE_PUSH_SKIP_DOCKER_HUB}" ]]
+		then
+			echo "Skipping docker.hub Push..."
+			
+		else
+			
+			echo "Assuming you are logged in to docker.hub..."
+			
+			# Now add to docker.hub
+			theCommand="docker push $targetImagePrefix$targetImage:$targetTag"
+			echo "Executing:"
+			echo $theCommand
+			$theCommand
+					
+	fi	
 	
 	exit 0
 	
