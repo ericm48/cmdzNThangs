@@ -1,0 +1,199 @@
+#!/bin/bash
+#
+# Wrapper for Grep
+#
+
+  #set -x
+
+	#
+	#  Remember this one?  Turn file-globbing OFF run our grep, then turn it on, on the way out...
+	#
+	#set -f   
+
+usage(){
+		echo " "
+		echo " "
+		echo " "
+		echo "Usage: $0 pattern file-mask -R/-r [optional]"
+		echo " "
+		echo " "
+		echo "   **Default is to RECURSE subdirectories..."
+		echo " "
+		echo " "
+		echo " Ex: gcode foo *      --Searches for foo, recursing subdirectories, unless in /Users/emanley/Users/dks0794897/dev2/sh."
+		echo " "
+		echo " Ex: gcode foo * -r   --Searches for foo, recursing subdirectories, even if in /Users/emanley/Users/dks0794897/dev2/sh."
+		echo " "
+		echo " "
+		exit 1
+}
+
+
+   if [ $# -lt 2 ] 
+   	then
+   		echo " "
+   		echo " "
+   		echo " "
+   		echo "Usage: gcode pattern file-mask"
+   		echo " "
+   		echo " "
+   		echo " "
+   		exit 1
+   fi
+
+
+	#
+	# ToDO:  MUST ASSUME that file mask is ALWAYS last param!
+	#
+
+
+	G_FILEOUT=""
+	G_FILEOUT="/Users/dks0794897/data/txt/GrepOut.txt"
+
+	tString=""
+	tString=$1
+	tFileMask=""
+	
+	# Default
+	tFileMask=$2
+
+	tDir=""
+	tDir="$PWD"
+
+	gParams="-irn"
+
+	rm -f "$G_FILEOUT"
+
+	#
+	# if we are in /Users/dks0794897/dev2/sh switch to NO RECURSE unless specified....
+	#
+
+	if [ "$tDir" == "/Users/dks0794897/dev2/sh" ]
+	then
+	  
+	  gParams="-in"	  
+	  
+	fi
+
+	#echo "TotalArgs Be: $#"
+
+
+	i=0
+	for argz in "$@"
+	do
+	    #echo "Here be Arg.$i: $argz"
+
+	 		if [ $i -gt 0 ]
+	   		then
+					case "$argz" in
+
+					    -H)
+									usage
+									exit 3
+					        ;;
+
+					    -h)
+									usage
+									exit 3
+									;;
+
+					    --H)
+									usage
+									exit 3
+					        ;;
+
+					    --h)
+									usage
+									exit 3
+									;;
+
+					    -help)
+									usage
+									exit 3
+					        ;;
+
+					    --help)
+									usage
+									exit 3
+									;;
+
+							#
+							# For this grep, -v is INVERSE (ie not matching), not verbose?!?!  ha-ha
+							#
+					    -v)
+					    	  gParams="${gParams}v"
+					        ;;
+
+					    -V)
+					    	  gParams="${gParams}v"
+					        ;;
+
+							--no-filename)
+					    	  gParams="${gParams} --no-filename "
+					        ;;
+
+							#
+							# Add recursive, if specified (ie running in ~/Users/dks0794897/dev2/sh).  Its on by default...otherwise, it'll just throw an error.
+							#
+					    -r)
+					    	  gParams="${gParams}r"
+					        ;;
+
+					    *)
+					    		#echo "Invalid Option: $var"
+					    		#usage
+					    		#exit 77
+					        ;;
+					esac
+
+			fi
+
+			((i=i+1))
+
+	done
+
+	echo "GParams: $gParams"
+
+	#
+	# Grep args start as our PARAM #3.
+	#
+
+
+	echo " " >"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+
+	echo "Searching For: $tString" >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+
+	echo "In Directory: $tDir" >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+
+	echo "   File Mask: $tFileMask" >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+
+	echo " Grep Params: $gParams" >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+	echo " " >>"$G_FILEOUT"
+
+
+	#
+	# For node if we need it...
+	#
+	# grep -irn --exclude-dir=node_modules "$tString" * >>"$G_FILEOUT"
+
+	#
+	# Please note, this command (gcode) has globbing turned off via the .bash_profile
+	#
+
+	grep $gParams $tString $tFileMask >>$G_FILEOUT
+
+	#open -a /Applications/UltraEdit.app/Contents/MacOS/UltraEdit "$G_FILEOUT" > /dev/null 2>&1 &
+
+	s "$G_FILEOUT" > /dev/null 2>&1 &
+
+	#setUltraEditTopWindow 
+
+
