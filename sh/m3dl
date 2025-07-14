@@ -1,5 +1,67 @@
 #!/bin/bash
-#  Call maven's dependency list
+#  Call maven's dependency list with recursive grep's
 #
 
-m3 $1 dependency:list
+#set -x
+
+usage(){
+        echo " "
+        echo " "
+        echo "Enhanced maven dependancies filtering"
+        echo " "
+        echo " "
+
+        echo "Usage:   $0 x,y,z  -RECURSIVELY Filters results with grep based on args provided."
+        echo " "
+        echo " "
+        echo " "
+  exit 1
+}   
+
+case $1 in
+
+    -help)
+        usage
+        ;;
+    --help)
+        usage
+        ;;
+
+    -h)
+        usage
+        ;;
+        
+    -H)
+        usage
+        ;;
+
+    --h)
+        usage
+        ;;
+        
+    --H)
+        usage
+        ;;
+
+esac  
+
+theCommand="m3 dependency:list "
+
+
+if [ $# -gt 0 ]
+  then      
+
+    for argz in "$@"
+    do
+      
+      theCommand+=" |grep $argz "
+
+    done
+
+fi
+
+echo "theCommand Be: $theCommand" 
+
+eval "$theCommand"
+
+
