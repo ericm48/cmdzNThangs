@@ -1,0 +1,50 @@
+#!/bin/bash
+#  Call gradle's bootBuildImage
+#
+
+#set -x
+
+usage(){
+        echo " "
+        echo " "
+        echo "Gradle bootBuildImage"
+        echo " "
+        echo " "
+
+        echo "Usage:   $0 x,y,z "
+        echo " "
+        echo " "
+        echo " "
+  exit 1
+}   
+
+case $1 in
+
+    -help)
+        usage
+        ;;
+    --help)
+        usage
+        ;;
+
+    -h)
+        usage
+        ;;
+        
+    -H)
+        usage
+        ;;
+
+    --h)
+        usage
+        ;;
+        
+    --H)
+        usage
+        ;;
+
+esac  
+
+
+./gradlew bootBuildImage "$@"
+
