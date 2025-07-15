@@ -56,4 +56,8 @@ if [ $# -gt 0 ]
 
   	mvn -gs ${M2_GLOBAL} -s ${M2_USER} -DHOME=$HOME "$@"
 
+else
+  usage
+
 fi
+
