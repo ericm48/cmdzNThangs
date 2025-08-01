@@ -1,0 +1,24 @@
+#
+# SublimeText Load file.
+#
+
+# No way to control order....
+
+/Users/dks0794897/.bash_profile
+/Users/dks0794897/data/txt/DockerCommands.txt
+/Users/dks0794897/data/txt/FindersLoadFileOSX.txt
+
+/Users/dks0794897/data/txt/GitCommandsDCSG.txt
+
+/Users/dks0794897/data/txt/GradleCommandsDCSG.txt
+
+/Users/dks0794897/data/txt/GithubReposDCSG.txt
+
+/Users/dks0794897/data/txt/MiniKubeCommands.txt
+/Users/dks0794897/data/txt/StatusFY2025DCGS.txt
+/Users/dks0794897/data/txt/SublimeTextLoadFileUBU.txt
+
+
+/Users/dks0794897/data/txt/notes/AzureCloudCommandsDCSG.txt
+
+/Users/dks0794897/data/txt/notes/DavidDobmeierNotes.txt
