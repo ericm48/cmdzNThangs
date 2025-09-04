@@ -1,0 +1,10 @@
+#!/bin/bash
+# Brings GoogleChromeIUM to ForeFront 
+#
+
+# set -x
+
+xdotool search --name 'Brave Web Browser' windowactivate
+
+
+

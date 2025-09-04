@@ -1,0 +1,10 @@
+#!/bin/bash
+# Brings FireFox to ForeFront 
+#
+
+# set -x
+
+xdotool search --name 'FireFox Web Browswer' windowactivate
+
+
+

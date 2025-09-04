@@ -1,0 +1,10 @@
+#!/bin/bash
+# Brings GoogleChrome to ForeFront 
+#
+
+# set -x
+
+xdotool search --name 'Google Chrome' windowactivate
+
+
+
