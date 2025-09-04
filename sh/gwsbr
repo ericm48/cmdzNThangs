@@ -1,18 +1,17 @@
 #!/bin/bash
-#
-#  Wrapper for mvn
+#  Call gradle's bootRun
 #
 
-# set -x
+#set -x
 
 usage(){
         echo " "
         echo " "
-        echo "Maven Wrapper"
+        echo "Gradle bootRun"
         echo " "
         echo " "
 
-        echo "Usage:   $0 x,y,z  "
+        echo "Usage:   $0 x,y,z "
         echo " "
         echo " "
         echo " "
@@ -46,18 +45,6 @@ case $1 in
 
 esac  
 
-if [ $# -gt 0 ]
-  then
-  	export M2_GLOBAL=
-  	export M2_USER=
-  	
-  	export M2_GLOBAL="${M2_HOME}/conf/settings.xml"
-  	export M2_USER="${M2_DATA}/eric/settings.xml"
 
-  	mvn -gs ${M2_GLOBAL} -s ${M2_USER} -DHOME=$HOME "$@"
-
-else
-  usage
-
-fi
+./gradlew bootRun "$@"
 
