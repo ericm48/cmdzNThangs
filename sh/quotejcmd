@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# Wrapper for Quotes 
+#
+
+#	 set -x
+
+	if [[ -z "${JAVA_HOME}" ]]; then
+		echo "JAVA_HOME is EMPTY!!  Setting JAVA_HOME..."
+		export JAVA_HOME='/opt/sdkman/candidates/java/current'
+	fi
+
+	echo "JAVA_HOME be: ${JAVA_HOME}"
+	which java
+
+	export ANT_HOME=
+	export ANT_HOME="/apps/java/apache-ant-1.8.4"
+	export PATH=.:/dev2/sh:$JAVA_HOME/bin:$M2_HOME/bin:$ANT_HOME/bin:$PATH
+
+	# Need a syncBackDir4 that handles multiple exclude patterns..  argZ
+	/dev2/sh/syncBackDir3  /apps/java/QuotesApp /data/vm-data/apps/java/quotesapp '**/*' '**/.git/*'
+
+  unset  Q_DIR
+  export Q_DIR=/apps/java/QuotesApp
+
+  unset  Q_EXE
+  export Q_EXE="$Q_DIR/QuoteJGUI"
+
+  cd "$Q_DIR"   
+   
+  if [ ! -f "$Q_EXE" ]
+	 then
+	   echo "File $Q_EXE does not exist!"
+	   exit 2
+	fi
+
+  if [ $# -lt 1 ] 
+	 then
+	 	 "$Q_EXE"
+
+  else
+ 			"$Q_EXE" "$1"    
+  fi     
