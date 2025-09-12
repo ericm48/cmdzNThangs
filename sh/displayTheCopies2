@@ -1,0 +1,107 @@
+#!/bin/bash
+#
+# Script that sync's selected files & dirs from local machine to flash drive...  Takes in a series of strings to exclude
+#
+
+#	set -x 
+
+	usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0"
+   			echo " "
+   			echo " Ex $0 tag1 tag2 tag3"
+   			echo " "
+   			echo " "
+   			echo " Runs, and will purposfully ommit any lines with tag1, tag2 or tag3"
+   			echo " "   			   			   			
+				exit 1
+	}   
+
+	if [ $# -lt 1 ] 
+	   	then
+				usage
+	fi
+	
+	targetFile=
+	targetFile=$1
+	
+	tempFileI=
+	tempFileI="/data/txt/displayCopies2FileIn.txt"
+
+	tempFileO=
+	tempFileO="/data/txt/displayCopies2FileOut.txt"
+
+	needle1=
+	needle1="copying"
+	
+	needle2=
+	needle2="omit"
+	
+	# First, Grab all lines with "copying"
+	grep -i $needle1 $targetFile >$tempFileI
+	
+	# Next, Grab all lines that do not have "omit"
+	grep -iv $needle2 $tempFileI >$tempFileO
+
+	rm $tempFileI
+	cp $tempFileO $tempFileI
+
+	i=0
+	for theArg in "$@"
+	do
+			# Skip the first one..
+				     
+	    if [ $i -gt 0 ];
+	    	then
+			    echo "Removing: $theArg"
+					
+					grep -iv $theArg $tempFileI >$tempFileO
+			    
+			    # Disable 4 debuggin...
+			    #rm $tempFileI
+			    
+					cp $tempFileO $tempFileI			
+			fi
+			
+			i=$(($i+1))
+			
+	done
+	
+	# Figure out which nix we got.. Gotta use gsed on MACOS b/c of MACOS BS...
+	
+	theSed2Use=''
+	
+	unameOut="$(uname -s)"
+	
+	case "${unameOut}" in
+	
+	    Linux*)     theSed2Use='sed'  ;;
+	    Darwin*)    theSed2Use='gsed' ;;	    
+	    
+	    *) 	    		echo "*****Invalid Option: $unameOut NOT SUPPORTED!!!"
+					    		exit 77
+	esac
+  
+  # Yank the extraneous FileOut text...
+	#$theSed2Use -i 's/\/Users\/emanley\/data\/txt\/displayCopies2FileOut.txt://' "$tempFileO"
+	
+	$theSed2Use -i 's/\/data\/txt\/displayCopies2FileOut.txt://' "$tempFileO"
+
+
+	# Yank the extraneoous FineIn text...
+	#$theSed2Use -i 's/\/Users\/emanley\/data\/txt\/displayCopies2FileIn.txt://' "$tempFileO"
+	
+	$theSed2Use -i 's/\/data\/txt\/displayCopies2FileIn.txt://' "$tempFileO"	
+
+	# AGAIN, [b/c of recursive previous grep...] Yank the extraneoous FineIn text...
+	#$theSed2Use -i 's/\/Users\/emanley\/data\/txt\/displayCopies2FileIn.txt://' "$tempFileO"
+	
+	$theSed2Use -i 's/\/data\/txt\/displayCopies2FileIn.txt://' "$tempFileO"
+
+	# Lastly, re-grep for 'copying' w/o filenames and display that...	
+	gcode "$needle1" "$tempFileO" '--no-filename'
+
+  
+	

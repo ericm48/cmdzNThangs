@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# Script that sync's selected files & dirs from local machine to flash drive...
+#
+
+#	set -x 
+
+	usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0"
+   			echo " "
+   			echo " "
+   			echo " "
+				exit 1
+	}   
+
+	if [ $# -lt 1 ] 
+	   	then
+				usage
+	fi
+	
+	targetFile=
+	targetFile=$1
+	
+	tempFile1=
+	tempFile1="/data/txt/displayCopiesFile1.txt"
+	
+	tempFile2=
+	tempFile2="/data/txt/displayCopiesFile2.txt"
+
+	needle1=
+	needle1="copying"
+	
+	needle2=
+	needle2="omit"
+	
+	# cd /data/txt
+	
+	# There are files that have "Copying" in the name...so omit those first...
+	
+	# First, Grab all lines with "copying"
+	grep -i $needle1 $targetFile >$tempFile1
+	
+	# Next, Grab all lines that do not have "omit"
+	grep -iv $needle2 $tempFile1 >$tempFile2
+	
+	# Now, re-grep for copying and display that...
+	gcode "$needle1" "$tempFile2"
