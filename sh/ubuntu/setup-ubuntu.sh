@@ -84,4 +84,24 @@
 	# Profile ThingZ:
 	#
 
+  wget https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE					| tee -a "$outFile"		
+  cp bashrcBASE /home/ubuntu/.bashrc																																			| tee -a "$outFile"		
+  chmod +x /home/ubuntu/.bashrc  																																					| tee -a "$outFile"		
+  
+	wget https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasBASE	| tee -a "$outFile"		
+  cp kubectl_aliasBASE /home/ubuntu/.kubectl_alias																												| tee -a "$outFile"		
+  chmod +x /home/ubuntu/.kubectl_alias																																		| tee -a "$outFile"	
+  
+	wget https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh								| tee -a "$outFile"
+	cp kube-ps1.sh /dev2/sh/kube-ps1.sh																																			| tee -a "$outFile"
+	chmod +x /dev2/sh/kube-ps1.sh
+		
+	wget https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/git-ps1.sh								| tee -a "$outFile"
+	cp kube-ps1.sh /dev2/sh/git-ps1.sh																																			| tee -a "$outFile"
+	chmod +x /dev2/sh/git-ps1.sh																																						| tee -a "$outFile"
+	
+	
+	
+	
+	
 
