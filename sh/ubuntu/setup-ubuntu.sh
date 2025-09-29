@@ -10,13 +10,19 @@
 	
 	mkdir -p "/data/txt"
 		
-	apt update -y  | tee -a "$outFile"	
-	apt upgrade -y | tee -a "$outFile"
+	apt update -y  								| tee -a "$outFile"	
+	apt upgrade -y 								| tee -a "$outFile"
 
-	mkdir -p "/data/inet" | tee -a "$outFile"
-	mkdir -p "/dev2/sh"   | tee -a "$outFile"	
+	mkdir -p "/data/inet" 				| tee -a "$outFile"
+	mkdir -p "/dev2/sh"   				| tee -a "$outFile"	
 
-	cd "/data/inet"
+	cd "/data/inet"								| tee -a "$outFile"
+
+	#
+	# Add Network Stuff
+	#
+	apt install -y nmap						| tee -a "$outFile"
+	apt install -y net-tools			| tee -a "$outFile"
 
 	#
 	# Setup Completion
