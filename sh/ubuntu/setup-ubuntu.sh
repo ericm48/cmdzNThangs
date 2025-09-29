@@ -14,6 +14,7 @@
 	apt upgrade -y | tee -a "$outFile"
 
 	mkdir -p "/data/inet" | tee -a "$outFile"
+	mkdir -p "/dev2/sh"   | tee -a "$outFile"	
 
 	cd "/data/inet"
 
