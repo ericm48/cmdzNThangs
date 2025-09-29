@@ -60,13 +60,13 @@
 	# Setup Kind
 	#
 	wget https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64														| tee -a "$outFile"	
-  install -o root -g root -m 0755 kind /usr/local/bin/kind     												| tee -a "$outFile"		
+  install -o root -g root -m 0755 kind-linux-amd64 /usr/local/bin/kind								| tee -a "$outFile"		
 
   #
   # Setup Docker
   #
 
-  wget https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg 			| tee -a "$outFile"
+  wget https://download.docker.com/linux/ubuntu/gpg | gpg --yes --dearmor -o /etc/apt/keyrings/docker.gpg 			| tee -a "$outFile"
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
   apt update -y																																														| tee -a "$outFile"			
   apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin					| tee -a "$outFile"
