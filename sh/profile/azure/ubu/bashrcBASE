@@ -226,8 +226,8 @@ KUBE_PS1_SYMBOL_COLOR='cyan'
 # K8s + git
 #PS1='\u@\h:$(kube_ps1)$(__git_ps1 " (%s)")\>'
 
+# Just Basic
 PS1="\u@${HOSTNAME}:\$PWD>"
-
 
 unset color_prompt force_color_prompt
 
