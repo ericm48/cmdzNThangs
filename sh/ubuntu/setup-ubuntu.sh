@@ -4,20 +4,20 @@
 # set -x
 
 	outFile="/data/txt/setup-ubuntu-log.txt"
-
   rm "$outFile"
 
 	# setup a place for logging...
 	
 	mkdir -p "/data/txt"					2>&1 | tee -a "$outFile"	
 		
-	apt update -y  								2>&1 | tee -a "$outFile"	
-	apt upgrade -y 								2>&1 | tee -a "$outFile"
-
 	mkdir -p "/data/inet" 				2>&1 | tee -a "$outFile"
 	mkdir -p "/dev2/sh"   				2>&1 | tee -a "$outFile"	
 
 	cd "/data/inet"								2>&1 | tee -a "$outFile"
+		
+	apt update -y  								2>&1 | tee -a "$outFile"	
+	apt upgrade -y 								2>&1 | tee -a "$outFile"
+
 
 	#
 	# Add Network Stuff
