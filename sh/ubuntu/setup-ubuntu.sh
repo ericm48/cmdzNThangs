@@ -69,7 +69,6 @@
 	wget -P /data/inet https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64														
   install -o root -g root -m 0755 /data/inet/kind-linux-amd64 /usr/local/bin/kind										
 
-
 	#
 	# Setup Minikube
 	#
@@ -77,10 +76,16 @@
 	cp /data/inet/minikube-linux-amd64 /data/inet/minikube-linux-amd64-v1.36.0																
   install -o root -g root -m 0755 /data/inet/minikube-linux-amd64 /usr/local/bin/minikube										
 
+	#
+	# Setup fzf
+	#
+  wget -P /data/inet https://github.com/junegunn/fzf/releases/download/v0.65.2/fzf-0.65.2-linux_amd64.tar.gz
+  tar -xf /data/inet/fzf-0.65.2-linux_amd64.tar.gz -C /data/inet
+  install -o root -g root -m 0755 /data/inet/fzf /usr/local/bin/fzf
+
   #
   # Setup Docker
-  #
-  
+  #  
 	install -m 0755 -d /etc/apt/keyrings																																	
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc								
   chmod a+r /etc/apt/keyrings/docker.asc																																
