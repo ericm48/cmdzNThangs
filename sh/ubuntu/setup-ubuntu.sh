@@ -24,6 +24,7 @@
 	#
 	apt install -y nmap						2>&1 | tee -a "$outFile"
 	apt install -y net-tools			2>&1 | tee -a "$outFile"
+	apt install -y pkgconf				2>&1 | tee -a "$outFile"
 
 	#
 	# Setup Completion
