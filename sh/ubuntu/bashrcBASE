@@ -161,7 +161,7 @@ export OY=' -o yaml '
 #alias kall='kubectl get nodes,deployments.apps,services,pods,ingress $ow'
 
 
-#source /dev2/k8/3rdParty/master/kube-ps1/kube-ps1.sh
+#source /dev2/sh/kube-ps1.sh
 
 #source /dev2/sh/git-ps1.sh
 
@@ -226,6 +226,7 @@ KUBE_PS1_SYMBOL_COLOR='cyan'
 # K8s + git
 #PS1='\u@\h:$(kube_ps1)$(__git_ps1 " (%s)")\>'
 
+# Basic
 PS1="\u@${HOSTNAME}:\$PWD>"
 
 
