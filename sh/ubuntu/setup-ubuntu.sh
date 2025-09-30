@@ -3,8 +3,9 @@
 
 # set -x
 
-
 	outFile="/data/txt/setup-ubuntu-log.txt"
+
+  rm "$outFile"
 
 	# setup a place for logging...
 	
