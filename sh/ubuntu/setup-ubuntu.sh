@@ -135,12 +135,11 @@
 	chown -R root:ubuntu /dev2																																														
 	chown -R root:ubuntu /data																																														
 
-	
+	echo "Done!"
+		
 	#
 	# Restart
 	#
+	shutdown now -r
 	
-	echo "Done!"
-	
-	#shutdown now -r
 	
