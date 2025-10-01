@@ -135,18 +135,6 @@
 	chown -R root:ubuntu /dev2																																														
 	chown -R root:ubuntu /data																																														
 	
-	
-	#
-	# Setup ssh-key
-	#
-	# This runs as root...we'll fix it..		
-	ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
-	cp -R /root/.ssh /home/ubuntu
-	chown -R ubuntu:ubuntu /home/ubuntu/.ssh
-	sed -i 's/root/ubuntu/g' /home/ubuntu/.ssh/id_ed25519.pub
-	
-	
-	
 	#
 	# Restart
 	#
