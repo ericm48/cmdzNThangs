@@ -102,7 +102,6 @@
   usermod -aG docker ubuntu	&& newgrp docker
   systemctl start docker																																									
   systemctl enable docker																																									
-
   
   #
   # Setup nkp-cli
@@ -129,8 +128,7 @@
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/git-ps1.sh								
 	cp /data/inet/kube-ps1.sh /dev2/sh/git-ps1.sh																																					
 	chmod +x /dev2/sh/git-ps1.sh																																													
-	
-	
+		
 	#
 	# Final chown's
 	#	
@@ -138,4 +136,15 @@
 	chown -R root:ubuntu /data																																														
 	
 	
-
+	#
+	# Setup ssh-key
+	#
+	sudo su ubuntu
+	ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""	
+	exit
+	
+	#
+	# Restart
+	#
+	shutdown now -r
+	
