@@ -146,5 +146,5 @@
 	#
 	# Restart
 	#
-	shutdown now -r
+	#shutdown now -r
 	
