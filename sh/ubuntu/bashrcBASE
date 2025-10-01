@@ -161,9 +161,9 @@ export OY=' -o yaml '
 #alias kall='kubectl get nodes,deployments.apps,services,pods,ingress $ow'
 
 
-#source /dev2/sh/kube-ps1.sh
+source /dev2/sh/kube-ps1.sh
 
-#source /dev2/sh/git-ps1.sh
+source /dev2/sh/git-ps1.sh
 
 source /usr/share/bash-completion/bash_completion
 
@@ -220,14 +220,14 @@ KUBE_PS1_SYMBOL_USE_IMG='false'
 KUBE_PS1_NS_COLOR='yellow'
 KUBE_PS1_SYMBOL_COLOR='cyan'
 
+# Basic
+#PS1="\u@${HOSTNAME}:\$PWD>"
+
 # Old K8s
-# PS1='\u@\h:$(kube_ps1)\>'
+#PS1='\u@\h:$(kube_ps1)\>'
 
 # K8s + git
-#PS1='\u@\h:$(kube_ps1)$(__git_ps1 " (%s)")\>'
-
-# Basic
-PS1="\u@${HOSTNAME}:\$PWD>"
+PS1='\u@\h:$(kube_ps1)$(__git_ps1 " (%s)")\>'
 
 
 unset color_prompt force_color_prompt
