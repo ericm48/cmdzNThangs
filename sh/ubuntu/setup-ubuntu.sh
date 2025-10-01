@@ -134,6 +134,7 @@
 	#	
 	chown -R root:ubuntu /dev2																																														
 	chown -R root:ubuntu /data																																														
+
 	
 	#
 	# Restart
