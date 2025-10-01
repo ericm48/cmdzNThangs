@@ -139,12 +139,15 @@
 	#
 	# Setup ssh-key
 	#
-	sudo su ubuntu
+	su - ubuntu
 	ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""	
 	exit
 	
 	#
 	# Restart
 	#
+	
+	echo "Done!"
+	
 	#shutdown now -r
 	
