@@ -114,7 +114,7 @@
 	# Profile ThingZ:
 	#
   wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
-  cp /data/inet/bashrcBASE /home/ubuntu/.bashrc																																		
+  cp /data/inet/bashrcBASE /home/ubuntu/.bashrc				
   chmod +x /home/ubuntu/.bashrc  																																									
   
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasBASE	
