@@ -132,8 +132,8 @@
 	#
 	# Final chown's
 	#	
-	chown -R root:ubuntu /dev2																																														
-	chown -R root:ubuntu /data																																														
+	chown -R ubuntu:root /dev2																																														
+	chown -R ubuntu:root /data																																														
 
 	echo "Done!"
 		
