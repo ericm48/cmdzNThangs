@@ -398,7 +398,12 @@ complete -F __start_kubectl k
 # Try this
 #sdk use java jdk-21.0.1-oracle
 
-# ssh
+# Setup ssh
+
+if [ ! -d /home/ubuntu/.ssh ]; then
+	ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
+fi
+
 eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
 
 
