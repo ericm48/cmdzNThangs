@@ -402,9 +402,10 @@ complete -F __start_kubectl k
 # Setup ssh
 #
 
-if [ ! -d ~/.ssh ]; then
+if [ ! -e ~/.ssh/id_ed25519.pub ]; then
   ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
 fi
+
 
 eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
 
