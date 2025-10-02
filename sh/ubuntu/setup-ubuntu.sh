@@ -51,11 +51,18 @@
 	#
 	# K8s Utilities
 	#	
- 	wget -P /data/inet https://raw.githubusercontent.com/blendle/kns/master/bin/kns 		
-  install -o root -g root -m 0755 /data/inet/kns /usr/local/bin/kns       						
+ 	wget -P /data/inet https://raw.githubusercontent.com/blendle/kns/master/bin/kns
+  install -o root -g root -m 0755 /data/inet/kns /usr/local/bin/kns			
  	
-	wget -P /data/inet https://raw.githubusercontent.com/blendle/kns/master/bin/ktx 		
-  install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx       						
+	wget -P /data/inet https://raw.githubusercontent.com/blendle/kns/master/bin/ktx
+  install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx     						
+
+	#
+	# crictl-tools
+	#
+	
+	
+	
 
   #
   # Setup K9s

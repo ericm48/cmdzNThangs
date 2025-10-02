@@ -1,0 +1,16 @@
+# The crio.network table containers settings pertaining to the management of
+# CNI plugins.
+[crio.network]
+
+# The default CNI network name to be selected. If not set or "", then
+# CRI-O will pick-up the first one found in network_dir.
+# cni_default_network = ""
+
+# Path to the directory where CNI configuration files are located.
+network_dir = "/etc/cni/net.d/"
+
+# Paths to directories where CNI plugin binaries are located.
+plugin_dirs = [
+        "/opt/cni/bin/",
+        "/usr/lib/cni/",
+]
