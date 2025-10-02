@@ -150,9 +150,9 @@
   cp /data/inet/bashrcBASE /home/ubuntu/.bashrc				
   chmod +x /home/ubuntu/.bashrc  																																									
   
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasBASE	
-  cp /data/inet/kubectl_aliasBASE /home/ubuntu/.kubectl_alias																														
-  chmod +x /home/ubuntu/.kubectl_alias																																									
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasesBASE	
+  cp /data/inet/kubectl_aliasesBASE /home/ubuntu/.kubectl_aliases
+  chmod +x /home/ubuntu/.kubectl_aliases
   
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh								
 	cp /data/inet/kube-ps1.sh /dev2/sh/kube-ps1.sh																																				
