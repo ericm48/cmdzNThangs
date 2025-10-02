@@ -99,16 +99,31 @@
  	apt-get update    
 
   apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin					
-  usermod -aG docker ubuntu
-  systemctl start docker																																									
-  systemctl enable docker																																									
+
+	getent group docker  					# group docker should already out there...
+  usermod -aG docker ubuntu  
+  
+  # Start'em up!
+  systemctl enable docker.service
+  systemctl start docker.service
+
+  systemctl enable containerd.service
+  systemctl start containerd.service  
+  
+  # Docker will not work until we bounce the machine, last step...																																						
   
   #
   # Setup nkp-cli
   #
-	wget -P /data/inet http://10.38.48.244/artifacts/nkp_v2.16.0_linux_amd64.tar.gz													
+	wget -P /data/inet http://10.38.48.244/artifacts/nkp_v2.16.0_linux_amd64.tar.gz
 	tar -xf /data/inet/nkp_v2.16.0_linux_amd64.tar.gz																												
   install -o root -g root -m 0755 /data/inet/nkp /usr/local/bin/nkp     																	
+
+  #
+  # Pull & Extract nkp-bundle
+  #
+	wget -P /data/inet http://10.38.48.244/artifacts/nkp-bundle_v2.16.0_linux_amd64.tar.gz
+	tar -xf /data/inet/nkp-bundle_v2.16.0_linux_amd64.tar.gz
 
 	#
 	# Profile ThingZ:
