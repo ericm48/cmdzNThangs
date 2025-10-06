@@ -7,7 +7,7 @@
 
 # UBU-os
 targetLoadFile=
-targetLoadFile='/Users/dks0794897/data/txt/FindersLoadFileOSX.txt'
+targetLoadFile='/Users/eric.manley/data/txt/FindersLoadFileOSX.txt'
 
 # UBU-os
 targetApp=
@@ -120,7 +120,7 @@ load_launch_app() {
 	  
 	done <$targetLoadFile
 
-	echo "FilesLoaded: $i"
+	echo "FindersLoaded: $i"
 	echo ""	
 
 }

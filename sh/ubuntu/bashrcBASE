@@ -390,7 +390,7 @@ source <(kubectl completion bash)
 #
 # kubectl_aliases
 #
-[ -f /home/ubuntu/.kubectl_aliases ] && source /home/ubuntu/.kubectl_aliases
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 
 
 # Reset the k alias for autocompletion (both lines below).
