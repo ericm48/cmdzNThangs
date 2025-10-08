@@ -68,18 +68,13 @@
   wget -P /data/inet https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
   chmod 700 /data/inet/get-helm-3
 	/data/inet/get-helm-3
-  
-  
-  - chmod 700 /tmp/get_helm.sh
-  - /tmp/get_helm.sh
-  - rm /tmp/get_helm.sh	
-	
 
   #
   # Setup K9s
   #
-	wget -P /data/inet https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_linux_amd64.deb 	
-  apt install -y /data/inet/k9s_linux_amd64.deb																											
+	wget -P /data/inet https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.deb
+	mv /data/inet/k9s_linux_amd64.deb /data/inet/k9s_linux_amd64-v0.50.9.deb
+  apt install -y /data/inet/k9s_linux_amd64-v0.50.9.deb
 
 	#
 	# Setup Kind
