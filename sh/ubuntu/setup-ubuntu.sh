@@ -109,7 +109,8 @@
   apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin					
 
 	getent group docker  					# group docker should already out there...
-  usermod -aG docker ubuntu  
+  usermod -aG docker ubuntu	  
+	usermod -aG docker nutanix && newgrp docker  
   
   # Start'em up!
   systemctl enable docker.service
@@ -137,12 +138,18 @@
 	# Profile ThingZ:
 	#
   wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
-  cp /data/inet/bashrcBASE /home/ubuntu/.bashrc				
-  chmod +x /home/ubuntu/.bashrc  																																									
+  cp /data/inet/bashrcBASE /home/ubuntu/.bashrc
+  chmod +x /home/ubuntu/.bashrc
+  cp /data/inet/bashrcBASE /home/nutanix/.bashrc
+  chmod +x /home/nutanix/.bashrc
   
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasesBASE	
   cp /data/inet/kubectl_aliasesBASE /home/ubuntu/.kubectl_aliases
   chmod +x /home/ubuntu/.kubectl_aliases
+  cp /data/inet/kubectl_aliasesBASE /home/nutanix/.kubectl_aliases
+  chmod +x /home/nutanix/.kubectl_aliases
+
+  chown -R nutanix:nutanix /home/nutanix
   
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh								
 	cp /data/inet/kube-ps1.sh /dev2/sh/kube-ps1.sh																																				
@@ -163,8 +170,8 @@
 	#
 	# Final chown's
 	#	
-	chown -R ubuntu:root /dev2																																														
-	chown -R ubuntu:root /data																																														
+	chown -R nutanix:root /dev2																																														
+	chown -R nutanix:root /data																																														
 
 	echo "Done!"
 		
