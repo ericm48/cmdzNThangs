@@ -58,11 +58,6 @@
   install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx     						
 
 	#
-	# crictl-tools
-	#
-	
-	
-	#
 	# Helm
 	#	
   wget -P /data/inet https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -156,6 +151,14 @@
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/git-ps1.sh								
 	cp /data/inet/kube-ps1.sh /dev2/sh/git-ps1.sh																																					
 	chmod +x /dev2/sh/git-ps1.sh																																													
+	
+	#
+	# cri-o / crictl-tools
+	#
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-crictl.sh
+	cp /data/inet/install-crictl.sh /dev2/sh/install-crictl.sh	
+	chmod +x /dev2/sh/install-crictl.sh
+	/dev2/sh/install-crictl.sh
 		
 	#
 	# Final chown's
