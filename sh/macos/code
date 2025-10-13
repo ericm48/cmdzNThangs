@@ -1,0 +1,8 @@
+#!/bin/bash
+# Launches VsCode from command-line with target params (file names).
+#
+
+# MAC
+open -a /Applications/Visual\ Studio\ Code.app/ . $* > /dev/null 2>&1 &
+
+
