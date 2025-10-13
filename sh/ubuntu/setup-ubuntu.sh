@@ -141,7 +141,9 @@
   cp /data/inet/bashrcBASE /home/ubuntu/.bashrc
   chmod +x /home/ubuntu/.bashrc
   cp /data/inet/bashrcBASE /home/nutanix/.bashrc
-  chmod +x /home/nutanix/.bashrc
+  chmod +x /home/nutanix/.bashrc  
+  cp /data/inet/bashrcBASE /etc/skel/.bashrc
+  chmod +x /etc/skel/.bashrc  
   
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasesBASE	
   cp /data/inet/kubectl_aliasesBASE /home/ubuntu/.kubectl_aliases
