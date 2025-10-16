@@ -41,7 +41,7 @@ exit 1
 	theListCommand='docker images'
 	
 	tFile1=
-	tFile1='/data/txt/killDockerImagesTemp1.txt'
+	tFile1='/Users/eric.manley/data/txt/killDockerImagesTemp1.txt'
 
 	dryRun=
 	targetName="<none>"
