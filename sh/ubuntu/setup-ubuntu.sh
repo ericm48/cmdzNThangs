@@ -170,10 +170,14 @@
 	/dev2/sh/install-crictl.sh
 		
 	#
-	# Final chown's
-	#	
-	chown -R nutanix:root /dev2																																														
-	chown -R nutanix:root /data																																														
+	# Final chown's & chmod's
+	#
+	chown -R ubuntu:root /dev2																																														
+	chown -R ubuntu:root /data																																														
+
+	chmod 777 -R /dev2
+	chmod 777 -R /data
+
 
 	echo "Done!"
 		
