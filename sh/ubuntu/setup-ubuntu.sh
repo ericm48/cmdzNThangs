@@ -178,7 +178,6 @@
 	chmod 777 -R /dev2
 	chmod 777 -R /data
 
-
 	echo "Done!"
 		
 	#
