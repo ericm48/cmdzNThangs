@@ -153,13 +153,17 @@
 
   chown -R nutanix:nutanix /home/nutanix
   
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh								
-	cp /data/inet/kube-ps1.sh /dev2/sh/kube-ps1.sh																																				
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh
+	cp /data/inet/kube-ps1.sh /dev2/sh/kube-ps1.sh
 	chmod +x /dev2/sh/kube-ps1.sh
 		
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/git-ps1.sh								
-	cp /data/inet/kube-ps1.sh /dev2/sh/git-ps1.sh																																					
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/git-ps1.sh					
+	cp /data/inet/kube-ps1.sh /dev2/sh/git-ps1.sh
 	chmod +x /dev2/sh/git-ps1.sh																																													
+	
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ip-addr-check.sh
+	cp /data/inet/ip-addr-check.sh /dev2/sh/ip-addr-check.sh
+	chmod +x /dev2/sh/ip-addr-check.sh
 	
 	#
 	# cri-o / crictl-tools
