@@ -25,8 +25,16 @@ usage(){
 
    			echo "Usage:   $0 -np NETWORK_PREFIX -lo LAST-OCTET"
    			echo " "
+   			echo "Example $0 -np 192.168.10 -lo 100"
    			echo " "
    			echo " "
+   			echo "Checks the first 100 addresses from 192.168.10.1 thru 192.168.10.100"
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo " "
+   			
 	exit 1
 }
 
