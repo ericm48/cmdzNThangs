@@ -19,7 +19,7 @@ increment=0
 usage(){
    			echo " "
    			echo " "
-   			echo "Check a series of IP-Addresses to see if used. REAL-LINUX-ONLY, Sorry MAC-OS.."
+   			echo "Check a series of IPv4-Addresses to see if used. "
    			echo " "
    			echo " "
 
