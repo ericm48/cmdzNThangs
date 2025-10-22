@@ -111,13 +111,27 @@ last_index(){
 
 	# Find the first index of the character in the reversed string
 	# (This gives its position from the end of the original string)
-	lastIndex=$(expr index "$reversedString" "$needle")
+
+	# MAC-os requires different handling because its just special... BSD...
+
+	unamestr=$(uname)	
+
+	if [ "$unamestr" = 'Darwin' ] 
+		then
+		
+			# MAC-os Impl:
+	   	lastIndex=$(echo "$reversedString" | sed -n "s/[$needle].*//p" | wc -c)
+
+	else 
+	
+		# Linux Impl:
+		lastIndex=$(expr index "$reversedString" "$needle")
+	
+	fi	
 
 	# Calculate the last index in the original string (1-based index)
 	# Total length - (index from end - 1)
 	returnValue=$(( ${#hayStack} - lastIndex + 1 ))
-
-	#echo "Last index of '$needle' in '$hayStack' (1-based): $returnValue"	
 
 	return $returnValue	
 }
@@ -136,8 +150,6 @@ check_the_range() {
 	last_index  "$baseAddress" "."	
 	iLastPeriod=$?
 	
-	#echo $iLastPeriod
-
 	firstThree=${baseAddress:start:iLastPeriod}
 	
   lastOctet=
@@ -160,8 +172,6 @@ check_the_range() {
 	# First One
 	IPAddress="${baseAddress}"
 	
-	#echo "   baseAddress: $baseAddress"
-	#echo "     IPAddress: $IPAddress"
 	
 	for i in $(seq 1 $iNextIncrement); do
 		
@@ -189,13 +199,11 @@ unamestr=$(uname)
 
 if [ "$unamestr" = 'Darwin' ] 
 	then
-   	platform='Darwin'
-  	echo "This is macOS (BSD-based)."
-  	echo "Sorry this script does not function properly on BSD-based..."
-  	exit 33   
-fi
+		echo ""
+  	echo "This is macOS (BSD-based)...."
+		echo ""
 
-	exit 5
+fi
 
 	arg_parse "$@"
 
