@@ -187,14 +187,15 @@ check_the_range() {
 
 unamestr=$(uname)
 
-if [ "$unamestr" = 'FreeBSD' ] 
+if [ "$unamestr" = 'Darwin' ] 
 	then
-   	platform='freebsd'
+   	platform='Darwin'
   	echo "This is macOS (BSD-based)."
   	echo "Sorry this script does not function properly on BSD-based..."
   	exit 33   
 fi
 
+	exit 5
 
 	arg_parse "$@"
 
