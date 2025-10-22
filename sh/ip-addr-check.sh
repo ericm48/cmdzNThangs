@@ -185,11 +185,16 @@ check_the_range() {
 	done
 }
 
-if [[ "$OS_TYPE" == "Darwin" ]]; then
-  echo "This is macOS (BSD-based)."
-  echo "Sorry this script does not function properly on BSD-based..."
-  exit 33
+unamestr=$(uname)
+
+if [ "$unamestr" = 'FreeBSD' ] 
+	then
+   	platform='freebsd'
+  	echo "This is macOS (BSD-based)."
+  	echo "Sorry this script does not function properly on BSD-based..."
+  	exit 33   
 fi
+
 
 	arg_parse "$@"
 
