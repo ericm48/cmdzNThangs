@@ -19,7 +19,7 @@ increment=0
 usage(){
    			echo " "
    			echo " "
-   			echo "Check a series of IP-Addresses to see if used."
+   			echo "Check a series of IP-Addresses to see if used. REAL-LINUX-ONLY, Sorry MAC-OS.."
    			echo " "
    			echo " "
 
@@ -184,6 +184,12 @@ check_the_range() {
 
 	done
 }
+
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+  echo "This is macOS (BSD-based)."
+  echo "Sorry this script does not function properly on BSD-based..."
+  exit 33
+fi
 
 	arg_parse "$@"
 
