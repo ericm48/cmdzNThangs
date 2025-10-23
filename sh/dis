@@ -17,15 +17,20 @@ usage(){
 	exit 1
 }   
 
-	theCommand='docker images '
+	theCommand="docker images "
 
 	if [ $# -gt 0 ]
 		then			
-		
-			$theCommand |grep "$@"					
-	else
-			
-		$theCommand
-		
+
+      for argz in "$@"
+      do
+        
+        theCommand+=" |grep $argz "
+
+      done
+
 	fi
-  
+
+  #echo "theCommand Be: $theCommand" 
+
+  eval "$theCommand"
