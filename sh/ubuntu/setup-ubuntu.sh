@@ -91,6 +91,11 @@
   tar -xf /data/inet/fzf-0.65.2-linux_amd64.tar.gz -C /data/inet
   install -o root -g root -m 0755 /data/inet/fzf /usr/local/bin/fzf
 
+	#
+	# Setup httpie
+	#
+	snap install httpie	
+
   #
   # Setup Docker
   #  
