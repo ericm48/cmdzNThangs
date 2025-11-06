@@ -296,7 +296,8 @@ alias qjc='quotejcmd "$@"'
 
 # NKP
 
-alias setmc='export KUBECONFIG="/home/ubuntu/nkp-mgmt-eric-4.conf"'
+alias setbsc4='export KUBECONFIG="/home/ubuntu/nkp-mgmt-eric-4-bootstrap.conf"'   	# BootStrapCluster
+alias setmc4='export KUBECONFIG="/home/ubuntu/nkp-mgmt-eric-4.conf"'   							# ManagementCluster
 
 #
 # Minikube
