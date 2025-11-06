@@ -98,8 +98,6 @@ export HNC_PLATFORM='linux_amd64'
 export K8_HNS_CLI=
 export K8_HNS_CLI='/apps/kubectl-hns-0.9.0/bin'
 
-export REPLICATED_CLI=
-export REPLICATED_CLI='/apps/replicated-0.84.0/bin'
 
 export PIVOTAL=
 export PIVOTAL=/apps/pivotal
@@ -295,7 +293,10 @@ alias dkmk='cd /dev2/k8/eric/master/kodekloud'
 alias dkmc='cd /dev2/k8/3rdParty/master/certified-kubernetes-administrator-course'
 
 alias qjc='quotejcmd "$@"'
-alias r='replicated "$@"'
+
+# NKP
+
+alias setmc='export KUBECONFIG="/home/ubuntu/nkp-mgmt-eric-4.conf"'
 
 #
 # Minikube
