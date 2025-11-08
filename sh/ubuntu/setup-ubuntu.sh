@@ -216,9 +216,18 @@ usage(){
 	# cri-o / crictl-tools
 	#
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-crictl.sh
-	cp /data/inet/install-crictl.sh /dev2/sh/install-crictl.sh	
+	cp /data/inet/install-crictl.sh /dev2/sh/install-crictl.sh
 	chmod +x /dev2/sh/install-crictl.sh
 	/dev2/sh/install-crictl.sh
+	
+	#
+	# dev tools
+	#
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-devtoolz.sh
+	cp /data/inet/install-devtoolz.sh /dev2/sh/install-devtoolz.sh
+	chmod +x /dev2/sh/install-devtoolz.sh
+	/dev2/sh/install-devtoolz.sh
+		
 		
 	#
 	# Final chown's & chmod's
