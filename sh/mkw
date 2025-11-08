@@ -1,0 +1,48 @@
+#!/bin/bash
+# Command test something...
+
+#set -x
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo "Minikube wrapper:		If a context is detected (ie not N/A), the all commands are prefaced with -p x-context"
+   			echo " "
+   			echo " "
+
+   			echo "Usage:   $0 Args"
+   			echo " "
+   			echo " "
+   			echo " "
+	exit 1
+}   
+
+	if [ $# -eq 0 ]
+ 		then
+			
+			exit 33
+ 	fi
+  
+	if [  "$1" == "-H" ] || [ "$1" == "-h" ] || [ "$1" == "--H" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "--help" ]
+		then
+			usage
+	fi		
+
+	
+	theCTX=	
+	theCTX="$(kubectl config current-context)"	
+	theCMD=
+
+	if [ "theCTX" != "N/A" ] 
+		then
+					
+			theCMD="minikube -p $theCTX $@"
+					
+	else
+		
+		theCMD="minikube $@"
+			
+	fi
+	
+	$theCMD
+	
