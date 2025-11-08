@@ -26,6 +26,11 @@
 	apt install -y pkgconf				
 
 	#
+	# Add direnv
+	#
+	apt install direnv
+	
+	#
 	# Setup Completion
 	#
   #apt install -y bash-completion	2>&1 | tee -a "$outFile"	
