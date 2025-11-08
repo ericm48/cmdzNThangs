@@ -36,8 +36,8 @@ export DOCKER_HOST_IP="172.17.0.1"
 export M2_DATA=
 export M2_DATA=/data/maven-3.x
 
-#export M2_HOME=
-#export M2_HOME=/apps/java/apache-maven-3.3.3
+export M2_HOME=
+export M2_HOME='/opt/sdkman/candidates/maven/current'
 
 export ANT_HOME=
 export ANT_HOME=/apps/java/apache-ant-1.8.4
@@ -417,6 +417,12 @@ fi
 # Invoke ssh
 #
 eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
+
+# Normal:
+source /opt/sdkman/bin/sdkman-init.sh
+
+# Try this
+sdk use java 21.0.8-librca #23.0.2-librca
 
 # direnv
 eval "$(direnv hook bash)"

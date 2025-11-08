@@ -3,7 +3,6 @@
 
   set -x
 
-
 # crictl install:
 
 # Assumes running sudo or as root...

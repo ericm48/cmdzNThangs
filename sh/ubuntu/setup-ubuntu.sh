@@ -3,12 +3,40 @@
 
   set -x
 
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0		-Sets up a basic Ubuntu JumpBox with my utilties and such."
+   			echo " "
+   			echo " "
+   			echo " -H/-h				-Display this help message."
+   			echo " "
+   			echo " "
+   			echo " "   			   			
+	exit 1
+}
+
+
+	if [ "$1" == "--help" ] || [  "$1" == "--H" ] || [ "$1" == "--h" ] || [  "$1" == "-H" ] || [ "$1" == "-h" ]
+	  then
+	    usage
+	fi
+
+
 	# setup a place for logging...
 	
-	mkdir -p "/data/txt"					
-		
-	mkdir -p "/data/inet" 				
-	mkdir -p "/dev2/sh"   				
+	
+	mkdir -p "/data/inet"
+	mkdir -p "/data/maven-3.x/eric"
+	mkdir -p "/data/txt"
+	
+	mkdir -p "/dev2/sh"
+	
+	mkdir -p "/dev2/java/eric/master"	
+	mkdir -p "/dev2/k8/eric/master"	
+	mkdir -p "/dev2/helm/eric/master"		
 
 	cd "/data/inet"								
 	
@@ -29,6 +57,11 @@
 	# Add direnv
 	#
 	apt install direnv
+	
+	#
+	# Add some utils...
+	#
+	apt install -y zip unzip
 	
 	#
 	# Setup Completion
@@ -190,8 +223,9 @@
 	#
 	# Final chown's & chmod's
 	#
-	chown -R ubuntu:root /dev2																																														
-	chown -R ubuntu:root /data																																														
+	chown -R ubuntu:root /dev2
+	chown -R ubuntu:root /data
+	chown -R ubuntu:root /opt	
 
 	chmod 777 -R /dev2
 	chmod 777 -R /data
