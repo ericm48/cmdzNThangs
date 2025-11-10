@@ -38,6 +38,8 @@ usage(){
 	mkdir -p "/dev2/k8/eric/master"	
 	mkdir -p "/dev2/helm/eric/master"		
 
+	mkdir -p "/mnt/nfsshare/k8svolumes"
+
 	cd "/data/inet"								
 	
 	pwd
@@ -62,6 +64,7 @@ usage(){
 	# Add some utils...
 	#
 	apt install -y zip unzip
+	apt install -y nfs-kernel-server
 	
 	#
 	# Setup Completion
