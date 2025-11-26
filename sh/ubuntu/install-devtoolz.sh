@@ -38,8 +38,8 @@ usage(){
 	ln -s /data/maven-3.x/.m2  /home/ubuntu/.m2
 	
 	sdk install java 21.0.8-librca
-	sdk install maven 3.9.3	
-	sdk install gradle 7.6.2			
+	sdk install maven 3.9.3
+	sdk install gradle 7.6.2
   
   mkdir -p /dev2/eric/master
   cd /dev2/eric/master
