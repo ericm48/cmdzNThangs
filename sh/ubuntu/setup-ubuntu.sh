@@ -233,7 +233,6 @@ usage(){
 	chmod +x /dev2/sh/install-devtoolz.sh
 	/dev2/sh/install-devtoolz.sh
 		
-		
 	#
 	# Final chown's & chmod's
 	#
