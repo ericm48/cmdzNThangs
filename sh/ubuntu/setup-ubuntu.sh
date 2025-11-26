@@ -34,7 +34,8 @@ usage(){
 	
 	mkdir -p "/dev2/sh"
 	
-	mkdir -p "/dev2/java/eric/master"	
+	mkdir -p "/dev2/java/eric/master"
+	mkdir -p "/dev2/java/eric/forkz"	
 	mkdir -p "/dev2/k8/eric/master"	
 	mkdir -p "/dev2/helm/eric/master"		
 
