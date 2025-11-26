@@ -48,5 +48,7 @@ usage(){
   cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
 	cp /dev2/eric/master/cmdzNThangs/sh/ubuntu/maven-settings-xmlBASE /data/maven-3.x/eric/settings.xml  
   
-  
+  # Final Chown's
+	chown -R ubuntu:root /data
+	chown -R ubuntu:root /opt  
   
