@@ -136,6 +136,14 @@ usage(){
   install -o root -g root -m 0755 /data/inet/fzf /usr/local/bin/fzf
 
 	#
+	# Setup Flux
+	#
+  wget -P /data/inet https://fluxcd.io/install.sh
+  mv /data/inet/install.sh /data/inet/flux-install.sh
+  chmod +x /data/inet/flux-install.sh
+	/data/inet/flux-install.sh  
+	
+	#
 	# Setup httpie
 	#
 	snap install httpie	
@@ -143,9 +151,9 @@ usage(){
   #
   # Setup Docker
   #  
-	install -m 0755 -d /etc/apt/keyrings																																	
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc								
-  chmod a+r /etc/apt/keyrings/docker.asc																																
+	install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  chmod a+r /etc/apt/keyrings/docker.asc
 
 	# Add the repository to Apt sources:
 	echo \
@@ -153,13 +161,13 @@ usage(){
   	$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
   	tee /etc/apt/sources.list.d/docker.list > /dev/null
  	
- 	apt-get update    
+ 	apt-get update
 
-  apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin					
+  apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 	getent group docker  					# group docker should already out there...
-  usermod -aG docker ubuntu	  
-	usermod -aG docker nutanix && newgrp docker  
+  usermod -aG docker ubuntu && newgrp docker
+	usermod -aG docker nutanix && newgrp docker
   
   # Start'em up!
   systemctl enable docker.service
