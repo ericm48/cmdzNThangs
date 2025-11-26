@@ -7,7 +7,7 @@ usage(){
    			echo " "
    			echo " "
    			echo " "
-   			echo "Usage:   $0		-"Installs sdkman w/java [default-21], maven, gradle."
+   			echo "Usage:   $0		-Installs sdkman w/java [default-21], maven, gradle."
    			echo " "
    			echo " "
    			echo " -H/-h				-Display this help message."

@@ -812,6 +812,8 @@ alias kgds='kubectl get daemonsets'
 alias kall='k get nodes,ds,deploy,svc,pods,ingress'
 alias kctx='kubectl config get-contexts'
 alias ku='kubectl config unset current-context'
+alias kx='kubectx'
+alias kns='kubens'
 
 alias wrap_args='f(){ echo before "$@" after;  unset -f f; }; f'
 #alias kctx='f(){ kubectl config use-context "$@"; unset -f f; }; f'

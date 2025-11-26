@@ -272,6 +272,14 @@ alias d4='cd /dev2/docker/eric/master/docker-ci-toolz-stack-master'
 alias d2em='cd /dev2/docker/eric/master'
 
 #
+# TMux
+#
+alias tn="tmux -2 new -s"
+alias tl="tmux ls"
+alias ta="tmux a -t"
+
+
+#
 # Java ThangZ
 #
 alias dj='cd /dev2/java'
