@@ -50,9 +50,11 @@ usage(){
 	export SDKMAN_DIR='/opt/sdkman'
 	
 	source /opt/sdkman/bin/sdkman-init.sh
-	
+
+	sdk install java 23.0.2-librca	
 	sdk install java 21.0.8-librca
-	sdk install java 23.0.2-librca
+	
+	sdk default java 21.0.8-librca
 	
 	sdk install maven 3.9.3
 	sdk install gradle 7.6.2
