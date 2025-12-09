@@ -52,16 +52,18 @@ usage(){
 	source /opt/sdkman/bin/sdkman-init.sh
 	
 	sdk install java 21.0.8-librca
+	sdk install java 23.0.2-librca
+	
 	sdk install maven 3.9.3
 	sdk install gradle 7.6.2
-  
-  mkdir -p /dev2/eric/master
-  cd /dev2/eric/master
-
+	
+	mkdir -p /dev2/eric/master
+	cd /dev2/eric/master
+	
 	git clone https://ericm48@github.com/ericm48/cmdzNThangs.git  
-  cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
+	cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
 	echo "Switching out of ubuntu...."	
-	EOF
+EOF
 		
 	whoami
   
