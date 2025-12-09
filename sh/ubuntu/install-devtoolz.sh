@@ -43,8 +43,9 @@ usage(){
 	# Become ubuntu... [ chicken or egg thing.. gotta become ubuntu to finish this up, so-as to be available to ubuntu..]
   #
 
-	su - ubuntu
-
+	sudo -i -u ubuntu bash << EOF
+	echo "Switching into ubuntu...."
+	whoami
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 	
@@ -59,10 +60,13 @@ usage(){
 
 	git clone https://ericm48@github.com/ericm48/cmdzNThangs.git  
   cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
-  
+	echo "Switching out of ubuntu...."	
+	EOF
+		
+	whoami
   
   # Final Chown's
   
-	sudo chown -R ubuntu:root /data
-	sudo chown -R ubuntu:root /opt  
+	chown -R ubuntu:root /data
+	chown -R ubuntu:root /opt  
   
