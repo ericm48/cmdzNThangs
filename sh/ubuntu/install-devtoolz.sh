@@ -22,20 +22,33 @@ usage(){
 	  then
 	    usage
 	fi  
+
+	# Maven Stuff
+
+	mkdir -p "/data/maven-3.x/eric"
+	mkdir -p "/data/maven-3.x/.m2"
+	cp /dev2/eric/master/cmdzNThangs/sh/ubuntu/maven-settings-xmlBASE /data/maven-3.x/eric/settings.xml	
+	ln -s /data/maven-3.x/.m2  /home/ubuntu/.m2
+	
+	# SDKMAN Stuff...
 	
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 
-	#mkdir -p $SDKMAN_DIR	
-	
 	chown -R ubuntu:root /opt	
 	
 	curl -s "https://get.sdkman.io" | bash
 
-	mkdir -p "/data/maven-3.x/eric"
-	mkdir -p "/data/maven-3.x/.m2"
+	#
+	# Become ubuntu... [ chicken or egg thing.. gotta become ubuntu to finish this up, so-as to be available to ubuntu..]
+  #
+
+	su - ubuntu
+
+	export SDKMAN_DIR=
+	export SDKMAN_DIR='/opt/sdkman'
 	
-	ln -s /data/maven-3.x/.m2  /home/ubuntu/.m2
+	source /opt/sdkman/bin/sdkman-init.sh
 	
 	sdk install java 21.0.8-librca
 	sdk install maven 3.9.3
@@ -46,9 +59,10 @@ usage(){
 
 	git clone https://ericm48@github.com/ericm48/cmdzNThangs.git  
   cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
-	cp /dev2/eric/master/cmdzNThangs/sh/ubuntu/maven-settings-xmlBASE /data/maven-3.x/eric/settings.xml  
+  
   
   # Final Chown's
-	chown -R ubuntu:root /data
-	chown -R ubuntu:root /opt  
+  
+	sudo chown -R ubuntu:root /data
+	sudo chown -R ubuntu:root /opt  
   

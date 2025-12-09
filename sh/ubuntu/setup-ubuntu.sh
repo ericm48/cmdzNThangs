@@ -181,15 +181,15 @@ usage(){
   #
   # Setup nkp-cli
   #
-	wget -P /data/inet http://10.38.48.244/artifacts/nkp_v2.16.0_linux_amd64.tar.gz
-	tar -xf /data/inet/nkp_v2.16.0_linux_amd64.tar.gz																												
+	wget -P /data/inet http://10.38.48.244/artifacts/nkp_v2.16.1_linux_amd64.tar.gz
+	tar -xf /data/inet/nkp_v2.16.1_linux_amd64.tar.gz												
   install -o root -g root -m 0755 /data/inet/nkp /usr/local/bin/nkp     																	
 
   #
   # Pull & Extract nkp-bundle
   #
-	wget -P /data/inet http://10.38.48.244/artifacts/nkp-bundle_v2.16.0_linux_amd64.tar.gz
-	tar -xf /data/inet/nkp-bundle_v2.16.0_linux_amd64.tar.gz
+	wget -P /data/inet http://10.38.48.244/artifacts/nkp-bundle_v2.16.1_linux_amd64.tar.gz
+	tar -xf /data/inet/nkp-bundle_v2.16.1_linux_amd64.tar.gz
 
 	#
 	# Profile ThingZ:
