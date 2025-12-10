@@ -52,25 +52,25 @@ usage(){
 	#
 	# Add Network Stuff
 	#
-	apt install -y nmap						
-	apt install -y net-tools			
-	apt install -y pkgconf				
+	apt-get install  -y nmap						
+	apt-get install  -y net-tools			
+	apt-get install  -y pkgconf				
 
 	#
 	# Add direnv
 	#
-	apt install direnv
+	apt-get install  direnv
 	
 	#
 	# Add some utils...
 	#
-	apt install -y zip unzip
-	apt install -y nfs-kernel-server
+	apt-get install  -y zip unzip
+	apt-get install  -y nfs-kernel-server
 	
 	#
 	# Setup Completion
 	#
-  #apt install -y bash-completion	2>&1 | tee -a "$outFile"	
+  #apt-get install  -y bash-completion	2>&1 | tee -a "$outFile"	
   #source /usr/share/bash-completion/bash_completion  
 
 	#
@@ -99,7 +99,7 @@ usage(){
 	wget -P /data/inet https://raw.githubusercontent.com/blendle/kns/master/bin/ktx
   install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx     						
 
-  apt install -y kubectx
+  apt-get install  -y kubectx
 
 	#
 	# Helm
@@ -113,7 +113,7 @@ usage(){
   #
 	wget -P /data/inet https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.deb
 	mv /data/inet/k9s_linux_amd64.deb /data/inet/k9s_linux_amd64-v0.50.9.deb
-  apt install -y /data/inet/k9s_linux_amd64-v0.50.9.deb
+  apt-get install  -y /data/inet/k9s_linux_amd64-v0.50.9.deb
 
 	#
 	# Setup Kind
@@ -175,7 +175,7 @@ usage(){
 	# Install 24.0.2 from jammy....
 	#
 	export DOCKER_VERSION_STRING="5:24.0.2-1~ubuntu.22.04~jammy"
-	apt install docker-ce=$DOCKER_VERSION_STRING docker-ce-cli=$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+	apt-get install  docker-ce=$DOCKER_VERSION_STRING docker-ce-cli=$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 
 	# For latest version of docker, now 29.x.x
   #apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
