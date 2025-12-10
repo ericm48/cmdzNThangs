@@ -28,6 +28,9 @@ usage(){
 	mkdir -p "/data/maven-3.x/eric"
 	mkdir -p "/data/maven-3.x/.m2"
 	
+	mkdir -p /dev2/eric/master
+	cd /dev2/eric/master
+		
 	git clone https://ericm48@github.com/ericm48/cmdzNThangs.git
 	cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
 		
@@ -62,10 +65,7 @@ usage(){
 	
 	sdk install maven 3.9.3
 	sdk install gradle 7.6.2
-	
-	mkdir -p /dev2/eric/master
-	cd /dev2/eric/master
-	
+
 
 	echo "Switching out of ubuntu...."	
 EOF
