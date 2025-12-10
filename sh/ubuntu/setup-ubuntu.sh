@@ -164,7 +164,7 @@ usage(){
  	
  	# Add jammy Repo as well
 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 	
-	add-apt-repository \
+	add-apt-repository -y \
 	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
 	   jammy \
 	   stable"
@@ -175,7 +175,7 @@ usage(){
 	# Install 24.0.2 from jammy....
 	#
 	export DOCKER_VERSION_STRING="5:24.0.2-1~ubuntu.22.04~jammy"
-	apt-get install  docker-ce=$DOCKER_VERSION_STRING docker-ce-cli=$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+	apt-get install -y docker-ce=$DOCKER_VERSION_STRING docker-ce-cli=$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 
 	# For latest version of docker, now 29.x.x
   #apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
