@@ -149,21 +149,35 @@ usage(){
 	snap install httpie	
 
   #
-  # Setup Docker
+  # Setup Docker FORCE VERSION 24.0.2
   #  
 	install -m 0755 -d /etc/apt/keyrings
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
   chmod a+r /etc/apt/keyrings/docker.asc
 
-	# Add the repository to Apt sources:
+	# Add the repository to Apt sources:  # Latest for current OS
 	echo \
   	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   	$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
   	tee /etc/apt/sources.list.d/docker.list > /dev/null
  	
- 	apt-get update
+ 	
+ 	# Add jammy Repo as well
+	add-apt-repository \
+	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+	   jammy \
+	   stable"
 
-  apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	apt-get update
+
+	#
+	# Install 24.0.2 from jammy....
+	#
+	export DOCKER_VERSION_STRING="5:24.0.2-1~ubuntu.22.04~jammy"
+	apt install docker-ce=$DOCKER_VERSION_STRING docker-ce-cli=$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+
+	# For latest version of docker, now 29.x.x
+  #apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 	getent group docker  					# group docker should already out there...
   usermod -aG docker ubuntu && newgrp docker
