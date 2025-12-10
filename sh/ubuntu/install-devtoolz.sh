@@ -27,6 +27,10 @@ usage(){
 
 	mkdir -p "/data/maven-3.x/eric"
 	mkdir -p "/data/maven-3.x/.m2"
+	
+	git clone https://ericm48@github.com/ericm48/cmdzNThangs.git
+	cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
+		
 	cp /dev2/eric/master/cmdzNThangs/sh/ubuntu/maven-settings-xmlBASE /data/maven-3.x/eric/settings.xml	
 	ln -s /data/maven-3.x/.m2  /home/ubuntu/.m2
 	
@@ -62,8 +66,7 @@ usage(){
 	mkdir -p /dev2/eric/master
 	cd /dev2/eric/master
 	
-	git clone https://ericm48@github.com/ericm48/cmdzNThangs.git  
-	cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
+
 	echo "Switching out of ubuntu...."	
 EOF
 		
