@@ -1,1 +1,0 @@
--bash: ./setup-ubuntu.sh: No such file or directory
