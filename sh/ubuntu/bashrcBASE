@@ -39,6 +39,9 @@ export M2_DATA=/data/maven-3.x
 export M2_HOME=
 export M2_HOME='/opt/sdkman/candidates/maven/current'
 
+export GRADLE_HOME=
+export GRADLE_HOME='/opt/sdkman/candidates/gradle/current'
+
 export ANT_HOME=
 export ANT_HOME=/apps/java/apache-ant-1.8.4
 
@@ -139,7 +142,7 @@ export GIT_TOKEN_FOR_PRS=
 # Main PATH HERE!
 #
 
-export PATH=.:/dev2/sh:$JAVA_HOME/bin:$M2_HOME/bin:$CARVEL_DIR/bin:$ANT_HOME/bin:$K8_HNS_CLI:$K8_MINIKUBE:$HELM_DIR:$FLUX_DIR:$K9S_CLI:$REPLICATED_CLI:$TERRAFORM_HOME:$GO_DIR/bin:$GOBIN:$K8_CUSTOM:$K8_KUSTOMIZE:$PIVOTAL:$VAULT_DIR:$KIND_DIR:$HEY_DIR:$CRICTL_CLI:$SDKMAN_DIR:$PATH
+export PATH=.:/dev2/sh:$JAVA_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$CARVEL_DIR/bin:$ANT_HOME/bin:$K8_HNS_CLI:$K8_MINIKUBE:$HELM_DIR:$FLUX_DIR:$K9S_CLI:$REPLICATED_CLI:$TERRAFORM_HOME:$GO_DIR/bin:$GOBIN:$K8_CUSTOM:$K8_KUSTOMIZE:$PIVOTAL:$VAULT_DIR:$KIND_DIR:$HEY_DIR:$CRICTL_CLI:$SDKMAN_DIR:$PATH
 
 
 #
