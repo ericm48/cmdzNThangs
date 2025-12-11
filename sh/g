@@ -1,17 +1,18 @@
 #!/bin/bash
-#  Call an awk on gradle properties for app version  -OOHHHGAWD!!  Equiv to mvn validate
+#
+#  Wrapper for gradle
 #
 
-#set -x
+# set -x
 
 usage(){
         echo " "
         echo " "
-        echo "Gradle properties | awk ...."
+        echo "Gradle Wrapper"
         echo " "
         echo " "
 
-        echo "Usage:   $0 x,y,z "
+        echo "Usage:   $0 x,y,z  "
         echo " "
         echo " "
         echo " "
@@ -45,7 +46,14 @@ case $1 in
 
 esac  
 
+if [ $# -gt 0 ]
+then
 
-./gradlew properties -q | awk '/^version:/ {print $2}'
+  gradle "$@"
+
+else
+  usage
+
+fi 
 
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-#  Call an awk on gradle properties for app version  -OOHHHGAWD!!  Equiv to mvn validate
+#  Call gradle's bootRun
 #
 
 #set -x
@@ -7,7 +7,7 @@
 usage(){
         echo " "
         echo " "
-        echo "Gradle properties | awk ...."
+        echo "Gradle bootRun"
         echo " "
         echo " "
 
@@ -46,6 +46,5 @@ case $1 in
 esac  
 
 
-./gradlew properties -q | awk '/^version:/ {print $2}'
-
+gradle bootRun "$@"
 
