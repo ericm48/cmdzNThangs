@@ -65,6 +65,8 @@ usage(){
 	rm -rfv ~/.docker
 	rm -rfv ~/.config/docker
 	
+	# Remove cli
+	rm /usr/bin/docker
 	
 	# Remove Docker's configuration files
 	rm -rfv /etc/docker
