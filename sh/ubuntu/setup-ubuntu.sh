@@ -149,7 +149,7 @@ usage(){
 	snap install httpie	
 
   #
-  # Setup Docker FORCE VERSION 24.0.2
+  # Setup Docker FORCE VERSION 28.0.4
   #  
 	install -m 0755 -d /etc/apt/keyrings
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -172,9 +172,11 @@ usage(){
 	apt-get update
 
 	#
-	# Install 24.0.2 from jammy....
-	#
-	export DOCKER_VERSION_STRING="5:24.0.2-1~ubuntu.22.04~jammy"
+	# Install 28.0.4 from jammy....
+	#	
+	
+	export DOCKER_VERSION_STRING="5:28.0.4-1~ubuntu.22.04~jammy"	
+	
 	apt-get install -y docker-ce=$DOCKER_VERSION_STRING docker-ce-cli=$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 
 	# For latest version of docker, now 29.x.x
@@ -191,7 +193,7 @@ usage(){
   systemctl enable containerd.service
   systemctl start containerd.service  
   
-  # Docker will not work until we bounce the machine, last step...																																						
+  # Docker will not work until we bounce the machine, Just DO IT! last step...																																						
   
   #
   # Setup nkp-cli
