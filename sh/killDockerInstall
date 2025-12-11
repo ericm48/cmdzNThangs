@@ -1,0 +1,88 @@
+#!/bin/bash
+# Removes current install of docker on ubuntu.
+#
+
+#set -x
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0 -F  # -Force flag.  Needed to confirm.  Assumes current user is a sudoer."
+   			echo " "
+   			echo " "
+   			echo "  Example:"
+   			echo "     $0  -F Removes Docker from this machine.... ARE YOU SURE?!?!?!"
+   			echo " "
+   			echo " "
+	exit 1
+}
+
+
+ 	if [ $# -lt 1 ]
+ 		then
+			usage
+ 	fi
+   	
+	if [ "$1" == "--help" ] || [  "$1" == "--H" ] || [ "$1" == "--h" ] || [  "$1" == "-H" ] || [ "$1" == "-h" ]
+	  then
+	    usage
+	    
+	  else
+	  	
+	  	if [ "$1" != "-F" ]
+	  		then 
+	  			usage
+	  				  	
+	  fi	    
+	    
+	fi
+ 	
+ 	echo " "
+ 	echo "Removing Docker Install...." 	
+ 	echo " " 	
+
+	# Stop Docker service
+	sudo systemctl stop docker.socket
+	sudo systemctl stop docker
+	sudo systemctl disable docker
+	
+	# Remove core packages (adjust for Desktop/Engine/Snap)
+	sudo apt-get purge -y docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-desktop
+	sudo apt-get autoremove -y --purge 
+	
+	# If installed via Snap, use:
+	# sudo snap remove docker --purge
+	
+	
+	# Remove all Docker data (images, containers, volumes, networks)
+	sudo rm -rf /var/lib/docker
+	sudo rm -rf /var/lib/containerd
+	
+	# Remove user-specific configurations
+	rm -rf ~/.docker
+	rm -rf ~/.config/docker
+	
+	
+	# Remove Docker's configuration files
+	sudo rm -rf /etc/docker
+	
+	# Remove AppArmor profiles (if used)
+	sudo rm /etc/apparmor.d/docker
+	
+	# Remove the docker group (optional)
+	#sudo groupdel docker
+
+ 	echo " "
+ 	echo "Docker Removed SUCCESSFULLY!!!" 	 	
+ 	echo " " 	
+ 	echo "Strongly Suggest Restart...." 	
+ 	echo " " 	
+
+
+
+
+
+
+
+
