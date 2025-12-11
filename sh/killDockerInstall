@@ -77,6 +77,8 @@ usage(){
 	# Remove the docker group (optional)
 	#sudo groupdel docker
 
+	set +x
+
  	echo " "
  	echo "Docker Removed SUCCESSFULLY!!!" 	 	
  	echo " " 	
