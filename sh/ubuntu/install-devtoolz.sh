@@ -37,6 +37,14 @@ usage(){
 	cp /dev2/eric/master/cmdzNThangs/sh/ubuntu/maven-settings-xmlBASE /data/maven-3.x/eric/settings.xml	
 	ln -s /data/maven-3.x/.m2  /home/ubuntu/.m2
 	
+	
+	# RyanC Stuff
+	
+	mkdir -p /dev2/k8/ryanc/forkz
+	cd /dev2/k8/ryanc/forkz
+	
+	git clone https://ericm48@github.com/ericm48/nkp-poc.git	
+	
 	# SDKMAN Stuff...
 	
 	export SDKMAN_DIR=
