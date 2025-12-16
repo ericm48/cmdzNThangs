@@ -89,6 +89,11 @@ arg_parse() {
 					usage
 					exit 3
 					;;
+
+	    --Help)
+					usage
+					exit 3
+					;;
 			
 			*)
 					#echo "[$i]: ${!i}"

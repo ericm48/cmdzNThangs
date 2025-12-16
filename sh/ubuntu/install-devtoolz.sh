@@ -85,5 +85,5 @@ EOF
   # Final Chown's
   
 	chown -R ubuntu:root /data
-	chown -R ubuntu:root /opt  
+	chown -R ubuntu:root /opt
   
