@@ -40,9 +40,9 @@ usage(){
 	
 	# RyanC Stuff
 	
-	mkdir -p /dev2/k8/ryanc/forkz
-	cd /dev2/k8/ryanc/forkz	
-	git clone https://ericm48@github.com/ericm48/nkp-poc.git
+	#mkdir -p /dev2/k8/ryanc/forkz
+	#cd /dev2/k8/ryanc/forkz	
+	#git clone https://ericm48@github.com/ericm48/nkp-poc.git
 	
 	cd /
 	
