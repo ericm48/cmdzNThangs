@@ -52,7 +52,7 @@ usage(){
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 
-	chown -R ubuntu:root /opt	
+	chown -R root:ubuntu /opt	
 	
 	curl -s "https://get.sdkman.io" | bash
 
@@ -60,9 +60,11 @@ usage(){
 	# Become ubuntu... [ chicken or egg thing.. gotta become ubuntu to finish this up, so-as to be available to ubuntu..]
   #
 
+
 	sudo -i -u ubuntu bash << EOF
 	echo "Switching into ubuntu...."
 	whoami
+	
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 	
@@ -84,6 +86,6 @@ EOF
   
   # Final Chown's
   
-	chown -R ubuntu:root /data
-	chown -R ubuntu:root /opt
+	chown -R root:ubuntu /data
+	chown -R root:ubuntu /opt
   
