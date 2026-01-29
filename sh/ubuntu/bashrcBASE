@@ -321,7 +321,7 @@ alias mkpl='minikube profile list'
 # Docker
 #
 
-alias dcdn='docker-compose stop'
+alias dcdn='docker-compose down'
 alias dcup='docker-compose up -d 2>&1 | tee /data/txt/dockerComposeStartLog.txt'
 alias di='docker images'
 alias dp='docker ps'
