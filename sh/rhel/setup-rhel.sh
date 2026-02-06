@@ -1,5 +1,5 @@
 #!/bin/bash
-#  Script that sets up a base set of tools for Ubuntu
+#  Script that sets up a base set of tools for RHEL
 
 #  set -x
 
@@ -8,7 +8,7 @@ usage(){
    			echo " "
    			echo " "
    			echo " "
-   			echo "Usage:   $0		-Sets up a basic Ubuntu JumpBox with my utilties and such."
+   			echo "Usage:   $0		-Sets up a basic RHEL JumpBox with my utilties and such."
    			echo " "
    			echo "              -REQUIRES eVars: "
    			echo "                    NUTANIX_VERSION"
@@ -74,32 +74,34 @@ usage(){
 	
 	pwd
 		
-	apt-get update -y  								
-	apt-get upgrade -y 								
+	dnf update -y  								
+	dnf upgrade -y 								
 
-
+	yum install -y yum-utils device-mapper-persistent-data lvm2
+	
 	#
 	# Add Network Stuff
 	#
-	apt-get install  -y nmap						
-	apt-get install  -y net-tools			
-	apt-get install  -y pkgconf				
+	dnf install  -y nmap						
+	dnf install  -y net-tools			
+	dnf install  -y pkgconf				
 
 	#
 	# Add direnv
 	#
-	apt-get install  direnv
+	dnf install  direnv
 	
 	#
 	# Add some utils...
 	#
-	apt-get install  -y zip unzip
-	apt-get install  -y nfs-kernel-server
+	dnf install  -y zip unzip
+	dnf install  -y nfs-kernel-server
+	dnf install  -y tmux
 	
 	#
 	# Setup Completion
 	#
-  #apt-get install  -y bash-completion	2>&1 | tee -a "$outFile"	
+  #dnf install  -y bash-completion	2>&1 | tee -a "$outFile"	
   #source /usr/share/bash-completion/bash_completion  
 
 	#
@@ -128,7 +130,7 @@ usage(){
 	wget -P /data/inet https://raw.githubusercontent.com/blendle/kns/master/bin/ktx
   install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx     						
 
-  apt-get install  -y kubectx
+  dnf install  -y kubectx
 
 	#
 	# Helm
@@ -142,7 +144,7 @@ usage(){
   #
 	wget -P /data/inet https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.deb
 	mv /data/inet/k9s_linux_amd64.deb /data/inet/k9s_linux_amd64-v0.50.9.deb
-  apt-get install  -y /data/inet/k9s_linux_amd64-v0.50.9.deb
+  dnf install  -y /data/inet/k9s_linux_amd64-v0.50.9.deb
 
 	#
 	# Setup Kind
@@ -179,40 +181,43 @@ usage(){
 
   #
   # Setup Docker FORCE VERSION 28.0.4
-  #  
-	install -m 0755 -d /etc/apt/keyrings
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  chmod a+r /etc/apt/keyrings/docker.asc
+  #
+	yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo  
+  
+   
+	#install -m 0755 -d /etc/apt/keyrings
+  #curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  #chmod a+r /etc/apt/keyrings/docker.asc
 
 	# Add the repository to Apt sources:  # Latest for current OS
-	echo \
-  	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  	$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-  	tee /etc/apt/sources.list.d/docker.list > /dev/null
+	#echo \
+  #	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  #	$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  #	tee /etc/apt/sources.list.d/docker.list > /dev/null
  	
  	
  	# Add jammy Repo as well
-	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 	
-	add-apt-repository -y \
-	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-	   jammy \
-	   stable"
+	#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 	
+	#add-apt-repository -y \
+	#   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+	#   jammy \
+	#   stable"
 
-	apt-get update
+	dnf update
 
 	#
-	# Install 28.0.4 from jammy....
+	# Install 28.0.4 
 	#	
 	
-	export DOCKER_VERSION_STRING="5:28.0.4-1~ubuntu.22.04~jammy"	
-	
-	apt-get install -y docker-ce=$DOCKER_VERSION_STRING docker-ce-cli=$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+	export DOCKER_VERSION_STRING="3:28.0.4-1.el9"
+
+	dnf install -y docker-ce-$DOCKER_VERSION_STRING docker-ce-cli-$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 
 	# For latest version of docker, now 29.x.x
-  #apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  #dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 	getent group docker  					# group docker should already out there...
-  usermod -aG docker ubuntu && newgrp docker
+  usermod -aG docker cloud-user && newgrp docker
 	usermod -aG docker nutanix && newgrp docker
   
   # Start'em up!
@@ -234,24 +239,24 @@ usage(){
   #
   # Pull & Extract nkp-bundle
   #
-	wget -P /data/inet "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+	wget -P /data/inet "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz    
 	wget -P /data/inet "$NUTANIX_ARTIFACT_HOST"/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 	tar -xf /data/inet/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 
 	#
 	# Profile ThingZ:
 	#
-  wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
-  cp /data/inet/bashrcBASE /home/ubuntu/.bashrc
-  chmod +x /home/ubuntu/.bashrc
+  wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/cloud-user/bashrcBASE		
+  cp /data/inet/bashrcBASE /home/cloud-user/.bashrc
+  chmod +x /home/cloud-user/.bashrc
   cp /data/inet/bashrcBASE /home/nutanix/.bashrc
   chmod +x /home/nutanix/.bashrc  
   cp /data/inet/bashrcBASE /etc/skel/.bashrc
   chmod +x /etc/skel/.bashrc  
   
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasesBASE	
-  cp /data/inet/kubectl_aliasesBASE /home/ubuntu/.kubectl_aliases
-  chmod +x /home/ubuntu/.kubectl_aliases
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/cloud-user/kubectl_aliasesBASE	
+  cp /data/inet/kubectl_aliasesBASE /home/cloud-user/.kubectl_aliases
+  chmod +x /home/cloud-user/.kubectl_aliases
   cp /data/inet/kubectl_aliasesBASE /home/nutanix/.kubectl_aliases
   chmod +x /home/nutanix/.kubectl_aliases
 
@@ -276,7 +281,7 @@ usage(){
 	#
 	# cri-o / crictl-tools
 	#
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-crictl.sh
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/cloud-user/install-crictl.sh
 	cp /data/inet/install-crictl.sh /dev2/sh/install-crictl.sh
 	chmod +x /dev2/sh/install-crictl.sh
 	/dev2/sh/install-crictl.sh
@@ -284,7 +289,7 @@ usage(){
 	#
 	# dev tools
 	#
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-devtoolz.sh
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/cloud-user/install-devtoolz.sh
 	cp /data/inet/install-devtoolz.sh /dev2/sh/install-devtoolz.sh
 	chmod +x /dev2/sh/install-devtoolz.sh
 	/dev2/sh/install-devtoolz.sh
@@ -292,9 +297,9 @@ usage(){
 	#
 	# Final chown's & chmod's
 	#
-	chown -R ubuntu:root /dev2
-	chown -R ubuntu:root /data
-	chown -R ubuntu:root /opt	
+	chown -R cloud-user:root /dev2
+	chown -R cloud-user:root /data
+	chown -R cloud-user:root /opt	
 
 	chmod 777 -R /dev2
 	chmod 777 -R /data
