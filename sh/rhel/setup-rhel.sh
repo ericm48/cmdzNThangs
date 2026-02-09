@@ -68,40 +68,68 @@ usage(){
 	mkdir -p "/dev2/k8/eric/master"	
 	mkdir -p "/dev2/helm/eric/master"		
 
+	# Setup NFS Share
 	mkdir -p "/mnt/nfsshare/k8svolumes"
+	chown nobody:nobody /mnt/nfsshare/k8svolumes
+	chmod 777 /mnt/nfsshare/k8svolumes
+	echo "/mnt/nfsshare/k8svolumes 192.168.122.0/24(rw,sync,no_root_squash)" | sudo tee -a /etc/exports
+	exportfs -rva	
 
 	cd "/data/inet"								
 	
 	pwd
 		
-	dnf update -y  								
-	dnf upgrade -y 								
+	yum update -y  								
+	yum upgrade -y 								
 
 	yum install -y yum-utils device-mapper-persistent-data lvm2
 	
 	#
 	# Add Network Stuff
 	#
-	dnf install  -y nmap						
-	dnf install  -y net-tools			
-	dnf install  -y pkgconf				
+	yum install  -y nmap			
+	yum install  -y net-tools
+	yum install -y pkgconf-pkg-config
 
+	# RHEL Base Stuff
+	yum install -y epel-release
+	yum install snapd
+	systemctl enable --now snapd.socket
+	
 	#
 	# Add direnv
-	#
-	dnf install  direnv
+	#	
+	snap install direnv	
 	
 	#
 	# Add some utils...
 	#
-	dnf install  -y zip unzip
-	dnf install  -y nfs-kernel-server
-	dnf install  -y tmux
+	yum install  -y zip unzip
+	yum install  -y tmux	
+	
+	#
+	# NFS
+	#
+	yum install nfs-utils -y
+	systemctl enable --now nfs-server
+	systemctl enable --now rpcbind
+	systemctl status nfs-server
+	
+	firewall-cmd --permanent --add-service=nfs
+	firewall-cmd --permanent --add-service=rpc-bind
+	firewall-cmd --permanent --add-service=mountd
+	firewall-cmd --reload
+	
+	mkdir -p /nfs/exports/myshare
+	
+	
+
+	
 	
 	#
 	# Setup Completion
 	#
-  #dnf install  -y bash-completion	2>&1 | tee -a "$outFile"	
+  #yum install  -y bash-completion	2>&1 | tee -a "$outFile"	
   #source /usr/share/bash-completion/bash_completion  
 
 	#
@@ -130,7 +158,7 @@ usage(){
 	wget -P /data/inet https://raw.githubusercontent.com/blendle/kns/master/bin/ktx
   install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx     						
 
-  dnf install  -y kubectx
+	snap install kubectx --classic
 
 	#
 	# Helm
@@ -142,9 +170,7 @@ usage(){
   #
   # Setup K9s
   #
-	wget -P /data/inet https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.deb
-	mv /data/inet/k9s_linux_amd64.deb /data/inet/k9s_linux_amd64-v0.50.9.deb
-  dnf install  -y /data/inet/k9s_linux_amd64-v0.50.9.deb
+	snap install k9s
 
 	#
 	# Setup Kind
@@ -184,18 +210,22 @@ usage(){
   #
 	yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo  
 
-	dnf update -y
+	yum update -y
 
 	#
 	# Install 28.0.4 
-	#	
+	#
 	
-	export DOCKER_VERSION_STRING="3:28.0.4-1.el9"
+	export DOCKER_VERSION_STRING="28.0.4-1.el9"
+			
+	yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
 
-	dnf install -y docker-ce-$DOCKER_VERSION_STRING docker-ce-cli-$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+	yum update -y
+
+	yum install -y docker-ce-$DOCKER_VERSION_STRING docker-ce-cli-$DOCKER_VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 
 	# For latest version of docker, now 29.x.x
-  #dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  #yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 	getent group docker  					# group docker should already out there...
   usermod -aG docker cloud-user && newgrp docker
@@ -227,15 +257,15 @@ usage(){
 	#
 	# Profile ThingZ:
 	#
-  wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/cloud-user/bashrcBASE		
+  wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/rhel/bashrcBASE		
   cp /data/inet/bashrcBASE /home/cloud-user/.bashrc
   chmod +x /home/cloud-user/.bashrc
   cp /data/inet/bashrcBASE /home/nutanix/.bashrc
-  chmod +x /home/nutanix/.bashrc  
+  chmod +x /home/nutanix/.bashrc
   cp /data/inet/bashrcBASE /etc/skel/.bashrc
-  chmod +x /etc/skel/.bashrc  
+  chmod +x /etc/skel/.bashrc
   
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/cloud-user/kubectl_aliasesBASE	
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/rhel/kubectl_aliasesBASE	
   cp /data/inet/kubectl_aliasesBASE /home/cloud-user/.kubectl_aliases
   chmod +x /home/cloud-user/.kubectl_aliases
   cp /data/inet/kubectl_aliasesBASE /home/nutanix/.kubectl_aliases

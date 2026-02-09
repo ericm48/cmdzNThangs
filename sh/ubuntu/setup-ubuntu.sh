@@ -68,8 +68,14 @@ usage(){
 	mkdir -p "/dev2/k8/eric/master"	
 	mkdir -p "/dev2/helm/eric/master"		
 
-	mkdir -p "/mnt/nfsshare/k8svolumes"
 
+	# Setup NFS Share
+	mkdir -p "/mnt/nfsshare/k8svolumes"
+	chown nobody:nobody /mnt/nfsshare/k8svolumes
+	chmod 777 /mnt/nfsshare/k8svolumes
+	echo "/mnt/nfsshare/k8svolumes 192.168.122.0/24(rw,sync,no_root_squash)" | sudo tee -a /etc/exports	
+	exportfs -rva	
+	
 	cd "/data/inet"								
 	
 	pwd
