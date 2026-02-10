@@ -60,6 +60,8 @@ usage(){
 	# Become cloud-user... [ chicken or egg thing.. gotta become cloud-user to finish this up, so-as to be available to cloud-user..]
   #
 
+	# Do this first while still root
+	mkdir -p /opt/sdkman/var/metadata
 
 	sudo -i -u cloud-user bash << EOF
 	echo "Switching into cloud-user...."
