@@ -52,7 +52,7 @@ usage(){
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 
-	chown -R root:cloud-user /opt	
+	
 	
 	curl -s "https://get.sdkman.io" | bash
 
@@ -62,6 +62,8 @@ usage(){
 
 	# Do this first while still root
 	mkdir -p /opt/sdkman/var/metadata
+
+	chown -R root:cloud-user /opt
 
 	sudo -i -u cloud-user bash << EOF
 	echo "Switching into cloud-user...."
