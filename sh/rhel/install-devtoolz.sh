@@ -64,6 +64,7 @@ usage(){
 	mkdir -p /opt/sdkman/var/metadata
 
 	chown -R root:cloud-user /opt
+	chmod 777 -R /opt/sdkman
 
 	sudo -i -u cloud-user bash << EOF
 	echo "Switching into cloud-user...."
