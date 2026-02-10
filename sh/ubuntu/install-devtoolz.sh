@@ -44,22 +44,25 @@ usage(){
 	#cd /dev2/k8/ryanc/forkz	
 	#git clone https://ericm48@github.com/ericm48/nkp-poc.git
 	
-	cd /
-	
+	cd /	
 	
 	# SDKMAN Stuff...
 	
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 
-	chown -R root:ubuntu /opt	
-	
 	curl -s "https://get.sdkman.io" | bash
 
 	#
 	# Become ubuntu... [ chicken or egg thing.. gotta become ubuntu to finish this up, so-as to be available to ubuntu..]
   #
 
+	# Do this first while still root
+	mkdir -p /opt/sdkman/var/metadata
+
+	# Needed to make this work!
+	chown -R root:cloud-user /opt
+	chmod 777 -R /opt/sdkman
 
 	sudo -i -u ubuntu bash << EOF
 	echo "Switching into ubuntu...."

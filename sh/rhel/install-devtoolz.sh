@@ -44,15 +44,12 @@ usage(){
 	#cd /dev2/k8/ryanc/forkz	
 	#git clone https://ericm48@github.com/ericm48/nkp-poc.git
 	
-	cd /
-	
+	cd /	
 	
 	# SDKMAN Stuff...
 	
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
-
-	
 	
 	curl -s "https://get.sdkman.io" | bash
 
@@ -63,6 +60,7 @@ usage(){
 	# Do this first while still root
 	mkdir -p /opt/sdkman/var/metadata
 
+	# Needed to make this work!
 	chown -R root:cloud-user /opt
 	chmod 777 -R /opt/sdkman
 
