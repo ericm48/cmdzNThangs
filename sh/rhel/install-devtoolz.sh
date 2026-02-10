@@ -34,8 +34,8 @@ usage(){
 	git clone https://ericm48@github.com/ericm48/cmdzNThangs.git
 	cp -R /dev2/eric/master/cmdzNThangs/sh/ /dev2/
 		
-	cp /dev2/eric/master/cmdzNThangs/sh/ubuntu/maven-settings-xmlBASE /data/maven-3.x/eric/settings.xml	
-	ln -s /data/maven-3.x/.m2  /home/ubuntu/.m2
+	cp /dev2/eric/master/cmdzNThangs/sh/cloud-user/maven-settings-xmlBASE /data/maven-3.x/eric/settings.xml	
+	ln -s /data/maven-3.x/.m2  /home/cloud-user/.m2
 	
 	
 	# RyanC Stuff
@@ -52,17 +52,17 @@ usage(){
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 
-	chown -R root:ubuntu /opt	
+	chown -R root:cloud-user /opt	
 	
 	curl -s "https://get.sdkman.io" | bash
 
 	#
-	# Become ubuntu... [ chicken or egg thing.. gotta become ubuntu to finish this up, so-as to be available to ubuntu..]
+	# Become cloud-user... [ chicken or egg thing.. gotta become cloud-user to finish this up, so-as to be available to cloud-user..]
   #
 
 
-	sudo -i -u ubuntu bash << EOF
-	echo "Switching into ubuntu...."
+	sudo -i -u cloud-user bash << EOF
+	echo "Switching into cloud-user...."
 	whoami
 	
 	export SDKMAN_DIR=
@@ -79,13 +79,13 @@ usage(){
 	sdk install gradle 7.6.2
 
 
-	echo "Switching out of ubuntu...."	
+	echo "Switching out of cloud-user...."	
 EOF
 		
 	whoami
   
   # Final Chown's
   
-	chown -R root:ubuntu /data
-	chown -R root:ubuntu /opt
+	chown -R root:cloud-user /data
+	chown -R root:cloud-user /opt
   
