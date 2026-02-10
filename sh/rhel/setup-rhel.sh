@@ -162,10 +162,13 @@ usage(){
   chmod 700 /data/inet/get-helm-3
 	/data/inet/get-helm-3
 
+
   #
   # Setup K9s
   #
-	snap install k9s
+	wget -P /data/inet https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.rpm
+	mv /data/inet/k9s_linux_amd64.rpm /data/inet/k9s_linux_amd64-v0.50.9.rpm
+  yum install  -y /data/inet/k9s_linux_amd64-v0.50.9.rpm
 
 	#
 	# Setup Kind
