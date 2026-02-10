@@ -91,6 +91,11 @@ usage(){
 	yum install  -y net-tools
 	yum install -y pkgconf-pkg-config
 
+	#
+	# Setup Completion
+	#
+	yum install -y bash-completion
+
 	# RHEL Base Stuff
 	yum install -y epel-release
 	yum install snapd
@@ -99,7 +104,7 @@ usage(){
 	#
 	# Add direnv
 	#	
-	snap install direnv	
+	snap install direnv
 	
 	#
 	# Add some utils...
@@ -121,16 +126,6 @@ usage(){
 	firewall-cmd --reload
 	
 	mkdir -p /nfs/exports/myshare
-	
-	
-
-	
-	
-	#
-	# Setup Completion
-	#
-  #yum install  -y bash-completion	2>&1 | tee -a "$outFile"	
-  #source /usr/share/bash-completion/bash_completion  
 
 	#
 	# Setup K8s
@@ -300,7 +295,7 @@ usage(){
 	#
 	# dev tools
 	#
-	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/cloud-user/install-devtoolz.sh
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/rhel/install-devtoolz.sh
 	cp /data/inet/install-devtoolz.sh /dev2/sh/install-devtoolz.sh
 	chmod +x /dev2/sh/install-devtoolz.sh
 	/dev2/sh/install-devtoolz.sh
