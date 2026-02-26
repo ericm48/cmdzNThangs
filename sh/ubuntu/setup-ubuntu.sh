@@ -230,6 +230,12 @@ usage(){
   
   # Docker will not work until we bounce the machine, Just DO IT! last step...																																						
   
+  
+  #
+  # Setup Podman
+  #
+	apt install -y podman  
+  
   #
   # Setup nkp-cli
   #
