@@ -100,7 +100,7 @@ usage(){
 	# Add some utils...
 	#
 	apt-get install  -y zip unzip
-	apt-get install  -y nfs-kernel-server
+	apt-get install  -y --force-confnew nfs-kernel-server
 	
 	#
 	# Setup Completion
