@@ -183,6 +183,11 @@ usage(){
 	#
 	snap install httpie	
 
+	#
+	# Setup python3
+	#
+	apt install -y python3
+
   #
   # Setup Docker FORCE VERSION 28.0.4
   #  
