@@ -191,7 +191,33 @@ usage(){
 	#
 	# Setup pip
 	#
-	apt install -y pip	
+	apt install -y pip
+	
+	
+	#
+	# Setup Socat
+	#
+	echo "GatewayPorts yes" >> /etc/ssh/sshd_config
+  systemctl restart sshd
+  apt install -y socat
+
+  # Create systemd service for socat  
+  echo "[Unit]" > /etc/systemd/system/socat.service
+  echo "Description=Socat Port Forwarding 443 -> 8443" >> /etc/systemd/system/socat.service
+  echo "After=network.target" >> /etc/systemd/system/socat.service
+  echo " " >> /etc/systemd/system/socat.service
+  echo "[Service]" >> /etc/systemd/system/socat.service
+  echo "ExecStart=/usr/bin/socat TCP-LISTEN:443,reuseaddr,fork TCP:127.0.0.1:8443" >> /etc/systemd/system/socat.service
+  echo "Restart=always" >> /etc/systemd/system/socat.service
+  echo "User=root" >> /etc/systemd/system/socat.service
+  echo " " >> /etc/systemd/system/socat.service
+  echo "[Install]" >> /etc/systemd/system/socat.service
+  echo "WantedBy=multi-user.target" >> /etc/systemd/system/socat.service
+
+  # Reload systemd, enable and start socat service
+  - systemctl daemon-reload
+  - systemctl enable socat.service
+  - systemctl start socat.service
 
   #
   # Setup Docker FORCE VERSION 28.0.4
