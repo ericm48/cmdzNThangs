@@ -187,6 +187,11 @@ usage(){
 	# Setup python3
 	#
 	apt install -y python3
+	
+	#
+	# Setup pip
+	#
+	apt install -y pip	
 
   #
   # Setup Docker FORCE VERSION 28.0.4
