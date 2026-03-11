@@ -89,7 +89,8 @@ usage(){
 	#
 	apt-get install  -y nmap						
 	apt-get install  -y net-tools			
-	apt-get install  -y pkgconf				
+	apt-get install  -y pkgconf
+	apt-get install  -y inetutils-traceroute
 
 	#
 	# Add direnv
