@@ -83,6 +83,10 @@ usage(){
 	apt-get update -y  								
 	apt-get upgrade -y 								
 
+	#
+	# Pin this kernel-version
+	#
+	apt-mark hold linux-image-$(uname -r) linux-headers-$(uname -r)	
 
 	#
 	# Add Network Stuff
