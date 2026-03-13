@@ -60,9 +60,9 @@ usage(){
 	mkdir -p "/data/inet"
 	mkdir -p "/data/maven-3.x/eric"
 	mkdir -p "/data/txt"
-	mkdir -p "/data/ssl/aws"
-	mkdir -p "/data/ssl/azure"
-	mkdir -p "/data/ssl/gcp"		
+	mkdir -p "/data/ssl/NTX/aws"
+	mkdir -p "/data/ssl/NTX/azure"
+	mkdir -p "/data/ssl//NTX/gcp"		
 	
 	mkdir -p "/dev2/sh"
 	
