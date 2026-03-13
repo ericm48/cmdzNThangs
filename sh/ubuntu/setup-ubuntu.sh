@@ -145,6 +145,13 @@ usage(){
   apt-get install  -y kubectx
 
 	#
+	# AWS-CLI
+	#
+	wget -P /data/inet https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+	unzip /data/inet/awscli-exe-linux-x86_64.zip
+	/data/inet/aws/install
+
+	#
 	# Helm
 	#	
   wget -P /data/inet https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
