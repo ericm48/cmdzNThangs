@@ -77,6 +77,8 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	mkdir -p "/dev2/k8/eric/master"	
 	mkdir -p "/dev2/helm/eric/master"		
 
+	mkdir -p "/dev2/davek/master"
+
 
 	# Setup NFS Share
 	mkdir -p "/mnt/nfsshare/k8svolumes"
