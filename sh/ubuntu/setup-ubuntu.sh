@@ -31,11 +31,10 @@ usage(){
   echo ""
 
 export NUTANIX_VERSION="v2.17.0"
+export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 
-# export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
-#	export NUTANIX_ARTIFACT_HOST="http://10.38.48.244/artifacts"  # PHX    
-
-export NUTANIX_ARTIFACT_HOST="http://10.55.87.62/artifacts"	  # DM3
+#export NUTANIX_ARTIFACT_HOST="http://10.38.48.244/artifacts"  # PHX
+#export NUTANIX_ARTIFACT_HOST="http://10.55.87.62/artifacts"	  # DM3
   
 	if [[ -v NUTANIX_VERSION ]]; then
 
@@ -304,7 +303,7 @@ export NUTANIX_ARTIFACT_HOST="http://10.55.87.62/artifacts"	  # DM3
   #
   # Pull & Extract nkp-bundle
   #
-	wget -P /data/inet "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+	#wget -P /data/inet "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 	wget -P /data/inet "$NUTANIX_ARTIFACT_HOST"/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 	tar -xf /data/inet/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 
