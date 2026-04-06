@@ -61,8 +61,8 @@ usage(){
 
 
 	# Needed to make this work!
-	chmod 777 -R /opt/github
+	sudo chmod 777 -R /opt/github
   
   # Final Chown's  
-	chown -R root:ubuntu /opt
+	sudo chown -R root:ubuntu /opt
   
