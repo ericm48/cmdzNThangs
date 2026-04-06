@@ -41,8 +41,7 @@ usage(){
   sudo tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
 
 	# Create the runner and start the configuration experience
-	/opt/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y
-  
+	/opt/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y  
 	
 	# Install As Service
 	sudo /opt/github/actions-runner/svc.sh install ubuntu
