@@ -47,24 +47,22 @@ usage(){
 	#./run.sh	
 	
 	# Install As Service
-	./svc.sh install ubuntu
+	/opt/github/actions-runner/svc.sh install ubuntu
 	
 	# Start The Service...
-	./svc.sh start &
+	/opt/github/actions-runner/svc.sh start &
 	
 	# Sleep
 	echo "Sleeping for 5...."
 	sleep 5
 	
 	# Service Status
-	./svc.sh status
+	/opt/github/actions-runner/svc.sh status
 
 
 	# Needed to make this work!
 	chmod 777 -R /opt/github
   
-  # Final Chown's
-  
-	chown -R root:ubuntu /data
+  # Final Chown's  
 	chown -R root:ubuntu /opt
   
