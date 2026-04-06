@@ -374,7 +374,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	cp /data/inet/install-github-runner.sh /dev2/sh/install-github-runner.sh
 	chmod +x /dev2/sh/install-github-runner.sh
 
-	# hold off on this for now..
+	# hold off on this for now..has to be run as ubuntu with that profile...
 	#/dev2/sh/install-github-runner.sh
 
 

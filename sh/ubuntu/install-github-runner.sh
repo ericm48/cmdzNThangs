@@ -1,7 +1,7 @@
 #!/bin/bash
 #  Script that installs sdkman w/java [default-21], maven, gradle
 
-  set -x
+#  set -x
 
 usage(){
    			echo " "
@@ -36,9 +36,7 @@ usage(){
 	echo "18f8f68ed1892854ff2ab1bab4fcaa2f5abeedc98093b6cb13638991725cab74  /data/inet/actions-runner-linux-x64-2.333.1.tar.gz" | shasum -a 256 -c  
   
   cp /data/inet/actions-runner-linux-x64-2.333.1.tar.gz /opt/github/actions-runner
-  
-  cd /opt/github/actions-runner
-
+    
   # Extract the installer
   tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
 
