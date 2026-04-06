@@ -366,6 +366,18 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	cp /data/inet/install-devtoolz.sh /dev2/sh/install-devtoolz.sh
 	chmod +x /dev2/sh/install-devtoolz.sh
 	/dev2/sh/install-devtoolz.sh
+
+	#
+	# github-runner
+	#
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-github-runner.sh
+	cp /data/inet/install-github-runner.sh /dev2/sh/install-github-runner.sh
+	chmod +x /dev2/sh/install-github-runner.sh
+
+	# hold off on this for now..
+	#/dev2/sh/install-github-runner.sh
+
+
 		
 	#
 	# Final chown's & chmod's
