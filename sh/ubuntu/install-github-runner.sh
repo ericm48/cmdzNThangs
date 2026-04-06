@@ -38,16 +38,14 @@ usage(){
   cp /data/inet/actions-runner-linux-x64-2.333.1.tar.gz /opt/github/actions-runner
     
   # Extract the installer
-  tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
+  sudo tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
 
 	# Create the runner and start the configuration experience
-	./config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y
+	/opt/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y
   
-  # Last step, run it!  Basically for the first time...as we'll add this as a service...
-	#./run.sh	
 	
 	# Install As Service
-	/opt/github/actions-runner/svc.sh install ubuntu
+	sudo /opt/github/actions-runner/svc.sh install ubuntu
 	
 	# Start The Service...
 	sudo /opt/github/actions-runner/svc.sh start &
@@ -58,7 +56,6 @@ usage(){
 	
 	# Service Status
 	sudo /opt/github/actions-runner/svc.sh status
-
 
 	# Needed to make this work!
 	sudo chmod 777 -R /opt/github
