@@ -50,14 +50,14 @@ usage(){
 	/opt/github/actions-runner/svc.sh install ubuntu
 	
 	# Start The Service...
-	/opt/github/actions-runner/svc.sh start &
+	sudo /opt/github/actions-runner/svc.sh start &
 	
 	# Sleep
 	echo "Sleeping for 5...."
 	sleep 5
 	
 	# Service Status
-	/opt/github/actions-runner/svc.sh status
+	sudo /opt/github/actions-runner/svc.sh status
 
 
 	# Needed to make this work!
