@@ -210,11 +210,18 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	# Setup python3
 	#
 	apt install -y python3
+	apt install -y python3.12-venv	
 	
 	#
 	# Setup pip
 	#
 	apt install -y pip
+
+	#
+	# Add go & go-task
+	#
+  snap install go --classic # Installs the Go language environment first, if needed
+  snap install task --classic
 	
 	
 	#
