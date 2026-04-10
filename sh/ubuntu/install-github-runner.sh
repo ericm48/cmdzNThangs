@@ -57,3 +57,5 @@ usage(){
 	#sudo /opt/github/actions-runner/svc.sh status
 
 
+  chown -R root:ubuntu /dev2
+  chmod 777 -R /dev2
