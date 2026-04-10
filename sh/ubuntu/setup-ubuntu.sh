@@ -108,6 +108,12 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	apt-get install  -y inetutils-traceroute
 
 	#
+	# Add other stuff
+	#
+	apt-get install -y apt-transport-https
+	
+	
+	#
 	# Add direnv
 	#
 	apt-get install  direnv
@@ -158,6 +164,20 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	wget -P /data/inet https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
 	unzip /data/inet/awscli-exe-linux-x86_64.zip
 	/data/inet/aws/install
+
+
+	#
+	# Azure AZ-CLI
+	#
+	
+	# Add gpg key
+	curl -sLS https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null	
+	SUITE=$(lsb_release -cs)
+	echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $SUITE main" |
+    sudo tee /etc/apt/sources.list.d/microsoft.list    
+	
+	apt-get update -y 
+	apt-get install -y azure-cli	  
 
 	#
 	# Helm

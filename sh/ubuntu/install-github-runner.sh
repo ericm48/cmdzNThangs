@@ -25,7 +25,7 @@ usage(){
 
 	# Setup folder.
 
-	mkdir -p "/opt/github/actions-runner"	
+	mkdir -p "/dev2/github/actions-runner"	
 
 	cd /opt/github/actions-runner
 	
@@ -35,26 +35,29 @@ usage(){
 	# Validate the hash
 	echo "18f8f68ed1892854ff2ab1bab4fcaa2f5abeedc98093b6cb13638991725cab74  /data/inet/actions-runner-linux-x64-2.333.1.tar.gz" | shasum -a 256 -c  
   
-  cp /data/inet/actions-runner-linux-x64-2.333.1.tar.gz /opt/github/actions-runner
+  cp /data/inet/actions-runner-linux-x64-2.333.1.tar.gz /dev2/github/actions-runner
     
   # Extract the installer
   sudo tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
 
 	# Create the runner and start the configuration experience
-	/opt/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y  
+	#/dev2/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y  
 	
 	# Install As Service
-	sudo /opt/github/actions-runner/svc.sh install ubuntu
+	#sudo /opt/github/actions-runner/svc.sh install ubuntu
 	
 	# Start The Service...
-	sudo /opt/github/actions-runner/svc.sh start &
+	#sudo /opt/github/actions-runner/svc.sh start &
 	
 	# Sleep
 	echo "Sleeping for 5...."
 	sleep 5
 	
 	# Service Status
-	sudo /opt/github/actions-runner/svc.sh status
+	#sudo /opt/github/actions-runner/svc.sh status
+
+
+
 
 	# Needed to make this work!
 	sudo chmod 777 -R /opt/github
