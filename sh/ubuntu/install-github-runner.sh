@@ -36,9 +36,12 @@ usage(){
 	echo "18f8f68ed1892854ff2ab1bab4fcaa2f5abeedc98093b6cb13638991725cab74  /data/inet/actions-runner-linux-x64-2.333.1.tar.gz" | shasum -a 256 -c  
   
   cp /data/inet/actions-runner-linux-x64-2.333.1.tar.gz /dev2/github/actions-runner
+
+	cd /dev2/github/actions-runner
     
   # Extract the installer
-  sudo tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
+  tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
+
 
 	# Create the runner and start the configuration experience
 	#/dev2/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y  
@@ -49,19 +52,7 @@ usage(){
 	# Start The Service...
 	#sudo /opt/github/actions-runner/svc.sh start &
 	
-	# Sleep
-	echo "Sleeping for 5...."
-	sleep 5
 	
 	# Service Status
 	#sudo /opt/github/actions-runner/svc.sh status
 
-
-
-
-	# Needed to make this work!
-	sudo chmod 777 -R /opt/github
-  
-  # Final Chown's  
-	sudo chown -R root:ubuntu /opt
-  
