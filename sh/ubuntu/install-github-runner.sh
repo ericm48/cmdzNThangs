@@ -25,9 +25,9 @@ usage(){
 
 	# Setup folder.
 
-	mkdir -p "/dev2/github/actions-runner"	
+	mkdir -p "/dev2/github/actions-runner"
 
-	cd /opt/github/actions-runner
+	cd /dev2/github/actions-runner
 	
 	# Pull down components	
   wget -P /data/inet https://github.com/actions/runner/releases/download/v2.333.1/actions-runner-linux-x64-2.333.1.tar.gz
