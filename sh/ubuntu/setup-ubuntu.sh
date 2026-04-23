@@ -33,7 +33,7 @@ usage(){
 export NUTANIX_VERSION="v2.17.1"
 export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 
-#export NUTANIX_ARTIFACT_HOST="http://10.38.48.244/artifacts"  # PHX
+#export NUTANIX_ARTIFACT_HOST="http://10.38.48.244/artifacts"   # PHX
 #export NUTANIX_ARTIFACT_HOST="http://10.55.87.62/artifacts"	  # DM3
   
 	if [[ -v NUTANIX_VERSION ]]; then
