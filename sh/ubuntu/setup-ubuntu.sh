@@ -97,7 +97,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Pin this kernel-version
 	#
-	apt-mark hold linux-image-$(uname -r) linux-headers-$(uname -r)	
+	#apt-mark hold linux-image-$(uname -r) linux-headers-$(uname -r)	
 
 	#
 	# Add Network Stuff
