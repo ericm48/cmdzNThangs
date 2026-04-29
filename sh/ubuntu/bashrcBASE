@@ -278,6 +278,10 @@ alias d2='cd /dev2/docker'
 alias d3='cd /dev2/ansible/repo1/master/repo1/docker/docker-ci-tool-stack-master'
 alias d4='cd /dev2/docker/eric/master/docker-ci-toolz-stack-master'
 alias d2em='cd /dev2/docker/eric/master'
+
+#
+# Calm Stuff
+#
 alias nudm='cd /dev2/davek/master/nkp-ubuntu'
 alias ca='source /dev2/davek/master/nkp-ubuntu/calm-dsl/venv/bin/activate'
 
