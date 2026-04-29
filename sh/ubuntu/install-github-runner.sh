@@ -30,20 +30,22 @@ usage(){
 	cd /dev2/github/actions-runner
 	
 	# Pull down components	
-  wget -P /data/inet https://github.com/actions/runner/releases/download/v2.333.1/actions-runner-linux-x64-2.333.1.tar.gz
+  wget -P /data/inet https://github.com/actions/runner/releases/download/v2.334.0/actions-runner-linux-x64-2.334.0.tar.gz
+
 
 	# Validate the hash
-	echo "18f8f68ed1892854ff2ab1bab4fcaa2f5abeedc98093b6cb13638991725cab74  /data/inet/actions-runner-linux-x64-2.333.1.tar.gz" | shasum -a 256 -c  
+	echo "048024cd2c848eb6f14d5646d56c13a4def2ae7ee3ad12122bee960c56f3d271  /data/inet/actions-runner-linux-x64-2.334.0.tar.gz" | shasum -a 256 -c
   
-  cp /data/inet/actions-runner-linux-x64-2.333.1.tar.gz /dev2/github/actions-runner
+  cp /data/inet/actions-runner-linux-x64-2.334.0.tar.gz /dev2/github/actions-runner
 
 	cd /dev2/github/actions-runner
     
   # Extract the installer
-  tar -xf ./actions-runner-linux-x64-2.333.1.tar.gz
+  tar -xf ./actions-runner-linux-x64-2.334.0.tar.gz
 
 
 	# Create the runner and start the configuration experience
+	
 	#/dev2/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y  
 	
 	# Install As Service
@@ -52,10 +54,9 @@ usage(){
 	# Start The Service...
 	#sudo /opt/github/actions-runner/svc.sh start &
 	
-	
 	# Service Status
 	#sudo /opt/github/actions-runner/svc.sh status
 
 
-  chown -R root:ubuntu /dev2
-  chmod 777 -R /dev2
+  #chown -R root:ubuntu /dev2
+  #chmod 777 -R /dev2
