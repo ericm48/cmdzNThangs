@@ -284,6 +284,7 @@ alias d2em='cd /dev2/docker/eric/master'
 #
 alias nudm='cd /dev2/davek/master/nkp-ubuntu'
 alias ca='source /dev2/davek/master/nkp-ubuntu/calm-dsl/venv/bin/activate'
+alias cuc='calm update cache | tee /data/txt/calm_cache_out.txt'
 
 #
 # TMux
