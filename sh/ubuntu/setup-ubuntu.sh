@@ -340,6 +340,11 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	tar -xf /data/inet/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 
 	#
+	# Load Konvoy
+	#
+	docker load -i /data/inet/nkp-"$NUTANIX_VERSION"/konvoy-bootstrap-image-"$NUTANIX_VERSION".tar	
+
+	#
 	# Profile ThingZ:
 	#
   wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
