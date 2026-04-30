@@ -44,6 +44,11 @@ usage(){
   tar -xf ./actions-runner-linux-x64-2.334.0.tar.gz
 
 
+  cp ./run-helper.sh.template ./run-helper.sh
+  chmod +x ./run-helper.sh
+  
+  
+
 	# Create the runner and start the configuration experience
 	
 	#/dev2/github/actions-runner/config.sh --url https://github.com/ericm48-gh-org --token $GITHUB_RUNNER_Y  

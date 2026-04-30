@@ -65,7 +65,10 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	
 	mkdir -p "/data/inet"
 	mkdir -p "/data/maven-3.x/eric"
-	mkdir -p "/data/txt"
+	mkdir -p "/data/txt/logs/hpoc"
+	mkdir -p "/data/txt/logs/aws"
+	mkdir -p "/data/txt/logs/azure"	
+		
 	mkdir -p "/data/ssl/NTX/aws"
 	mkdir -p "/data/ssl/NTX/azure"
 	mkdir -p "/data/ssl//NTX/gcp"		
@@ -394,9 +397,8 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	cp /data/inet/install-github-runner.sh /dev2/sh/install-github-runner.sh
 	chmod +x /dev2/sh/install-github-runner.sh
 
-	# hold off on this for now..has to be run as ubuntu with that profile...
-	#/dev2/sh/install-github-runner.sh
-
+	# This will pull down and expand the .tar.gz.  More steps needed.
+	/dev2/sh/install-github-runner.sh
 
 		
 	#
