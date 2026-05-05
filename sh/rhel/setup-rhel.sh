@@ -283,6 +283,10 @@ usage(){
 	cp /data/inet/ipv4-addr-check.sh /dev2/sh/ipv4-addr-check.sh
 	chmod +x /dev2/sh/ipv4-addr-check.sh
 	
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ipv4-addr-check4service.sh
+	cp /data/inet/ipv4-addr-check4service.sh /dev2/sh/ipv4-addr-check4service.sh
+	chmod +x /dev2/sh/ipv4-addr-check4service.sh
+		
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/dis
 	cp /data/inet/dis /dev2/sh/dis
 	chmod +x /dev2/sh/dis
