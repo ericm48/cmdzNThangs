@@ -51,7 +51,7 @@ usage(){
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
 
-	curl -s "https://get.sdkman.io" | bash
+	curl -s "https://get.sdkman.io" | bash 
 
 	#
 	# Become ubuntu... [ chicken or egg thing.. gotta become ubuntu to finish this up, so-as to be available to ubuntu..]
@@ -73,7 +73,7 @@ usage(){
 	
 	source /opt/sdkman/bin/sdkman-init.sh
 
-	sdk install java 23.0.2-librca	
+	sdk install java 23.0.2-librca
 	sdk install java 21.0.8-librca
 	
 	sdk default java 21.0.8-librca
