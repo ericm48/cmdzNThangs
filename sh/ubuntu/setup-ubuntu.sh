@@ -119,7 +119,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Add direnv
 	#
-	apt-get install  direnv
+	apt-get install -y direnv
 	
 	#
 	# Add some utils...
