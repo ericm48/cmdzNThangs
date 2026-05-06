@@ -14,8 +14,11 @@ baseAddress="192.168.1.100"
 defaultPort=
 defaultPort="80"
 
+targetPort=
+targetPort=$defaultPort
+
 nextIncrement=
-nextIncrement="15"
+nextIncrement="1"
 increment=0
 
 usage(){
