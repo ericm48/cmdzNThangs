@@ -30,7 +30,9 @@ usage(){
 	
   echo ""
 
-export NUTANIX_VERSION="v2.17.1"
+# Recall that DK Calm-Automation is 2.17.0
+
+export NUTANIX_VERSION="v2.17.0"
 export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 
 #export NUTANIX_ARTIFACT_HOST="http://10.38.48.244/artifacts"   # PHX
@@ -109,12 +111,12 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	apt-get install  -y net-tools			
 	apt-get install  -y pkgconf
 	apt-get install  -y inetutils-traceroute
+	apt-get install  -y yq											# Anish says this is too-old.
 
 	#
 	# Add other stuff
 	#
-	apt-get install -y apt-transport-https
-	
+	apt-get install -y apt-transport-https	
 	
 	#
 	# Add direnv
