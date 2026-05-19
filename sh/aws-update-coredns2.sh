@@ -22,7 +22,7 @@ usage(){
 	fi  
 
 
-source ./aws-env
+source ./aws-env2
 
 
 if [ -z "$NKP_TUNNEL_PUBLIC_IP" ] ; then
