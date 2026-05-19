@@ -9,9 +9,12 @@ usage(){
    			echo " -H/-h				-Display this help message."
    			echo " "
    			echo " -Requires the following eVars set:"
+   			echo " "   			
    			echo "  NKP_TUNNEL_PUBLIC_IP"
+   			echo "  NKP_DASHBOARD_IP"
    			echo " "
-   			echo " "   			   			
+   			echo " "
+   			echo " "   			
 	exit 1
 }
 
@@ -26,9 +29,19 @@ source ./aws-env2
 
 
 if [ -z "$NKP_TUNNEL_PUBLIC_IP" ] ; then
-  echo "AWS tunnel IP  not set in aws-env."
+	echo " "
+  echo "eVar: NKP_TUNNEL_PUBLIC_IP not set in aws-env2."
+	echo " "  
   exit 1
-fi 
+fi
+
+if [ -z "$NKP_DASHBOARD_IP" ] ; then
+	echo " "
+  echo "eVar: NKP_DASHBOARD_IP not set in aws-env2."
+	echo " "  
+  exit 1
+fi
+
 
 # select NKP mgmt cluster context
     CONTEXTS=$(kubectl config get-contexts --output=name)
@@ -55,21 +68,34 @@ input_file=coredns-cm.yaml
 output_file=coredns-cm-updated.yaml
 
 # Text block to insert (preserves indentation)
+
+
+#INSERT_TEXT="        hosts {
+#            $NKP_TUNNEL_PUBLIC_IP $NKP_MGMT_FQDN
+#            fallthrough
+#        }"
+
 INSERT_TEXT="        hosts {
-            $NKP_TUNNEL_PUBLIC_IP $NKP_MGMT_FQDN
+            $NKP_TUNNEL_PUBLIC_IP $NKP_DASHBOARD_IP
             fallthrough
-        }" 
+        }"
+
+        
 # Insert the text before the line containing 'forward'
 awk -v insert="${INSERT_TEXT}" '/^[ \t]*forward/ {print insert}{print}' "${input_file}" > "${output_file}"
 
 echo "Text inserted and saved to ${output_file}"
 echo
-yq e  ${output_file}
+#yq e  ${output_file}
+
+cat  ${output_file}
 
 echo "press enter to apply update to coredns configmap or CTRL-C to abort"
 read
+
 # update coredns configmap
 kubectl replace -f coredns-cm-updated.yaml -n kube-system
+
 #check if error
 if [ $? -ne 0 ]; then
   echo "Failed to update coredns configmap."
@@ -78,5 +104,5 @@ fi
 
 kubectl  rollout restart deploy -n kommander-flux source-controller
 kubectl  rollout restart deploy -n kommander-flux flux-oci-mirror
-kubectl get gitrepo management -n kommander-flux -w
+kubectl  get gitrepo management -n kommander-flux -w
 
