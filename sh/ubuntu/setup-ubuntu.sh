@@ -384,6 +384,10 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/dis
 	cp /data/inet/dis /dev2/sh/dis
 	chmod +x /dev2/sh/dis
+	
+	wget -P /data/inet https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-update-secret2.sh
+	cp /data/inet/aws-update-secret2.sh /dev2/sh/aws-update-secret2.sh
+	chmod +x /dev2/sh/aws-update-secret2.sh
 		
 	#
 	# cri-o / crictl-tools
