@@ -232,6 +232,11 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	snap install httpie	
 
 	#
+	# Certbot
+	#
+	snap install certbot --classic
+
+	#
 	# Setup python3
 	#
 	apt install -y python3
