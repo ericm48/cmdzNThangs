@@ -1,8 +1,12 @@
+#
 # Traefik Ingress IP for NKP Dashboard
+#
 
+# Kommander
 export NKP_DASHBOARD_IP='10.38.235.16'
 
 # Public IP for cloud tunnel VM
 export NKP_TUNNEL_PUBLIC_IP='52.37.3.148'
 
+# FQDN for Kommander IP above
 export NKP_MGMT_FQDN='nkp-demo.aws.ericm48.net'
