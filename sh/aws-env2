@@ -5,5 +5,4 @@ export NKP_DASHBOARD_IP='10.38.235.16'
 # Public IP for cloud tunnel VM
 export NKP_TUNNEL_PUBLIC_IP='52.37.3.148'
 
-
-#export NKP_MGMT_FQDN=nkp-ultimate.nkpdemo.com
+export NKP_MGMT_FQDN='nkp-demo.aws.ericm48.net'

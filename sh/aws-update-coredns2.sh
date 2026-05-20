@@ -76,7 +76,7 @@ output_file=coredns-cm-updated.yaml
 #        }"
 
 INSERT_TEXT="        hosts {
-            $NKP_TUNNEL_PUBLIC_IP $NKP_DASHBOARD_IP
+            $NKP_TUNNEL_PUBLIC_IP $NKP_MGMT_FQDN
             fallthrough
         }"
 
@@ -86,6 +86,7 @@ awk -v insert="${INSERT_TEXT}" '/^[ \t]*forward/ {print insert}{print}' "${input
 
 echo "Text inserted and saved to ${output_file}"
 echo
+
 #yq e  ${output_file}
 
 cat  ${output_file}
@@ -103,6 +104,6 @@ if [ $? -ne 0 ]; then
 fi
 
 kubectl  rollout restart deploy -n kommander-flux source-controller
-kubectl  rollout restart deploy -n kommander-flux flux-oci-mirror
+kubectl  rollout restart deploy -n kommander-flux flux-oci-mirror				# Not needed for AWS..
 kubectl  get gitrepo management -n kommander-flux -w
 
