@@ -138,7 +138,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Setup K8s
 	#
-  curl --output-dir /data/inet -O  https://dl.k8s.io/release/v1.34.1/bin/linux/amd64/kubectl
+  curl -LO  --output-dir /data/inet   https://dl.k8s.io/release/v1.34.1/bin/linux/amd64/kubectl
   install -o root -g root -m 0755 /data/inet/kubectl /usr/local/bin/kubectl     
   mv /data/inet/kubectl /data/inet/kubectl-v1.34.1-linux-amd64         					
 
@@ -155,10 +155,10 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# K8s Utilities
 	#	
- 	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/blendle/kns/master/bin/kns
+ 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/blendle/kns/master/bin/kns
   install -o root -g root -m 0755 /data/inet/kns /usr/local/bin/kns			
  	
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/blendle/kns/master/bin/ktx
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/blendle/kns/master/bin/ktx
   install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx     						
 
   apt-get install  -y kubectx
@@ -166,7 +166,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# AWS-CLI
 	#
-	curl --output-dir /data/inet -O  https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+	curl -LO  --output-dir /data/inet   https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
 	unzip -o /data/inet/awscli-exe-linux-x86_64.zip
 	/data/inet/aws/install
 
@@ -187,41 +187,41 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Helm
 	#	
-  curl --output-dir /data/inet -O  https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
   chmod 700 /data/inet/get-helm-3
 	/data/inet/get-helm-3
 
   #
   # Setup K9s
   #
-	curl --output-dir /data/inet -O  https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.deb
+	curl -LO  --output-dir /data/inet   https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.deb
 	mv /data/inet/k9s_linux_amd64.deb /data/inet/k9s_linux_amd64-v0.50.9.deb
   apt-get install  -y /data/inet/k9s_linux_amd64-v0.50.9.deb
 
 	#
 	# Setup Kind
 	#
-	curl --output-dir /data/inet -O  https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64														
+	curl -LO  --output-dir /data/inet   https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64														
   install -o root -g root -m 0755 /data/inet/kind-linux-amd64 /usr/local/bin/kind										
 
 	#
 	# Setup Minikube
 	#
-	curl --output-dir /data/inet -O  https://github.com/kubernetes/minikube/releases/download/v1.36.0/minikube-linux-amd64  
+	curl -LO  --output-dir /data/inet   https://github.com/kubernetes/minikube/releases/download/v1.36.0/minikube-linux-amd64  
 	cp /data/inet/minikube-linux-amd64 /data/inet/minikube-linux-amd64-v1.36.0																
-  install -o root -g root -m 0755 /data/inet/minikube-linux-amd64 /usr/local/bin/minikube										
+  install -o root -g root -m 0755 /data/inet/minikube-linux-amd64 /usr/local/bin/minikube
 
 	#
 	# Setup fzf
 	#
-  curl --output-dir /data/inet -O  https://github.com/junegunn/fzf/releases/download/v0.65.2/fzf-0.65.2-linux_amd64.tar.gz
+  curl -LO  --output-dir /data/inet   https://github.com/junegunn/fzf/releases/download/v0.65.2/fzf-0.65.2-linux_amd64.tar.gz
   tar -xf /data/inet/fzf-0.65.2-linux_amd64.tar.gz -C /data/inet
   install -o root -g root -m 0755 /data/inet/fzf /usr/local/bin/fzf
 
 	#
 	# Setup Flux
 	#
-  curl --output-dir /data/inet -O  https://fluxcd.io/install.sh
+  curl -LO  --output-dir /data/inet   https://fluxcd.io/install.sh
   mv /data/inet/install.sh /data/inet/flux-install.sh
   chmod +x /data/inet/flux-install.sh
 	/data/inet/flux-install.sh  
@@ -349,15 +349,15 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   #
   # Setup nkp-cli
   #
-	curl --output-dir /data/inet -O  "$NUTANIX_ARTIFACT_HOST"/nkp_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+	curl -LO  --output-dir /data/inet   "$NUTANIX_ARTIFACT_HOST"/nkp_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 	tar -xf /data/inet/nkp_"$NUTANIX_VERSION"_linux_amd64.tar.gz
   install -o root -g root -m 0755 /data/inet/nkp /usr/local/bin/nkp
 
   #
   # Pull & Extract nkp-bundle
   #
-	#curl --output-dir /data/inet -O  "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
-	curl --output-dir /data/inet -O  "$NUTANIX_ARTIFACT_HOST"/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+	#curl -LO  --output-dir /data/inet   "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+	curl -LO  --output-dir /data/inet   "$NUTANIX_ARTIFACT_HOST"/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 	tar -xf /data/inet/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 
 	#
@@ -368,7 +368,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Profile ThingZ:
 	#
-  curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
+  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
   cp /data/inet/bashrcBASE /home/ubuntu/.bashrc
   chmod +x /home/ubuntu/.bashrc
   cp /data/inet/bashrcBASE /home/nutanix/.bashrc
@@ -376,7 +376,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   cp /data/inet/bashrcBASE /etc/skel/.bashrc
   chmod +x /etc/skel/.bashrc  
   
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasesBASE	
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasesBASE	
   cp /data/inet/kubectl_aliasesBASE /home/ubuntu/.kubectl_aliases
   chmod +x /home/ubuntu/.kubectl_aliases
   cp /data/inet/kubectl_aliasesBASE /home/nutanix/.kubectl_aliases
@@ -384,45 +384,45 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 
   chown -R nutanix:nutanix /home/nutanix
   
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh
 	cp /data/inet/kube-ps1.sh /dev2/sh/kube-ps1.sh
 	chmod +x /dev2/sh/kube-ps1.sh
 		
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/git-ps1.sh					
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/git-ps1.sh					
 	cp /data/inet/kube-ps1.sh /dev2/sh/git-ps1.sh
 	chmod +x /dev2/sh/git-ps1.sh																																													
 	
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ipv4-addr-check.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ipv4-addr-check.sh
 	cp /data/inet/ipv4-addr-check.sh /dev2/sh/ipv4-addr-check.sh
 	chmod +x /dev2/sh/ipv4-addr-check.sh
 
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ipv4-addr-check4service.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ipv4-addr-check4service.sh
 	cp /data/inet/ipv4-addr-check4service.sh /dev2/sh/ipv4-addr-check4service.sh
 	chmod +x /dev2/sh/ipv4-addr-check4service.sh
 	
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/dis
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/dis
 	cp /data/inet/dis /dev2/sh/dis
 	chmod +x /dev2/sh/dis
 		
 	#
 	# AWS Utils
 	#
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-update-secret2.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-update-secret2.sh
 	cp /data/inet/aws-update-secret2.sh /dev2/sh/aws-update-secret2.sh
 	chmod +x /dev2/sh/aws-update-secret2.sh
 
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-update-coredns2.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-update-coredns2.sh
 	cp /data/inet/aws-update-coredns2.sh /dev2/sh/aws-update-coredns2.sh
 	chmod +x /dev2/sh/aws-update-coredns2.sh
 	
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-env2
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-env2
 	cp /data/inet/aws-env2 /dev2/sh/aws-env2
 	chmod +x /dev2/sh/aws-env2
 		
 	#
 	# cri-o / crictl-tools
 	#
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-crictl.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-crictl.sh
 	cp /data/inet/install-crictl.sh /dev2/sh/install-crictl.sh
 	chmod +x /dev2/sh/install-crictl.sh
 	/dev2/sh/install-crictl.sh
@@ -430,7 +430,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# dev tools
 	#
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-devtoolz.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-devtoolz.sh
 	cp /data/inet/install-devtoolz.sh /dev2/sh/install-devtoolz.sh
 	chmod +x /dev2/sh/install-devtoolz.sh
 	/dev2/sh/install-devtoolz.sh
@@ -438,7 +438,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# github-runner
 	#
-	curl --output-dir /data/inet -O  https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-github-runner.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-github-runner.sh
 	cp /data/inet/install-github-runner.sh /dev2/sh/install-github-runner.sh
 	chmod +x /dev2/sh/install-github-runner.sh
 
