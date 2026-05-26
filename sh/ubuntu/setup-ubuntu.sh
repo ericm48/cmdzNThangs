@@ -314,8 +314,22 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   #apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 	getent group docker  					# group docker should already out there...
-  usermod -aG docker ubuntu && newgrp docker
-	usermod -aG docker nutanix && newgrp docker
+	
+	grep -q "^docker:" /etc/group	
+	
+	greprc=$?
+	
+	if [ $greprc -eq 0 ]
+	   then
+				echo "Group: Docker Exists..."
+	else
+				echo "Group: Docker DOES NOT Exist!"
+				groupadd -f docker				
+	fi		
+	
+	# add users to docker, make primary group.  Remember this is running as root!
+	usermod -g docker ubuntu
+	usermod -g docker nutanix
   
   # Start'em up!
   systemctl enable docker.service
