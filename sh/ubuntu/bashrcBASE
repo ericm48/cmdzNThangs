@@ -317,6 +317,9 @@ alias dkmc='cd /dev2/k8/3rdParty/master/certified-kubernetes-administrator-cours
 
 alias qjc='quotejcmd "$@"'
 
+alias startRadar='nohup radar 2>&1 | tee /data/txt/logs/radar-log.txt &'
+alias stopRadar='sudo killall radar'
+
 # NKP
 
 alias setbsc4='export KUBECONFIG="/home/ubuntu/nkp-mgmt-eric-4-bootstrap.conf"'   	# BootStrapCluster

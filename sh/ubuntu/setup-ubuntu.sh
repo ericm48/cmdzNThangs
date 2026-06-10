@@ -159,7 +159,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   install -o root -g root -m 0755 /data/inet/kns /usr/local/bin/kns			
  	
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/blendle/kns/master/bin/ktx
-  install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx     						
+  install -o root -g root -m 0755 /data/inet/ktx /usr/local/bin/ktx			
 
   apt-get install  -y kubectx
 
@@ -197,6 +197,13 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	curl -LO  --output-dir /data/inet   https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_amd64.deb
 	mv /data/inet/k9s_linux_amd64.deb /data/inet/k9s_linux_amd64-v0.50.9.deb
   apt-get install  -y /data/inet/k9s_linux_amd64-v0.50.9.deb
+
+	#
+	# Radar
+	#
+	curl -LO --output-dir /data/inet https://github.com/skyhook-io/radar/releases/download/v1.7.6/radar_v1.7.6_linux_amd64.tar.gz
+	tar -xzf /data/inet/radar_v1.7.6_linux_amd64.tar.gz -C /data/inet
+	install -o root -g root -m 0755 /data/inet/kubectl-radar /usr/local/bin/radar
 
 	#
 	# Setup Kind
