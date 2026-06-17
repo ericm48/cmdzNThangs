@@ -425,6 +425,10 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-env2
 	cp /data/inet/aws-env2 /dev2/sh/aws-env2
 	chmod +x /dev2/sh/aws-env2
+	
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/getPodLogZByNS
+	cp /data/inet/getPodLogZByNS /dev2/sh/getPodLogZByNS
+	chmod +x /dev2/sh/getPodLogZByNS
 		
 	#
 	# cri-o / crictl-tools
