@@ -1,0 +1,106 @@
+#!/bin/bash
+
+#set -x
+
+targetNameSpace=
+targetNameSpace=""
+
+i=0
+k=0
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:   $0		-Grabs & Outputs ALL Pod-Logs for a given Namespace"
+   			echo " "
+   			echo " -H/-h				-Display this help message."
+   			echo " "
+   			echo " "
+   			echo " Example:   $0 -n targetNameSpace"
+   			echo " "   			
+   			echo " "
+   			echo " "
+   			echo " "   			
+	exit 1
+}
+
+arg_parse() {
+	
+	for (( i=1; i<=$#; i++)); do
+		
+		case ${!i} in
+				 	
+		  -n)
+		  		# targetNameSpace after  -n
+		  	  k=$(($i+1))
+				 	targetNameSpace="${!k}"
+				 	;;
+	
+	    -H)
+					usage
+					exit 3
+	        ;;
+	
+	    -h)
+					usage
+					exit 3
+					;;
+	
+	    --H)
+					usage
+					exit 3
+	        ;;
+	
+	    --h)
+					usage
+					exit 3
+					;;
+	
+	    -help)
+					usage
+					exit 3
+	        ;;
+	
+	    --help)
+					usage
+					exit 3
+					;;
+			
+			*)
+					#echo "[$i]: ${!i}"
+		
+		
+		esac
+	
+	  
+	done
+
+}
+
+dump_logz() {
+
+	for pod in $(kubectl get pods -n $targetNameSpace -o jsonpath='{.items[*].metadata.name}'); do 
+	    echo "=== Logs for Pod: $pod BEGINS ==="
+	    kubectl logs -n $targetNameSpace "$pod" --all-containers=true
+			echo "=== Logs for Pod: $pod ENDS   ==="	    
+	done
+
+}
+
+	arg_parse "$@"
+	
+ 	if [ $# -lt 2 ]
+ 		then
+			usage
+ 	fi
+
+	echo " "
+	echo "Target NameSpace: $targetNameSpace"
+	echo " "	
+
+	dump_logz 
+	
+	exit 0
+	
+	
