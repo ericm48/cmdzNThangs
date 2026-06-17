@@ -5,6 +5,9 @@
 targetNameSpace=
 targetNameSpace=""
 
+sinceDuration=
+sinceDuration=""
+
 i=0
 k=0
 
@@ -15,7 +18,8 @@ usage(){
    			echo "Usage:   $0		-Grabs & Outputs ALL Pod-Logs for a given Namespace"
    			echo " "
    			echo " -H/-h				-Display this help message."
-   			echo " "
+   			echo " -n           -TargetNameSpace -REQUIRED"
+   			echo " -s           -SinceDuration, as time duration, (ie 6m for last 6 minutes). -Optional"
    			echo " "
    			echo " Example:   $0 -n targetNameSpace"
    			echo " "   			
@@ -35,6 +39,12 @@ arg_parse() {
 		  		# targetNameSpace after  -n
 		  	  k=$(($i+1))
 				 	targetNameSpace="${!k}"
+				 	;;
+	
+			-s)
+		  		# sinceDuration after  -s
+		  	  k=$(($i+1))
+				 	sinceDuration="${!k}"
 				 	;;
 	
 	    -H)
@@ -80,10 +90,27 @@ arg_parse() {
 
 dump_logz() {
 
+	theCommand=""
+
 	for pod in $(kubectl get pods -n $targetNameSpace -o jsonpath='{.items[*].metadata.name}'); do 
+	    
 	    echo "=== Logs for Pod: $pod BEGINS ==="
-	    kubectl logs -n $targetNameSpace "$pod" --all-containers=true
-			echo "=== Logs for Pod: $pod ENDS   ==="	    
+	    
+	    theCommand=""
+	    theCommand="kubectl logs -n $targetNameSpace $pod --all-containers=true "
+
+			if [[ ! -z "$sinceDuration" ]]; then
+				#theCommand="kubectl logs -n $targetNameSpace $pod --all-containers=true --since $sinceDuration "
+				theCommand="$theCommand --since $sinceDuration "				
+			fi
+	    
+	    #echo "theCommand: $theCommand"
+	    
+	    # Run IT!
+	    $theCommand			
+	    
+			echo "=== Logs for Pod: $pod ENDS   ==="
+			
 	done
 
 }
@@ -97,6 +124,7 @@ dump_logz() {
 
 	echo " "
 	echo "Target NameSpace: $targetNameSpace"
+	echo "  Since Duration: $sinceDuration"	
 	echo " "	
 
 	dump_logz 
