@@ -3,7 +3,10 @@
 #set -x
 
 targetNameSpace=
-targetNameSpace=""
+targetNameSpace="default"
+
+targetNameFragment=
+targetNameFragment=""
 
 sinceDuration=
 sinceDuration=""
@@ -18,9 +21,13 @@ usage(){
    			echo "Usage:   $0		-Grabs All Services & Describes for a given Namespace"
    			echo " "
    			echo " -H/-h        -Display this help message."
-   			echo " -n           -TargetNameSpace -REQUIRED"
+   			echo " -n           -TargetNameSpace    -Optional. Default: default"
+   			echo " -f           -TargetNameFragment -Optional. Default: blank -->all services."   			
+   			
    			echo " "
-   			echo " Example:   $0 -n targetNameSpace"
+   			echo " Example:   $0 -n targetNameSpace                 # Describes ALL Services in targetNameSpace"  			
+   			echo " "
+   			echo " Example:   $0 -n targetNameSpace -f prometheus   # Describes Services that contain prometheus in the name ONLY."   			
    			echo " "   			
    			echo " "
    			echo " "   			
@@ -44,6 +51,12 @@ arg_parse() {
 		  	  k=$(($i+1))
 				 	sinceDuration="${!k}"
 				 	;;
+				 	
+			-f)
+		  		# targetNameFragment after  -f
+		  	  k=$(($i+1))
+				 	targetNameFragment="${!k}"
+				 	;;				 	
 	
 	    -H)
 					usage
@@ -86,23 +99,46 @@ arg_parse() {
 
 }
 
-dump_logz() {
+dump_services() {
 
 	theCommand=""
 
 	for service in $(kubectl get service -n $targetNameSpace -o jsonpath='{.items[*].metadata.name}'); do 
 	    
-	    echo "=== Describe For Service: $pod BEGINS ==="
-	    
-	    theCommand=""
-	    theCommand="kubectl -n $targetNameSpace describe service $service"
-	    
-	    #echo "theCommand: $theCommand"
-	    
-	    # Run IT!
-	    $theCommand			
-	    
-			echo "=== Describe For Service: $pod ENDS   ==="
+			if [[ -z "$targetNameFragment" ]]; then
+
+			    echo "=== Describe For Service: $service BEGINS ==="
+			    
+			    theCommand=""
+			    theCommand="kubectl -n $targetNameSpace describe service $service"
+			    
+			    #echo "theCommand: $theCommand"
+			    
+			    # Run IT!
+			    $theCommand			
+			    
+					echo "=== Describe For Service: $service ENDS   ==="
+
+			else
+
+				if [[ $service =~ "$targetNameFragment" ]]; then
+				
+				    echo "=== Describe For Service: $service BEGINS ==="
+				    
+				    theCommand=""
+				    theCommand="kubectl -n $targetNameSpace describe service $service"
+				    
+				    #echo "theCommand: $theCommand"
+				    
+				    # Run IT!
+				    $theCommand			
+				    
+						echo "=== Describe For Service: $service ENDS   ==="
+									
+
+				fi			
+
+			fi	
 			
 	done
 
@@ -111,10 +147,12 @@ dump_logz() {
 	arg_parse "$@"
 
 	echo " "
-	echo "Target NameSpace: $targetNameSpace"
+	echo "         Target NameSpace: $targetNameSpace"
+	echo " "	
+	echo "Target TargetNameFragment: $targetNameFragment"
 	echo " "	
 
-	dump_logz 
+	dump_services 
 	
 	exit 0
 	

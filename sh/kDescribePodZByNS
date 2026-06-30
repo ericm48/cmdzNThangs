@@ -3,10 +3,10 @@
 #set -x
 
 targetNameSpace=
-targetNameSpace=""
+targetNameSpace="default"
 
-sinceDuration=
-sinceDuration=""
+targetNameFragment=
+targetNameFragment=""
 
 i=0
 k=0
@@ -18,7 +18,12 @@ usage(){
    			echo "Usage:   $0		-Grabs All Pods & Describes for a given Namespace"
    			echo " "
    			echo " -H/-h        -Display this help message."
-   			echo " -n           -TargetNameSpace -REQUIRED"
+   			echo " -n           -TargetNameSpace -Optional. Default: default"
+   			echo " -f           -TargetNameFragment -Optional. Default: blank -->all pods."   			   			
+   			echo " "
+   			echo " Example:   $0 -n targetNameSpace                 # Describes ALL Pods in targetNameSpace"  			
+   			echo " "
+   			echo " Example:   $0 -n targetNameSpace -f prometheus   # Describes Pods that contain prometheus in the name ONLY."   			   			
    			echo " "
    			echo " Example:   $0 -n targetNameSpace"
    			echo " "   			
@@ -44,6 +49,13 @@ arg_parse() {
 		  	  k=$(($i+1))
 				 	sinceDuration="${!k}"
 				 	;;
+				 	
+			-f)
+		  		# targetNameFragment after  -f
+		  	  k=$(($i+1))
+				 	targetNameFragment="${!k}"
+				 	;;				 	
+				 	
 	
 	    -H)
 					usage
@@ -86,25 +98,49 @@ arg_parse() {
 
 }
 
-dump_logz() {
+dump_podz() {
 
 	theCommand=""
 
 	for pod in $(kubectl get pods -n $targetNameSpace -o jsonpath='{.items[*].metadata.name}'); do 
 	    
-	    echo "=== Describe For Pod: $pod BEGINS ==="
 	    
-	    theCommand=""
-	    theCommand="kubectl -n $targetNameSpace describe pod $pod"
+			if [[ -z "$targetNameFragment" ]]; then	    
 	    
-	    #echo "theCommand: $theCommand"
-	    
-	    # Run IT!
-	    $theCommand			
-	    
-			echo "=== Describe For Pod: $pod ENDS   ==="
+			    echo "=== Describe For Pod: $pod BEGINS ==="
+			    
+			    theCommand=""
+			    theCommand="kubectl -n $targetNameSpace describe pod $pod"
+			    
+			    #echo "theCommand: $theCommand"
+			    
+			    # Run IT!
+			    $theCommand			
+			    
+					echo "=== Describe For Pod: $pod ENDS   ==="
+			
+			else
+
+				if [[ $pod =~ "$targetNameFragment" ]]; then
+				
+				    echo "=== Describe For Pod: $pod BEGINS ==="
+				    
+				    theCommand=""
+				    theCommand="kubectl -n $targetNameSpace describe pod $pod"
+				    
+				    #echo "theCommand: $theCommand"
+				    
+				    # Run IT!
+				    $theCommand			
+				    
+						echo "=== Describe For Pod: $pod ENDS   ==="				
+				
+				fi			
+			
+			fi	
 			
 	done
+
 
 }
 
@@ -113,8 +149,12 @@ dump_logz() {
 	echo " "
 	echo "Target NameSpace: $targetNameSpace"
 	echo " "	
+	echo " "	
+	echo "Target TargetNameFragment: $targetNameFragment"
+	echo " "	
 
-	dump_logz 
+
+	dump_podz 
 	
 	exit 0
 	
