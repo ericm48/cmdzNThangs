@@ -48,6 +48,9 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	    usage
 	fi	
 	
+	
+	
+	
 	if [[ -v NUTANIX_ARTIFACT_HOST ]]; then
 
 	    echo "NUTANIX_ARTIFACT_HOST: $NUTANIX_ARTIFACT_HOST"
@@ -185,11 +188,11 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	apt-get install -y azure-cli	  
 
 	#
-	# Helm
+	# Helm -v4.x
 	#	
-  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-  chmod 700 /data/inet/get-helm-3
-	/data/inet/get-helm-3
+	curl -fsSLO --output-dir /data/inet https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+	chmod 700 /data/inet/get-helm-4
+	/data/inet/get-helm-4
 
   #
   # Setup K9s
@@ -378,19 +381,23 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
   cp /data/inet/bashrcBASE /home/ubuntu/.bashrc
   chmod +x /home/ubuntu/.bashrc
+  
   cp /data/inet/bashrcBASE /home/nutanix/.bashrc
-  chmod +x /home/nutanix/.bashrc  
+  chmod +x /home/nutanix/.bashrc
+  
   cp /data/inet/bashrcBASE /etc/skel/.bashrc
   chmod +x /etc/skel/.bashrc  
   
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/kubectl_aliasesBASE	
   cp /data/inet/kubectl_aliasesBASE /home/ubuntu/.kubectl_aliases
   chmod +x /home/ubuntu/.kubectl_aliases
+  
   cp /data/inet/kubectl_aliasesBASE /home/nutanix/.kubectl_aliases
   chmod +x /home/nutanix/.kubectl_aliases
 
-  chown -R nutanix:nutanix /home/nutanix
-  
+	#
+	# My UtilZ:
+	#  
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kube-ps1.sh
 	cp /data/inet/kube-ps1.sh /dev2/sh/kube-ps1.sh
 	chmod +x /dev2/sh/kube-ps1.sh
@@ -410,6 +417,17 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/dis
 	cp /data/inet/dis /dev2/sh/dis
 	chmod +x /dev2/sh/dis
+
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/getPodLogZByNS
+	cp /data/inet/getPodLogZByNS /dev2/sh/getPodLogZByNS
+	chmod +x /dev2/sh/getPodLogZByNS
+
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/back_dk-nkp-ubuntu-m
+	cp /data/inet/back_dk-nkp-ubuntu-m /dev2/sh/back_dk-nkp-ubuntu-m
+	chmod +x /dev2/sh/back_dk-nkp-ubuntu-m
+
+
+
 		
 	#
 	# AWS Utils
@@ -425,10 +443,6 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/aws-env2
 	cp /data/inet/aws-env2 /dev2/sh/aws-env2
 	chmod +x /dev2/sh/aws-env2
-	
-	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/getPodLogZByNS
-	cp /data/inet/getPodLogZByNS /dev2/sh/getPodLogZByNS
-	chmod +x /dev2/sh/getPodLogZByNS
 		
 	#
 	# cri-o / crictl-tools
@@ -455,11 +469,14 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 
 	# This will pull down and expand the .tar.gz.  More steps needed.
 	/dev2/sh/install-github-runner.sh
-
-		
+	
+	
 	#
 	# Final chown's & chmod's
 	#
+	
+  chown -R nutanix:nutanix /home/nutanix
+  	
 	chown -R ubuntu:root /dev2
 	chown -R ubuntu:root /data
 	chown -R ubuntu:root /opt	
