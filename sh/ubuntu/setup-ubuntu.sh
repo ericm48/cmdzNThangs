@@ -418,16 +418,21 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	cp /data/inet/dis /dev2/sh/dis
 	chmod +x /dev2/sh/dis
 
-	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/getPodLogZByNS
-	cp /data/inet/getPodLogZByNS /dev2/sh/getPodLogZByNS
-	chmod +x /dev2/sh/getPodLogZByNS
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kGetPodLogZByNS
+	cp /data/inet/kGetPodLogZByNS /dev2/sh/kGetPodLogZByNS
+	chmod +x /dev2/sh/kGetPodLogZByNS
+
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kDescribePodZByNS
+	cp /data/inet/kDescribePodZByNS /dev2/sh/kDescribePodZByNS
+	chmod +x /dev2/sh/kDescribePodZByNS
+
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kDescribeServiceZByNS
+	cp /data/inet/kDescribeServiceZByNS /dev2/sh/kDescribeServiceZByNS
+	chmod +x /dev2/sh/kDescribeServiceZByNS
 
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/back_dk-nkp-ubuntu-m
 	cp /data/inet/back_dk-nkp-ubuntu-m /dev2/sh/back_dk-nkp-ubuntu-m
 	chmod +x /dev2/sh/back_dk-nkp-ubuntu-m
-
-
-
 		
 	#
 	# AWS Utils
