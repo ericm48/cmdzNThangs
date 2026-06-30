@@ -814,6 +814,7 @@ alias kctx='kubectl config get-contexts'
 alias ku='kubectl config unset current-context'
 alias kx='kubectx'
 alias kns='kubens'
+alias kgsvc='kubectl get svc'
 
 alias wrap_args='f(){ echo before "$@" after;  unset -f f; }; f'
 #alias kctx='f(){ kubectl config use-context "$@"; unset -f f; }; f'

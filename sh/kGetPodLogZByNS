@@ -3,10 +3,10 @@
 #set -x
 
 targetNameSpace=
-targetNameSpace=""
+targetNameSpace="default"
 
 sinceDuration=
-sinceDuration=""
+sinceDuration="2m"
 
 i=0
 k=0
@@ -18,8 +18,8 @@ usage(){
    			echo "Usage:   $0		-Grabs & Outputs ALL Pod-Logs for a given Namespace"
    			echo " "
    			echo " -H/-h        -Display this help message."
-   			echo " -n           -TargetNameSpace -REQUIRED"
-   			echo " -s           -SinceDuration, as time duration, (ie 6m for last 6 minutes). -Optional"
+   			echo " -n           -TargetNameSpace -Optional. Default: default"
+   			echo " -s           -SinceDuration, as time duration, (ie 6m for last 6 minutes). -Optional.  Default: 2m"
    			echo " "
    			echo " Example:   $0 -n targetNameSpace"
    			echo " "   			
@@ -94,7 +94,7 @@ dump_logz() {
 
 	for pod in $(kubectl get pods -n $targetNameSpace -o jsonpath='{.items[*].metadata.name}'); do 
 	    
-	    echo "=== Logs for Pod: $pod BEGINS ==="
+	    echo "=== Logs For Pod: $pod BEGINS ==="
 	    
 	    theCommand=""
 	    theCommand="kubectl logs -n $targetNameSpace $pod --all-containers=true "
@@ -109,18 +109,13 @@ dump_logz() {
 	    # Run IT!
 	    $theCommand			
 	    
-			echo "=== Logs for Pod: $pod ENDS   ==="
+			echo "=== Logs For Pod: $pod ENDS   ==="
 			
 	done
 
 }
 
 	arg_parse "$@"
-	
- 	if [ $# -lt 2 ]
- 		then
-			usage
- 	fi
 
 	echo " "
 	echo "Target NameSpace: $targetNameSpace"
