@@ -153,7 +153,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   echo "source <(kubectl completion bash)" >> ~/.bashrc  
   alias k=kubectl
   
-  complete -F __start_kubectl k																					
+  complete -F __start_kubectl k
   
 	#
 	# K8s Utilities

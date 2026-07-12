@@ -13,7 +13,7 @@ usage(){
    			echo " "
    			echo " Ex:  getit gpu k			# loads clipboard with gpu-enviro k-creds"
    			echo " "
-   			echo " "
+   			echo " Ex:  getit nai ui		# loads clipboard with nai-enviro ui-creds"
    			echo " "   			
    			echo " "
 	exit 1
@@ -39,11 +39,15 @@ usage(){
 				  elif [  "$2" == "pc" ]
 							then
 								echo $DH_GPU_PC_Y | pbcopy
-								
+
+					elif [  "$2" == "nai" ]
+				  		then								
+								echo $DH_GPU_NAI_Y | pbcopy
 					else 
 				  		echo "Nope, not a sub..."
 				  		exit 33
 				  fi
+				  
 		 
 		elif [  "$1" == "ult" ]
 	  		then
@@ -75,6 +79,50 @@ usage(){
 				  		echo "Nope, not a sub..."
 				  		exit 55
 				  fi	  		
+
+
+		elif [  "$1" == "west" ]
+	  		then
+					if [  "$2" == "k" ]
+				  		then								
+								echo $DH_WEST_K_Y | pbcopy
+								
+				  elif [  "$2" == "pc" ]
+							then
+								echo $DH_WEST_PC_Y | pbcopy
+								
+					else 
+				  		echo "Nope, not a sub..."
+				  		exit 55
+				  fi	  		
+
+		# Latest
+		elif [  "$1" == "hpoc" ]
+	  		then
+					if [  "$2" == "k" ]
+				  		then								
+								echo $DH_HPOC_K_Y | pbcopy
+								
+				  elif [  "$2" == "pc" ]
+							then
+								echo $DH_HPOC_PC_Y | pbcopy
+								
+					else 
+				  		echo "Nope, not a sub..."
+				  		exit 55
+				  fi	  		
+
+		# JL & KH Shared NAI Lab
+		elif [  "$1" == "shared" ]
+	  		then
+					if [  "$2" == "nai" ]
+				  		then								
+								echo $DH_SHARED_NAI_Y | pbcopy
+								
+					else 
+				  		echo "Nope, not a sub..."
+				  		exit 55
+				  fi
 
 	  else
 	  		echo "Nope, not an enviro..."
