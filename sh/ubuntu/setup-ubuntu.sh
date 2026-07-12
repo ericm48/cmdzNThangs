@@ -40,7 +40,9 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   
 	if [[ -v NUTANIX_VERSION ]]; then
 
+			echo " "
 	    echo "NUTANIX_VERSION: $NUTANIX_VERSION"
+	    echo " "
 	    
 	else
 			echo ""
@@ -48,8 +50,34 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	    usage
 	fi	
 	
-	
-	
+	if [[ -z "${HOSTNAME}" ]]; then
+	  echo " "
+	  echo "*** HOSTNAME NOT SET!!! Defaulting...."
+		echo " "	  
+		export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"	
+	  
+	else
+	  
+	  if [[ "$HOSTNAME" == *"phx"* ]]; then
+			
+			echo "PHX Hostname Detected!"
+			export NUTANIX_ARTIFACT_HOST="http://10.38.48.244/artifacts"   # PHX
+
+			
+		fi
+	  
+	  if [[ "$HOSTNAME" == *"dm3"* ]]; then
+			echo "DM3 Hostname Detected!"
+			export NUTANIX_ARTIFACT_HOST="http://10.55.87.62/artifacts"	  # DM3
+			
+		fi
+	  
+	  
+	fi
+
+	echo " "
+	echo "Using Artifact Host: $NUTANIX_ARTIFACT_HOST"
+	echo " "	
 	
 	if [[ -v NUTANIX_ARTIFACT_HOST ]]; then
 
