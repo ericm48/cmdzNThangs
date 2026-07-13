@@ -263,7 +263,6 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   tar -xf /data/inet/troubleshoot-live_v0.2.1_linux_amd64.tar.gz -C /data/inet
   install -o root -g root -m 0755 /data/inet/troubleshoot-live /usr/local/bin/troubleshoot-live
 
-
 	#
 	# Setup Flux
 	#
