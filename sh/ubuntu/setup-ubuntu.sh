@@ -250,6 +250,13 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   install -o root -g root -m 0755 /data/inet/minikube-linux-amd64 /usr/local/bin/minikube
 
 	#
+	# Setup ArgoCD-CLI
+	#
+	curl -LO  --output-dir /data/inet  https://github.com/argoproj/argo-cd/releases/download/v3.4.4/argocd-linux-amd64
+	cp /data/inet/argocd-linux-amd64 /data/inet/argocd-linux-amd64-v3.4.4
+	install -o root -g root -m 0755 /data/inet/argocd-linux-amd64 /usr/local/bin/argocd
+
+	#
 	# Setup fzf
 	#
   curl -LO  --output-dir /data/inet   https://github.com/junegunn/fzf/releases/download/v0.65.2/fzf-0.65.2-linux_amd64.tar.gz
