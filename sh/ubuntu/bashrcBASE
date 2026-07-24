@@ -43,7 +43,7 @@ export GRADLE_HOME=
 export GRADLE_HOME='/opt/sdkman/candidates/gradle/current'
 
 export ANT_HOME=
-export ANT_HOME=/apps/java/apache-ant-1.8.4
+export ANT_HOME=/opt/java/apache/apache-ant-1.8.4
 
 #
 # GO Stuff

@@ -45,8 +45,21 @@ usage(){
 	#git clone https://ericm48@github.com/ericm48/nkp-poc.git
 	
 	cd /	
+
+	# 
+	# Ant -My Version
+	#
+	cp /dev2/eric/master/cmdzNThangs/ant/apache-ant-1.8.4-bin.tar.gz /data/inet
+	tar -xzf /data/inet/apache-ant-1.8.4-bin.tar.gz -C /data/inet
+	mkdir -p /opt/java/apache
+	mv /data/inet/apache-ant-1.8.4 /opt/java/apache
+	mkdir -p /dev2/eric/ant
+	cp /dev2/eric/master/cmdzNThangs/ant/eric_utils.xml /dev2/eric/ant/eric_utils.xml
+	cp /dev2/eric/master/cmdzNThangs/ant/build.properties /dev2/eric/ant/build.properties
 	
+	#	
 	# SDKMAN Stuff...
+	#
 	
 	export SDKMAN_DIR=
 	export SDKMAN_DIR='/opt/sdkman'
