@@ -21,16 +21,16 @@
 	  fi
 
 		HomeSRCDir=''
-		HomeSRCDir='/dev2/davek/master/nkp-ubuntu'
+		HomeSRCDir='/home/ubuntu/.calm'
 
 		MaxFolders=''
 		MaxFolders='20'
 
     ParentDirName=""
-    ParentDirName="/data/back/$HOSTNAME/dev2/davek"
+    ParentDirName="/data/back/$HOSTNAME/dev2/davek/calm"
 
 		ChildDirName=''
-		ChildDirName='nkp-ubuntu-master'
+		ChildDirName='home-calm'
 
 		export LAN_VOL=
 		export LAN_VOL='/data/back/LAN'
