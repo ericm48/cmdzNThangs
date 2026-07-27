@@ -21,19 +21,19 @@
 	  fi
 
 		HomeSRCDir=''
-		HomeSRCDir='/dev2/davek/master/nkp-ubuntu'
+		HomeSRCDir='/Users/eric.manley/dev2/davek/master/nkp-ubuntu'
 
 		MaxFolders=''
 		MaxFolders='20'
 
     ParentDirName=""
-    ParentDirName="/data/back/$HOSTNAME/dev2/davek"
+    ParentDirName="/Users/eric.manley/data/back/$HOSTNAME/dev2/davek"
 
 		ChildDirName=''
 		ChildDirName='nkp-ubuntu-master'
 
 		export LAN_VOL=
-		export LAN_VOL='/data/back/LAN'
+		export LAN_VOL='/media/eric/SlaveB'
 
 		LANParentDirName=""
 		LANParentDirName="$LAN_VOL$ParentDirName"
@@ -48,14 +48,14 @@
 
 		# Backs up locally to shadow directory...
 
-		/dev2/sh/cycleFolders2 "$ParentDirName" "$ChildDirName" "$MaxFolders"
+		/Users/eric.manley/dev2/sh/cycleFolders2 "$ParentDirName" "$ChildDirName" "$MaxFolders"
 
 		mkdir "$ParentDirName"
 		mkdir "$ParentDirName/$ChildDirName"
 
 		# Need a call to mvn clean here..
 
-		/dev2/sh/syncBackDir3  "$ParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
+		/Users/eric.manley/dev2/sh/syncBackDir3  "$ParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
 
 		# Backs up locally to external storage
 
@@ -89,12 +89,12 @@
 	 	if [ -d "$LAN_VOL" ]
 				then
 
-					/dev2/sh/cycleFolders2 "$LANParentDirName" "$ChildDirName" "$MaxFolders"
+					/Users/eric.manley/dev2/sh/cycleFolders2 "$LANParentDirName" "$ChildDirName" "$MaxFolders"
 
 					mkdir "$LANParentDirName"
 					mkdir "$LANParentDirName/$ChildDirName"
 
-					/dev2/sh/syncBackDir3  "$LANParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
+					/Users/eric.manley/dev2/sh/syncBackDir3  "$LANParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
 
 
 		else
