@@ -284,6 +284,11 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	snap install httpie	
 
 	#
+	# Setup Hey
+	#
+	apt install -y hey	
+
+	#
 	# Certbot
 	#
 	snap install certbot --classic
