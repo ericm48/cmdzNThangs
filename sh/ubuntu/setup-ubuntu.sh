@@ -413,9 +413,15 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   #
   # Pull & Extract nkp-bundle
   #
-	#curl -LO  --output-dir /data/inet   "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+	curl -LO  --output-dir /data/inet   "$NUTANIX_ARTIFACT_HOST"/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
 	curl -LO  --output-dir /data/inet   "$NUTANIX_ARTIFACT_HOST"/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+
+	# Extract to default folder
 	tar -xf /data/inet/nkp-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz
+
+	# Put AG bundle in sep folder.	
+	mkdir -p /data/inet/nkp-"$NUTANIX_VERSION"-ag
+	tar -xf /data/inet/nkp-air-gapped-bundle_"$NUTANIX_VERSION"_linux_amd64.tar.gz -C /data/inet/nkp-"$NUTANIX_VERSION"-ag
 
 	#
 	# Load Konvoy
