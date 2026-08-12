@@ -809,7 +809,7 @@ alias kgdepwslowiden='kubectl get deployment --watch --show-labels -o=wide --nam
 
 alias kvlo='kubectl-vsphere logout'
 alias kgds='kubectl get daemonsets'
-alias kall='k get nodes,ds,deploy,svc,ingress,endpoints,pods'
+alias kall='kubectl get nodes,ds,deploy,svc,ingress,endpoints,pods'
 alias kctx='kubectl config get-contexts'
 alias ku='kubectl config unset current-context'
 alias kx='kubectx'
