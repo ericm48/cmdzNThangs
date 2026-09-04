@@ -86,10 +86,11 @@ usage(){
 	
 	source /opt/sdkman/bin/sdkman-init.sh
 
+	sdk install java 25.0.4+1.1-librca
 	sdk install java 23.0.2-librca
 	sdk install java 21.0.8-librca
 	
-	sdk default java 21.0.8-librca
+	sdk default java 25.0.4+1.1-librca
 	
 	sdk install maven 3.9.3
 	sdk install gradle 7.6.2
