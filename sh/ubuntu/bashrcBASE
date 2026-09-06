@@ -450,7 +450,7 @@ eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
 source /opt/sdkman/bin/sdkman-init.sh
 
 # Try this
-sdk use java 21.0.8-librca #23.0.2-librca
+sdk use java 25.0.4+1.1-librca  #21.0.8-librca #23.0.2-librca
 
 # direnv
 eval "$(direnv hook bash)"
