@@ -425,7 +425,15 @@ source <(kubectl completion bash)
 
 # Reset the k alias for autocompletion (both lines below).
 
-alias k='kubectl'
+
+
+#
+# Override STUPID Validation
+#
+alias k='kubectl --validate=false "$@"'
+
+#alias k='kubectl'
+
 complete -F __start_kubectl k
 
 #source /opt/sdkman/bin/sdkman-init.sh
