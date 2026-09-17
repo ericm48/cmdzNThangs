@@ -303,6 +303,12 @@ alias djem='cd /dev2/java/eric/master'
 
 alias ij='cd /apps/java/idea-IU-242.21829.142/bin; ./idea &'
 
+#
+# Me things:
+#
+alias de='cd /Users/eric.manley/dev2/eric'
+alias dem='cd /Users/eric.manley/dev2/eric/master'
+alias def='cd /Users/eric.manley/dev2/eric/forkz'
 
 #
 # Base-K8s
@@ -430,9 +436,13 @@ source <(kubectl completion bash)
 #
 # Override STUPID Validation
 #
-alias k='kubectl --validate=false "$@"'
 
-#alias k='kubectl'
+alias k='kubectl'
+
+# For k apply
+alias ka='kubectl --validate=false "$@"'
+
+
 
 complete -F __start_kubectl k
 
