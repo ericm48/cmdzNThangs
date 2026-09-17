@@ -306,9 +306,9 @@ alias ij='cd /apps/java/idea-IU-242.21829.142/bin; ./idea &'
 #
 # Me things:
 #
-alias de='cd /Users/eric.manley/dev2/eric'
-alias dem='cd /Users/eric.manley/dev2/eric/master'
-alias def='cd /Users/eric.manley/dev2/eric/forkz'
+alias de='cd /dev2/eric'
+alias dem='cd /dev2/eric/master'
+alias def='cd /dev2/eric/forkz'
 
 #
 # Base-K8s
