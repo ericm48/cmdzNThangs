@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Backup a centralized version of calm-dsl configs.  Contains files deployed to both UBU or MAC.
+# Backup the home version of calm-dsl configs.  Contains files deployed to both UBU or MAC.
 # Its calm, sooo, it should be same right?  Except for target folders..
 #
 
@@ -33,22 +33,27 @@
 			
 				# MAC-os Impl:
 	  		baseFolderRoot="/Users/eric.manley"
+
+				HomeSRCDir=""
+				HomeSRCDir="/Users/eric.manley/.calm"
+		    ParentDirName=""
+		    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/Users/eric.manley/.calm"			
 	
 		else 
 
 			# Linux Impl:
 			  baseFolderRoot=""
+
+				HomeSRCDir=""
+				HomeSRCDir="/home/ubuntu/.calm"
+		    ParentDirName=""
+		    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/home/ubuntu/.calm"			  
 		fi	
 
-
-		HomeSRCDir=""
-		HomeSRCDir="$baseFolderRoot/data/yaml/NKP/calm/configs"
 
 		MaxFolders=''
 		MaxFolders='20'
 
-    ParentDirName=""
-    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/data/yaml/NKP/calm/configs"
 
 		ChildDirName=''
 		ChildDirName='central-calm-configs'
