@@ -56,7 +56,7 @@
 
 
 		ChildDirName=''
-		ChildDirName='central-calm-configs'
+		ChildDirName='home-calm-configs'
 
     export LAN_VOL=
     export LAN_VOL='/media/eric/SlaveB'
