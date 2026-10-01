@@ -93,10 +93,12 @@ usage(){
 	sdk default java 25.0.4+1.1-librca
 	
 	sdk install maven 3.9.3
+	sdk use maven 3.9.3
+	
 	sdk install gradle 7.6.2
+	sdk use gradle 7.6.2	
 
-
-	echo "Switching out of ubuntu...."	
+	echo "Switching out of ubuntu...."		
 EOF
 		
 	whoami
