@@ -309,7 +309,11 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
   snap install go --classic # Installs the Go language environment first, if needed
   snap install task --classic
-	
+
+	#
+	# Install go-task-bin
+	#
+	pip install go-task-bin  
 	
 	#
 	# Setup Socat
