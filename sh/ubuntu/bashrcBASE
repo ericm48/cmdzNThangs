@@ -141,6 +141,23 @@ export GITHUB_RUNNER_HOME='QUNTRDJOVzdPQ09TT0xDS0FZNkwzRlRKMlFIWE8K'
 export GITHUB_RUNNER_Y=
 export GITHUB_RUNNER_Y=$(echo $GITHUB_RUNNER_HOME | base64 --decode )
 
+export EM_HPOC_UBU=
+export EM_HPOC_UBU='dWJ1bnR1MjAyNiEK'
+export EM_HPOC_UBU_Y=$(echo $EM_HPOC_UBU | base64 --decode )
+
+export DH_HPOC_PC=
+export DH_HPOC_PC='bnRueFNBUy80dSEK'
+export DH_HPOC_PC_Y=$(echo $DH_HPOC_PC | base64 --decode )
+
+export HPOC_NTX=
+export HPOC_NTX=$(echo $DH_HPOC_PC | base64 --decode )
+
+export HPOC_UBU=
+export HPOC_UBU=$(echo $EM_HPOC_UBU | base64 --decode )
+
+export SSHPASS=
+export SSHPASS=$HPOC_UBU
+
 
 # Azure Stuff
 
