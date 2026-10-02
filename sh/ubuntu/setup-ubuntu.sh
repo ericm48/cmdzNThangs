@@ -147,7 +147,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Add other stuff
 	#
-	apt-get install -y apt-transport-https	
+	apt-get install -y apt-transport-https sshpass
 	
 	#
 	# Add direnv
