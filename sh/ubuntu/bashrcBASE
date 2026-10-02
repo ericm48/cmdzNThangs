@@ -122,9 +122,6 @@ export SDKMAN_DIR='/opt/sdkman'
 export CARVEL_DIR=
 export CARVEL_DIR='/apps/carvel'
 
-export SSHPASS=
-export SSHPASS='ntnxSAS/4u!'
-
 
 # Git Stuff
 
