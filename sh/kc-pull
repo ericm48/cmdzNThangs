@@ -22,3 +22,5 @@
 	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/finops-k8s-kubeconfig.conf .
 	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/marketing-k8s-kubeconfig.conf .
 	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/sales-k8s-kubeconfig.conf .
+
+
