@@ -153,7 +153,7 @@ export HPOC_UBU=
 export HPOC_UBU=$(echo $EM_HPOC_UBU | base64 --decode )
 
 export SSHPASS=
-export SSHPASS=$HPOC_NTX
+export SSHPASS=$HPOC_UBU
 
 
 # Azure Stuff
