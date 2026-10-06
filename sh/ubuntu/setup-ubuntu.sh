@@ -490,6 +490,15 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/back_dk-nkp-ubuntu-m
 	cp /data/inet/back_dk-nkp-ubuntu-m /dev2/sh/back_dk-nkp-ubuntu-m
 	chmod +x /dev2/sh/back_dk-nkp-ubuntu-m
+
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kc-push
+	cp /data/inet/kc-push /dev2/sh/kc-push
+	chmod +x /dev2/sh/kc-push		
+
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kc-pull
+	cp /data/inet/kc-pull /dev2/sh/kc-pull
+	chmod +x /dev2/sh/kc-pull
+		
 		
 	#
 	# AWS Utils
