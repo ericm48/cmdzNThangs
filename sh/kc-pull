@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Command to pull k8s kube configs
+#
+#set -x
+
+	if [[ -z "${TARGET_HOST}" ]]; then
+	  echo " "
+	  echo "*** TARGET_HOST NOT SET!!! "
+		echo " "	  
+
+	  exit 33
+	fi
+
+
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/nkp.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/accounting-k8s-kubeconfig.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/accounting-k8s-kubeconfig.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/billing-k8s-kubeconfig.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/data-science-k8s-kubeconfig.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/demo-k8s-kubeconfig.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/finops-k8s-kubeconfig.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/marketing-k8s-kubeconfig.conf /home/ubuntu/
+	sshpass -e scp ubuntu@"$TARGET_HOST":/home/ubuntu/sales-k8s-kubeconfig.conf /home/ubuntu/	
