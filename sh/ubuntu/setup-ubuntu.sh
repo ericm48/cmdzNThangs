@@ -499,7 +499,11 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kc-pull
 	cp /data/inet/kc-pull /dev2/sh/kc-pull
 	chmod +x /dev2/sh/kc-pull
-		
+	
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/kGetALLKubeConfigZ
+	cp /data/inet/kGetALLKubeConfigZ /dev2/sh/kGetALLKubeConfigZ
+	chmod +x /dev2/sh/kGetALLKubeConfigZ
+	
 		
 	#
 	# AWS Utils
