@@ -96,6 +96,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
     
 	set -x
 	
+	mkdir -p "/data/json"	
 	mkdir -p "/data/inet"
 	mkdir -p "/data/maven-3.x/eric"
 	mkdir -p "/data/txt/logs/hpoc"
