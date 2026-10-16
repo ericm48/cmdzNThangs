@@ -62,12 +62,6 @@ arg_parse() {
 				 	sinceDuration="${!k}"
 				 	;;
 
-			-f)
-		  		# targetNameFragment after  -f
-		  	  k=$(($i+1))
-				 	targetNameFragment="${!k}"
-				 	;;				 					 	
-	
 	    -H)
 					usage
 					exit 3
