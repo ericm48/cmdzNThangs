@@ -1,0 +1,158 @@
+#!/bin/bash
+# Handy script to kick off calm automation from cron
+
+#set -x
+
+targetClusterName=
+targetClusterName=""
+
+baseDir=
+baseDir=""
+
+i=0
+k=0
+
+	unamestr=$(uname)	
+
+	# Linux IMPL
+	baseDir=""
+	
+	if [ "$unamestr" = 'Darwin' ] 
+		then
+		
+			# MAC-os Impl:
+	   	baseDir="/Users/eric.manley"
+
+	fi 
+
+usage(){
+   			echo " "
+   			echo " "
+   			echo " "
+   			echo "Usage:      $0 targetClusterName   -Kick off calm automation from cron"
+   			echo " "
+   			echo " -H/-h                                           -Display this help message."
+   			echo " "
+   			echo " "
+   			echo " Example:   $0 -t PHX-POC236       -Runs the HPOC build command for cluster PHX-POC236"						   			
+   			echo " "   			
+   			echo " "   			
+	exit 1
+}
+
+arg_parse() {
+	
+	for (( i=1; i<=$#; i++)); do
+		
+		case ${!i} in
+
+		  -t)
+		  		# targetClusterName after  -t
+		  	  k=$(($i+1))
+				 	targetClusterName="${!k}"
+				 	;;
+
+	    -H)
+					usage
+					exit 3
+	        ;;
+	
+	    -h)
+					usage
+					exit 3
+					;;
+	
+	    --H)
+					usage
+					exit 3
+	        ;;
+	
+	    --h)
+					usage
+					exit 3
+					;;
+	
+	    -help)
+					usage
+					exit 3
+	        ;;
+	
+	    --help)
+					usage
+					exit 3
+					;;
+			
+			*)
+					#echo "[$i]: ${!i}"
+		
+		
+		esac
+	
+	  
+	done
+
+}
+
+setup_calm_enviro(){
+
+	echo "Setting CALM Enviro..."
+	
+	cd $baseDir/dev2/davek/master/nkp-ubuntu
+
+	source ./calm-dsl/venv/bin/activate
+	
+	which calm
+	which python3
+	which task
+	
+}
+
+run_calm(){
+	
+	echo ""
+	echo ""
+	echo "Running For HPOC Enviro: $targetClusterName"
+	
+	#theCommand="nohup task build-full-hpoc HPOC_NAME=${targetClusterName} 2>&1 | tee /data/txt/logs/hpoc_auto_full_${targetClusterName}_log.txt &	"
+	#theCommand="/snap/bin/task build-full-hpoc HPOC_NAME=${targetClusterName} 2>&1 | tee /data/txt/logs/hpoc_auto_full_${targetClusterName}_log.txt &	"	
+
+  # Works
+	theCommand="/snap/bin/task build-full-hpoc HPOC_NAME=${targetClusterName}"	
+
+	echo "Running: "
+	echo $theCommand
+	
+	echo " "
+	
+  $theCommand
+	
+}
+
+#
+# Main
+#
+
+ 	if [ $# -lt 2 ]
+ 		then
+
+ 			echo ""
+ 			echo "" 		
+ 			echo "****ERROR: No TargetClusterName specified!"
+ 			echo ""
+ 			echo ""
+ 		
+			usage
+ 	fi	
+
+	arg_parse "$@"
+
+	
+	echo " "
+	echo "TargetCluster: $targetClusterName"
+	echo " "
+
+  setup_calm_enviro
+  
+  run_calm	
+	
+	exit 0
