@@ -8,6 +8,9 @@ targetNameSpace="default"
 sinceDuration=
 sinceDuration="2m"
 
+targetPodNameFilter=
+targetPodNameFilter=""
+
 i=0
 k=0
 
@@ -15,15 +18,20 @@ usage(){
    			echo " "
    			echo " "
    			echo " "
-   			echo "Usage:   $0		-Grabs & Outputs ALL Pod-Logs for a given Namespace"
+   			echo "Usage:   $0		 -Grabs & Outputs ALL Pod-Logs for a given Namespace"
    			echo " "
-   			echo " -H/-h        -Display this help message."
-   			echo " -n           -TargetNameSpace -Optional. Default: default"
-   			echo " -s           -SinceDuration, as time duration, (ie 6m for last 6 minutes). -Optional.  Default: 2m"
+   			echo " -H/-h         -Display this help message."
+   			echo " -n            -TargetNameSpace -Optional.  Default: default"
+   			echo " -p            -PodName Filter  -Optional.  If not specified, gets ALL pod logs in that NS."   			
+   			echo " -s            -SinceDuration   -Optional.  As a time duration, (ie 6m for last 6 minutes). Default: 2m"
    			echo " "
-   			echo " Example:   $0 -n targetNameSpace"
+   			echo " "
    			echo " "   			
-   			echo " Example:   $0 -n targetNameSpace -s 10m"
+   			echo " Example:   $0 -n targetNameSpace          -Gets all pod logs in targetNameSpace."
+   			echo " "   			
+   			echo " Example:   $0 -n targetNameSpace -p graf  -Gets ONLY pod logs in targetNameSpace that have graf in the name."
+   			echo " "   			   			
+   			echo " Example:   $0 -n targetNameSpace -s 10m   -Gets ONLY pod logs entries in last 10min in targetNameSpace."						
    			echo " "
    			echo " "   			
 	exit 1
@@ -40,12 +48,25 @@ arg_parse() {
 		  	  k=$(($i+1))
 				 	targetNameSpace="${!k}"
 				 	;;
+				 	
+		  -p)
+		  		# targetPodNameFilter after  -p
+		  	  k=$(($i+1))
+				 	targetPodNameFilter="${!k}"
+				 	;;			 	
+				 	
 	
 			-s)
 		  		# sinceDuration after  -s
 		  	  k=$(($i+1))
 				 	sinceDuration="${!k}"
 				 	;;
+
+			-f)
+		  		# targetNameFragment after  -f
+		  	  k=$(($i+1))
+				 	targetNameFragment="${!k}"
+				 	;;				 					 	
 	
 	    -H)
 					usage
@@ -88,11 +109,45 @@ arg_parse() {
 
 }
 
+calc_num_podz(){
+
+  theCommand=""
+  
+	if [[ -n "$targetPodNameFilter" ]]
+		then
+
+	    theCommand="kubectl get pods -n $targetNameSpace |grep $targetPodNameFilter |wc -l"
+
+	    
+	  else
+	    theCommand="kubectl get pods -n $targetNameSpace |wc -l"	  
+	fi
+
+  numPodZ=$(eval "$theCommand")
+
+	numPodZ="${numPodZ#"${numPodZ%%[![:space:]]*}"}"
+
+	echo "       Number of Pods: $numPodZ"
+
+}
+
 dump_logz() {
 
 	theCommand=""
 
 	for pod in $(kubectl get pods -n $targetNameSpace -o jsonpath='{.items[*].metadata.name}'); do 
+	    
+	    # Filter on pods by name if specified...
+	    
+			if [[ -n "$targetPodNameFilter" ]]
+				then
+				
+					if [[ "$pod" != *"$targetPodNameFilter"* ]]
+					 	then
+
+					 		continue   					    
+					fi			
+			fi
 	    
 	    echo "=== Logs For Pod: $pod BEGINS ==="
 	    
@@ -101,6 +156,7 @@ dump_logz() {
 
 			if [[ ! -z "$sinceDuration" ]]; then
 				#theCommand="kubectl logs -n $targetNameSpace $pod --all-containers=true --since $sinceDuration "
+				
 				theCommand="$theCommand --since $sinceDuration "				
 			fi
 	    
@@ -117,11 +173,24 @@ dump_logz() {
 
 	arg_parse "$@"
 
+	if [[ -z "$targetPodNameFilter" ]]
+		then
+  		podNameFilterDisplay="ALL"
+  		
+  	else
+  		podNameFilterDisplay="$targetPodNameFilter"
+	fi
+	
+	
 	echo " "
-	echo "Target NameSpace: $targetNameSpace"
-	echo "  Since Duration: $sinceDuration"	
-	echo " "	
+	echo "     Target NameSpace: $targetNameSpace"
+	echo " Target PodNameFilter: $podNameFilterDisplay"	
+	echo "       Since Duration: $sinceDuration"	
 
+	calc_num_podz
+
+	echo " "
+		
 	dump_logz 
 	
 	exit 0
