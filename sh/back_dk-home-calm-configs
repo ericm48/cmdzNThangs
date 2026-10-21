@@ -50,7 +50,6 @@
 		    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/home/ubuntu/.calm"			  
 		fi	
 
-
 		MaxFolders=''
 		MaxFolders='20'
 
@@ -59,8 +58,9 @@
 		ChildDirName='home-calm-configs'
 
     export LAN_VOL=
-    export LAN_VOL='/media/eric/SlaveB'
-    #export LAN_VOL='/Users/eric.manley/OneDrive/OneDrive - Nutanix/$HOSTNAME/Users/eric.manley'    
+    #export LAN_VOL='/media/eric/SlaveB'
+    
+    export LAN_VOL="/Users/eric.manley/OneDrive/OneDrive - Nutanix/$HOSTNAME/Users/eric.manley"    
 
 		LANParentDirName=""
 		LANParentDirName="$LAN_VOL$ParentDirName"

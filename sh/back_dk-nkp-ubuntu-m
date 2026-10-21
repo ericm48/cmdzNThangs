@@ -20,21 +20,40 @@
 					usage
 	  fi
 
-		HomeSRCDir=''
-		HomeSRCDir='/Users/eric.manley/dev2/davek/master/nkp-ubuntu'
+	  unamestr=$(uname)
+
+		if [ "$unamestr" = 'Darwin' ] 
+			then
+			
+				# MAC-os Impl:
+	  		baseFolderRoot="/Users/eric.manley"
+
+				HomeSRCDir=""
+				HomeSRCDir="$baseFolderRoot/dev2/davek/master/nkp-ubuntu"
+		    ParentDirName=""
+		    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/dev2/davek"			
+	
+		else 
+
+			# Linux Impl:
+			  baseFolderRoot=""
+
+				HomeSRCDir=""
+				HomeSRCDir="$baseFolderRoot/dev2/davek/master/nkp-ubuntu"
+		    ParentDirName=""
+		    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/dev2/davek"			  
+		fi	
 
 		MaxFolders=''
 		MaxFolders='20'
 
-    ParentDirName=""
-    ParentDirName="/Users/eric.manley/data/back/$HOSTNAME/dev2/davek"
 
 		ChildDirName=''
 		ChildDirName='nkp-ubuntu-master'
 
 		export LAN_VOL=
-		export LAN_VOL='/media/eric/SlaveB'
-    #export LAN_VOL='/Users/eric.manley/OneDrive/OneDrive - Nutanix/$HOSTNAME/Users/eric.manley'
+		#export LAN_VOL='/media/eric/SlaveB'
+    export LAN_VOL="/Users/eric.manley/OneDrive/OneDrive - Nutanix/$HOSTNAME/Users/eric.manley"
 
 		LANParentDirName=""
 		LANParentDirName="$LAN_VOL$ParentDirName"
@@ -45,18 +64,31 @@
 		greprc=$?
 
 	  cd $HomeSRCDir
-		m3 clean
+
+		#	  
+	  # See if this is a maven project...if so run clean.  No need to backup build-files..Otherwise press-on.
+	  #
+	  
+		thePomFile="./pom.xml"
+		
+		if [[ -f "$thePomFile" ]]; then
+		    echo " "
+		    echo "Maven POM.XML Detected...running clean..."
+		    echo " "
+
+				m3 clean
+		fi	  
 
 		# Backs up locally to shadow directory...
 
-		/Users/eric.manley/dev2/sh/cycleFolders2 "$ParentDirName" "$ChildDirName" "$MaxFolders"
+		"$baseFolderRoot"/Users/eric.manley/dev2/sh/cycleFolders2 "$ParentDirName" "$ChildDirName" "$MaxFolders"
 
 		mkdir "$ParentDirName"
 		mkdir "$ParentDirName/$ChildDirName"
 
 		# Need a call to mvn clean here..
 
-		/Users/eric.manley/dev2/sh/syncBackDir3  "$ParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
+		"$baseFolderRoot"/dev2/sh/syncBackDir3  "$ParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
 
 		# Backs up locally to external storage
 
@@ -90,13 +122,12 @@
 	 	if [ -d "$LAN_VOL" ]
 				then
 
-					/Users/eric.manley/dev2/sh/cycleFolders2 "$LANParentDirName" "$ChildDirName" "$MaxFolders"
+					"$baseFolderRoot"/dev2/sh/cycleFolders2 "$LANParentDirName" "$ChildDirName" "$MaxFolders"
 
 					mkdir "$LANParentDirName"
 					mkdir "$LANParentDirName/$ChildDirName"
 
-					/Users/eric.manley/dev2/sh/syncBackDir3  "$LANParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
-
+					"$baseFolderRoot"/dev2/sh/syncBackDir3  "$LANParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
 
 		else
 				echo "$LAN_VOL" is not attached!
