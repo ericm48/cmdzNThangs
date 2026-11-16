@@ -1,0 +1,134 @@
+#!/bin/bash
+# Process backup files locally, in order of:  CycleLocal, BackItUp, YankStuff.....
+#
+
+#set -x
+
+	usage(){
+	   			echo " "
+	   			echo " "
+	   			echo " "
+	   			echo "Usage:   $0 -F/-f 			-Force back-up to LAN if VPN Connection Detected."
+	   			echo "            -H/-h				-Show this help Screen."
+	   			echo " "
+	   			echo " "
+		exit 1
+	}
+
+		if [  "$1" == "-H" ] || [ "$1" == "-h" ]
+	  		then
+					usage
+	  fi
+
+	  unamestr=$(uname)
+
+		if [ "$unamestr" = 'Darwin' ] 
+			then
+			
+				# MAC-os Impl:
+	  		baseFolderRoot="/Users/eric.manley"
+
+				HomeSRCDir=""
+				HomeSRCDir="$baseFolderRoot/dev2/davek/forkz/nkp-ubuntu"
+		    ParentDirName=""
+		    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/dev2/davek"			
+	
+		else 
+
+			# Linux Impl:
+			  baseFolderRoot=""
+
+				HomeSRCDir=""
+				HomeSRCDir="$baseFolderRoot/dev2/davek/forkz/nkp-ubuntu"
+		    ParentDirName=""
+		    ParentDirName="$baseFolderRoot/data/back/$HOSTNAME/dev2/davek"			  
+		fi	
+
+		MaxFolders=''
+		MaxFolders='20'
+
+
+		ChildDirName=''
+		ChildDirName='nkp-ubuntu-forkz'
+
+		export LAN_VOL=
+		#export LAN_VOL='/media/eric/SlaveB'
+    export LAN_VOL="/Users/eric.manley/OneDrive/OneDrive - Nutanix/$HOSTNAME/Users/eric.manley"
+
+		LANParentDirName=""
+		LANParentDirName="$LAN_VOL$ParentDirName"
+
+		needleHome="192.168.1"
+
+		ifconfig | grep $needleHome >/dev/null
+		greprc=$?
+
+	  cd $HomeSRCDir
+
+		#	  
+	  # See if this is a maven project...if so run clean.  No need to backup build-files..Otherwise press-on.
+	  #
+	  
+		thePomFile="./pom.xml"
+		
+		if [[ -f "$thePomFile" ]]; then
+		    echo " "
+		    echo "Maven POM.XML Detected...running clean..."
+		    echo " "
+
+				m3 clean
+		fi	  
+
+		# Backs up locally to shadow directory...
+
+		"$baseFolderRoot"/dev2/sh/cycleFolders2 "$ParentDirName" "$ChildDirName" "$MaxFolders"
+
+		mkdir "$ParentDirName"
+		mkdir "$ParentDirName/$ChildDirName"
+
+		# Need a call to mvn clean here..
+
+		"$baseFolderRoot"/dev2/sh/syncBackDir3  "$ParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
+
+		# Backs up locally to external storage
+
+		#
+		# Check to see if at home...FORCE flag must be present, otherwise do LAN backup....
+		#
+
+		if [ $greprc -eq 0 ]
+		   then
+
+	        echo " "
+	     		echo "*** Running At Home, Checking for FORCE..."
+	        echo " "
+
+					if [  "$1" == "-F" ] || [ "$1" == "-f" ]
+	  				 then
+								echo " "
+								echo "FORCE DETECTED....Using FORCE!!"
+								echo " "
+				  else
+ 								echo " "
+								echo "NO FORCE DETECTED....Dropping out..."
+								echo " "
+
+				  	 		exit 0
+					fi
+
+		fi
+
+		# Does this exist ?
+	 	if [ -d "$LAN_VOL" ]
+				then
+
+					"$baseFolderRoot"/dev2/sh/cycleFolders2 "$LANParentDirName" "$ChildDirName" "$MaxFolders"
+
+					mkdir "$LANParentDirName"
+					mkdir "$LANParentDirName/$ChildDirName"
+
+					"$baseFolderRoot"/dev2/sh/syncBackDir3  "$LANParentDirName/$ChildDirName" "$HomeSRCDir" '**/*' '**/.git/*'
+
+		else
+				echo "$LAN_VOL" is not attached!
+		fi
