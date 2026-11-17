@@ -309,8 +309,12 @@ alias d2em='cd /dev2/docker/eric/master'
 #
 alias dmn="cd ${BASE_DIR}/dev2/davek/master/nkp-ubuntu"
 alias dms="cd ${BASE_DIR}/dev2/davek/master/shared-demo-cicd"
+alias efn="cd ${BASE_DIR}/dev2/eric/forkz/nkp-ubuntu"
+
 alias ca="source ${BASE_DIR}/dev2/davek/master/shared-demo-cicd/calm-dsl/venv/bin/activate"
 alias cuc="calm update cache | tee ${BASE_DIR}/data/txt/logs/calm_cache_out.txt"
+
+
 
 #
 # TMux
