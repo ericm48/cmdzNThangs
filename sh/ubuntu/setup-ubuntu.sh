@@ -114,7 +114,11 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	mkdir -p "/dev2/k8/eric/master"	
 	mkdir -p "/dev2/helm/eric/master"		
 
-	mkdir -p "/dev2/davek/master"	
+	mkdir -p "/dev2/davek/master"
+	mkdir -p "/dev2/davek/forkz"		
+	mkdir -p "/dev2/eric/master"
+	mkdir -p "/dev2/eric/forkz"		
+	
 	mkdir -p "/opt/github/actions-runner"
 
 	# Setup NFS Share
