@@ -27,6 +27,16 @@ HISTFILESIZE=2000
 #
 # Path Handling
 #
+unamestr=$(uname)
+export BASE_DIR=''
+if [ "$unamestr" = 'Darwin' ] 
+	then
+	
+		# MAC-os Impl:
+   	export BASE_DIR='/Users/eric.manley'
+
+fi 
+
 export JAVA_HOME=
 export JAVA_HOME='/opt/sdkman/candidates/java/current'
 
@@ -297,9 +307,10 @@ alias d2em='cd /dev2/docker/eric/master'
 #
 # Calm Stuff
 #
-alias nudm='cd /dev2/davek/master/nkp-ubuntu'
-alias ca='source /dev2/davek/master/nkp-ubuntu/calm-dsl/venv/bin/activate'
-alias cuc='calm update cache | tee /data/txt/calm_cache_out.txt'
+alias dnm="cd ${BASE_DIR}/dev2/davek/master/nkp-ubuntu"
+alias sddm="cd ${BASE_DIR}/dev2/davek/master/shared-demo-cicd"
+alias ca="source ${BASE_DIR}/dev2/davek/master/shared-demo-cicd/calm-dsl/venv/bin/activate"
+alias cuc="calm update cache | tee ${BASE_DIR}/data/txt/logs/calm_cache_out.txt"
 
 #
 # TMux
