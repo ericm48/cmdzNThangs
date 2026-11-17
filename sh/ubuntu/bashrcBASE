@@ -307,8 +307,8 @@ alias d2em='cd /dev2/docker/eric/master'
 #
 # Calm Stuff
 #
-alias dnm="cd ${BASE_DIR}/dev2/davek/master/nkp-ubuntu"
-alias sddm="cd ${BASE_DIR}/dev2/davek/master/shared-demo-cicd"
+alias dmn="cd ${BASE_DIR}/dev2/davek/master/nkp-ubuntu"
+alias dms="cd ${BASE_DIR}/dev2/davek/master/shared-demo-cicd"
 alias ca="source ${BASE_DIR}/dev2/davek/master/shared-demo-cicd/calm-dsl/venv/bin/activate"
 alias cuc="calm update cache | tee ${BASE_DIR}/data/txt/logs/calm_cache_out.txt"
 
