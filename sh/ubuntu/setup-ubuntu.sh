@@ -352,16 +352,19 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   echo "[Install]" >> /etc/systemd/system/socat.service
   echo "WantedBy=multi-user.target" >> /etc/systemd/system/socat.service
 
+	chmod +x /etc/systemd/system/socat.service
+
 	# Create a one-time startup job to init minikube, [ yes this is different than above.. ]
   curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/one-time-startup-serviceBASE
   cp /data/inet/one-time-startup-serviceBASE /etc/systemd/system/one-time-startup.service
+  chmod +x /etc/systemd/system/one-time-startup.service
 
   # Reload systemd, enable and start socat service
-  - systemctl daemon-reload
+  systemctl daemon-reload
 
   # Enable and start socat.service
-  - systemctl enable socat.service
-  - systemctl start socat.service
+  systemctl enable socat.service
+  systemctl start socat.service
 
   # Enable and start one-time-startup.service
 	systemctl enable one-time-startup.service
