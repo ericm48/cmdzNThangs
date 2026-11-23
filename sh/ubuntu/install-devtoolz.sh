@@ -102,7 +102,7 @@ usage(){
 	# Setup pipx & Ansible-9.5.1
 	#
 	sudo apt-get install -y pipx
-	#pipx ensurepath
+	pipx ensurepath
 
 	which pipx
 	
