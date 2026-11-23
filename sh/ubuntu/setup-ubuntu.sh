@@ -31,8 +31,9 @@ usage(){
   echo ""
 
 # Recall that DK Calm-Automation is now 2.18.0 PC/HCI 7.5
+# Recall that DK Calm-Automation is now 2.19.0 PC/HCI 7.6
 
-export NUTANIX_VERSION="v2.18.0"
+export NUTANIX_VERSION="v2.19.0"
 export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 
 #export NUTANIX_ARTIFACT_HOST="http://10.38.48.244/artifacts"   # PHX
