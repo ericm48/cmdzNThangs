@@ -323,18 +323,18 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Setup pip: DISABLE
 	#
-	apt install -y pip
+	#apt install -y pip
 
 	#
 	# Add go & go-task
 	#
-  snap install go --classic # Installs the Go language environment first, if needed
-  snap install task --classic
+  #snap install go --classic # Installs the Go language environment first, if needed
+  #snap install task --classic
 
 	#
 	# Install go-task-bin
 	#
-	pip install go-task-bin  
+	#pip install go-task-bin  
 	
 	#
 	# Setup Socat

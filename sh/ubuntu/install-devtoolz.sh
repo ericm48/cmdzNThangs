@@ -98,12 +98,12 @@ usage(){
 	sdk install gradle 7.6.2
 	sdk use gradle 7.6.2	
 
-
 	#
 	# Setup pipx & Ansible-9.5.1
 	#
 	sudo apt-get install -y pipx
-	pipx ensurepath
+	#pipx ensurepath
+
 	which pipx
 	
 	pipx install --include-deps ansible==9.5.1
