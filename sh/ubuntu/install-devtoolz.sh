@@ -77,43 +77,35 @@ usage(){
 	chown -R root:cloud-user /opt
 	chmod 777 -R /opt/sdkman
 
-	sudo -i -u ubuntu bash << EOF
+sudo -i -u ubuntu bash << EOF
 	echo "Switching into ubuntu...."
-	whoami
-	
+	whoami	
 	export SDKMAN_DIR=
-	export SDKMAN_DIR='/opt/sdkman'
-	
+	export SDKMAN_DIR='/opt/sdkman'	
 	source /opt/sdkman/bin/sdkman-init.sh
-
 	sdk install java 25.0.4+1.1-librca
 	sdk install java 23.0.2-librca
-	sdk install java 21.0.8-librca
-	
-	sdk default java 25.0.4+1.1-librca
-	
+	sdk install java 21.0.8-librca	
+	sdk default java 25.0.4+1.1-librca	
 	sdk install maven 3.9.3
-	sdk use maven 3.9.3
-	
+	sdk use maven 3.9.3	
 	sdk install gradle 7.6.2
 	sdk use gradle 7.6.2	
-
 	#
 	# Setup pipx & Ansible-9.5.1
 	#
 	sudo apt-get install -y pipx
+	pipx --version
 	pipx ensurepath
-
-	which pipx
-	
+	which pipx	
 	pipx install --include-deps ansible==9.5.1
 	which ansible
-	ansible --version	
-	
+	ansible --version		
 	# add auto-complete
 	pipx inject --include-apps ansible argcomplete  
-
-	echo "Switching out of ubuntu...."		
+	echo "Switching out of ubuntu...."
+	echo " "
+	echo " "	
 EOF
 		
 	whoami
