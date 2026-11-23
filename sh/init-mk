@@ -75,6 +75,9 @@ arg_parse() {
 
 	arg_parse "$@"
 
+	whoami
+	su - ubuntu	
+
 	minikube start
 	minikube stop
 	
