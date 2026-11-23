@@ -77,6 +77,9 @@ arg_parse() {
 
 	minikube start
 	minikube stop
+	
+	# Run one-time only.
+	sudo systemctl disable one-time-startup.service	
 
 	exit 0
 
