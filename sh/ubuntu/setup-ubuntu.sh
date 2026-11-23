@@ -308,28 +308,13 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	# Setup python3
 	#
 	apt install -y python3
-	apt install -y python3.12-venv	
-
-	#
-	# Setup pipx & Ansible-9.5.1
-	#
-	apt-get install -y pipx
-	which pipx
-	
-	pipx install --include-deps ansible==9.5.1
-	which ansible
-	ansible --version	
-	
-	# add auto-complete
-	pipx inject --include-apps ansible argcomplete
-
+	apt install -y python3.12-venv
 	python3 --version
 	
 	#
 	# Setup pip: DISABLE
 	#
-	#apt install -y pip
-
+	apt install -y pip
 
 	#
 	# Add go & go-task
