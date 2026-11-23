@@ -5,6 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
+User=ubuntu
 ExecStart=/dev2/sh/init-mk
 RemainAfterExit=yes
 
