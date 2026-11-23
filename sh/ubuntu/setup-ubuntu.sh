@@ -180,9 +180,14 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Setup K8s
 	#
-  curl -LO  --output-dir /data/inet   https://dl.k8s.io/release/v1.34.1/bin/linux/amd64/kubectl
+  #curl -LO  --output-dir /data/inet   https://dl.k8s.io/release/v1.34.1/bin/linux/amd64/kubectl
+  #install -o root -g root -m 0755 /data/inet/kubectl /usr/local/bin/kubectl     
+  #mv /data/inet/kubectl /data/inet/kubectl-v1.34.1-linux-amd64     					
+
+  curl -LO  --output-dir /data/inet   https://dl.k8s.io/release/v1.35.2/bin/linux/amd64/kubectl
   install -o root -g root -m 0755 /data/inet/kubectl /usr/local/bin/kubectl     
-  mv /data/inet/kubectl /data/inet/kubectl-v1.34.1-linux-amd64         					
+  mv /data/inet/kubectl /data/inet/kubectl-v1.35.2-linux-amd64     					
+
 
 	#
   # Bash-Completion
