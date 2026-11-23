@@ -95,12 +95,16 @@ sudo -i -u ubuntu bash << EOF
 	# Setup pipx & Ansible-9.5.1
 	#
 	sudo apt-get install -y pipx
+	echo "pipx version:"
 	pipx --version
+	echo " "	
 	pipx ensurepath
 	which pipx	
 	pipx install --include-deps ansible==9.5.1
 	which ansible
+	echo "ansible version:"	
 	ansible --version		
+	echo " "	
 	# add auto-complete
 	pipx inject --include-apps ansible argcomplete  
 	echo "Switching out of ubuntu...."
