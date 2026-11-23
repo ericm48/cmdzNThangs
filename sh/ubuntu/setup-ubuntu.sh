@@ -352,10 +352,19 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   echo "[Install]" >> /etc/systemd/system/socat.service
   echo "WantedBy=multi-user.target" >> /etc/systemd/system/socat.service
 
+	# Create a one-time startup job to init minikube, [ yes this is different than above.. ]
+  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/one-time-startup-serviceBASE
+  cp /data/inet/one-time-startup-serviceBASE /etc/systemd/system/one-time-startup.service
+
   # Reload systemd, enable and start socat service
   - systemctl daemon-reload
+
+  # Enable and start socat.service
   - systemctl enable socat.service
   - systemctl start socat.service
+
+  # Enable and start one-time-startup.service
+	systemctl enable one-time-startup.service
 
   #
   # Setup Docker FORCE VERSION 28.0.4
@@ -520,6 +529,9 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	cp /data/inet/kGetALLKubeConfigZ /dev2/sh/kGetALLKubeConfigZ
 	chmod +x /dev2/sh/kGetALLKubeConfigZ
 	
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/init-mk
+	cp /data/inet/init-mk /dev2/sh/init-mk
+	chmod +x /dev2/sh/init-mk
 		
 	#
 	# AWS Utils
