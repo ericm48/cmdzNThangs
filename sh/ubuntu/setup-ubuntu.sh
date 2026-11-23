@@ -121,6 +121,10 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	mkdir -p "/dev2/eric/forkz"		
 	
 	mkdir -p "/opt/github/actions-runner"
+	
+	# For python & ansible:
+	mkdir -p "/home/ubuntu/.local/bin"
+	chown -R ubuntu:ubuntu /home/ubuntu
 
 	# Setup NFS Share
 	mkdir -p "/mnt/nfsshare/k8svolumes"
@@ -171,6 +175,7 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
   #apt-get install  -y bash-completion	2>&1 | tee -a "$outFile"	
   #source /usr/share/bash-completion/bash_completion  
+
 
 	#
 	# Setup K8s
@@ -304,11 +309,27 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	apt install -y python3
 	apt install -y python3.12-venv	
+
+	#
+	# Setup pipx & Ansible-9.5.1
+	#
+	apt-get install -y pipx
+	which pipx
+	
+	pipx install --include-deps ansible==9.5.1
+	which ansible
+	ansible --version	
+	
+	# add auto-complete
+	pipx inject --include-apps ansible argcomplete
+
+	python3 --version
 	
 	#
-	# Setup pip
+	# Setup pip: DISABLE
 	#
-	apt install -y pip
+	#apt install -y pip
+
 
 	#
 	# Add go & go-task
