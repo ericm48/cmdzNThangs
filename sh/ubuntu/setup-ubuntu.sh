@@ -261,8 +261,12 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# Setup Minikube
 	#
-	curl -LO  --output-dir /data/inet   https://github.com/kubernetes/minikube/releases/download/v1.36.0/minikube-linux-amd64  
-	cp /data/inet/minikube-linux-amd64 /data/inet/minikube-linux-amd64-v1.36.0																
+	#curl -LO  --output-dir /data/inet   https://github.com/kubernetes/minikube/releases/download/v1.36.0/minikube-linux-amd64  
+	#cp /data/inet/minikube-linux-amd64 /data/inet/minikube-linux-amd64-v1.36.0																
+  #install -o root -g root -m 0755 /data/inet/minikube-linux-amd64 /usr/local/bin/minikube
+
+	curl -LO  --output-dir /data/inet   https://github.com/kubernetes/minikube/releases/download/v1.38.0/minikube-linux-amd64  
+	cp /data/inet/minikube-linux-amd64 /data/inet/minikube-linux-amd64-v1.38.0																
   install -o root -g root -m 0755 /data/inet/minikube-linux-amd64 /usr/local/bin/minikube
 
 	#
