@@ -6,7 +6,7 @@ usage(){
    			echo " "
    			echo " "
    			echo " "
-   			echo "Usage:   $0		-Script initializes MiniKube [ minikube start; minikube stop"
+   			echo "Usage:   $0		-Script installs ansible, initializes MiniKube [ minikube start; minikube stop ] "
    			echo " "
    			echo " -H/-h				-Display this help message."
    			echo " "
@@ -78,9 +78,27 @@ arg_parse() {
 	whoami
 	su - ubuntu	
 
+	# Start, Stop minikube...
 	minikube start
 	minikube stop
-	
+
+	#
+	# Finish pipx, ansible installs
+	#
+	echo "Running pipx from:"
+	which pipx
+	echo "pipx version:"
+	pipx --version
+	echo " "	
+	pipx ensurepath
+	pipx install --include-deps ansible==9.5.1
+	which ansible
+	echo "ansible version:"	
+	ansible --version		
+	echo " "	
+	# add auto-complete
+	pipx inject --include-apps ansible argcomplete  
+		
 	# Run one-time only.
 	sudo systemctl disable one-time-startup.service	
 

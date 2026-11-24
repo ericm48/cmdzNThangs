@@ -92,9 +92,15 @@ sudo -i -u ubuntu bash << EOF
 	sdk install gradle 7.6.2
 	sdk use gradle 7.6.2	
 	#
-	# Setup pipx & Ansible-9.5.1
-	#
+	# Setup pipx 
+	#	
+	echo "*** SCRIPT BLOWS OUT AFTER NEXT STEP!!! "
+	echo "Switching out of ubuntu...."
+	echo " "
+	echo " "		
 	sudo apt-get install -y pipx
+	# Script under ubuntu blows out at this point...
+	
 	echo "pipx version:"
 	pipx --version
 	echo " "	
@@ -107,9 +113,7 @@ sudo -i -u ubuntu bash << EOF
 	echo " "	
 	# add auto-complete
 	pipx inject --include-apps ansible argcomplete  
-	echo "Switching out of ubuntu...."
-	echo " "
-	echo " "	
+
 EOF
 		
 	whoami

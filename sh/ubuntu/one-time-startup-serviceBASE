@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 User=ubuntu
-ExecStart=/dev2/sh/init-mk
+ExecStart=/dev2/sh/post-hook-dev-toolz.sh
 RemainAfterExit=yes
 
 [Install]
