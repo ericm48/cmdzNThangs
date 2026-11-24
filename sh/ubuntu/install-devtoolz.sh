@@ -92,17 +92,7 @@ sudo -i -u ubuntu bash << EOF
 	sdk use maven 3.9.3	
 	sdk install gradle 7.6.2
 	sdk use gradle 7.6.2	
-	#
-	# Setup pipx 
-	#	
-	# Moving this back to setup-ubuntu.sh
-	#
-	#echo "*** SCRIPT BLOWS OUT AFTER NEXT STEP!!! "
-	#echo "Switching out of ubuntu...."
-	#echo " "
-	#echo " "		
-	#sudo apt-get install -y pipx
-	# Script under ubuntu blows out at this point...Gotta pick up in one-time-startup-service	
+	echo " "	
 	echo "Which pipx:"
 	which pipx
 	echo "pipx version:"
