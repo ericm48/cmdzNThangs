@@ -77,6 +77,7 @@ usage(){
 	chown -R root:cloud-user /opt
 	chmod 777 -R /opt/sdkman
 
+	# HereDoc: NO BLANK LINES!!!
 sudo -i -u ubuntu bash << EOF
 	echo "Switching into ubuntu...."
 	whoami	
@@ -94,26 +95,28 @@ sudo -i -u ubuntu bash << EOF
 	#
 	# Setup pipx 
 	#	
-	echo "*** SCRIPT BLOWS OUT AFTER NEXT STEP!!! "
-	echo "Switching out of ubuntu...."
-	echo " "
-	echo " "		
-	sudo apt-get install -y pipx
-	# Script under ubuntu blows out at this point...Gotta pick up in one-time-startup-service
-	
+	# Moving this back to setup-ubuntu.sh
+	#
+	#echo "*** SCRIPT BLOWS OUT AFTER NEXT STEP!!! "
+	#echo "Switching out of ubuntu...."
+	#echo " "
+	#echo " "		
+	#sudo apt-get install -y pipx
+	# Script under ubuntu blows out at this point...Gotta pick up in one-time-startup-service	
+	echo "Which pipx:"
+	which pipx
 	echo "pipx version:"
 	pipx --version
 	echo " "	
 	pipx ensurepath
-	which pipx	
 	pipx install --include-deps ansible==9.5.1
+	echo "Which ansible:"
 	which ansible
 	echo "ansible version:"	
 	ansible --version		
 	echo " "	
 	# add auto-complete
-	pipx inject --include-apps ansible argcomplete  
-
+	pipx inject --include-apps ansible argcomplete
 EOF
 		
 	whoami

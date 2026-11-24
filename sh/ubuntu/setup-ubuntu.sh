@@ -146,6 +146,33 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#apt-mark hold linux-image-$(uname -r) linux-headers-$(uname -r)	
 
 	#
+	# Profile ThingZ RoundI, for pipx & ansible, so they have something in the path.  We'll do this again later...
+	#
+  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
+  cp /data/inet/bashrcBASE /home/ubuntu/.bashrc
+  chmod +x /home/ubuntu/.bashrc
+
+	#
+	# Setup pipx 
+	#	
+	#echo "*** SCRIPT BLOWS OUT AFTER NEXT STEP!!! "
+	#echo "Switching out of ubuntu...."
+	#echo " "
+	#echo " "		
+	
+	# Install pipx here.  Ansible must be installed under user:ubuntu in install-dev-toolz.sh
+	#
+	
+	sudo apt-get install -y pipx
+
+	echo "Which pipx:"
+	which pipx	
+	echo "pipx version:"
+	pipx --version
+	echo " "	
+	pipx ensurepath
+
+	#
 	# Add Network Stuff
 	#
 	apt-get install  -y nmap						
@@ -466,9 +493,9 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	docker load -i /data/inet/nkp-"$NUTANIX_VERSION"/konvoy-bootstrap-image-"$NUTANIX_VERSION".tar	
 
 	#
-	# Profile ThingZ:
+	# Profile ThingZ RoundII, in case something tweaked bashrc earlier...
 	#
-  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE		
+  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/bashrcBASE
   cp /data/inet/bashrcBASE /home/ubuntu/.bashrc
   chmod +x /home/ubuntu/.bashrc
   
@@ -536,9 +563,9 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	cp /data/inet/kGetALLKubeConfigZ /dev2/sh/kGetALLKubeConfigZ
 	chmod +x /dev2/sh/kGetALLKubeConfigZ
 	
-	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/init-mk
-	cp /data/inet/init-mk /dev2/sh/init-mk
-	chmod +x /dev2/sh/init-mk
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/post-hook-dev-toolz.sh
+	cp /data/inet/init-mk /dev2/sh/post-hook-dev-toolz.sh
+	chmod +x /dev2/sh/post-hook-dev-toolz.sh
 		
 	#
 	# AWS Utils
