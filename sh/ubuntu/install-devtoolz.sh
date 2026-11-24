@@ -99,7 +99,7 @@ sudo -i -u ubuntu bash << EOF
 	echo " "
 	echo " "		
 	sudo apt-get install -y pipx
-	# Script under ubuntu blows out at this point...
+	# Script under ubuntu blows out at this point...Gotta pick up in one-time-startup-service
 	
 	echo "pipx version:"
 	pipx --version
