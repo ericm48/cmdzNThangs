@@ -370,22 +370,12 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
   systemctl restart sshd
   apt install -y socat
 
-  # Create systemd service for socat  
-  echo "[Unit]" > /etc/systemd/system/socat.service
-  echo "Description=Socat Port Forwarding 443 -> 8443" >> /etc/systemd/system/socat.service
-  echo "After=network.target" >> /etc/systemd/system/socat.service
-  echo " " >> /etc/systemd/system/socat.service
-  echo "[Service]" >> /etc/systemd/system/socat.service
-  echo "ExecStart=/usr/bin/socat TCP-LISTEN:443,reuseaddr,fork TCP:127.0.0.1:8443" >> /etc/systemd/system/socat.service
-  echo "Restart=always" >> /etc/systemd/system/socat.service
-  echo "User=root" >> /etc/systemd/system/socat.service
-  echo " " >> /etc/systemd/system/socat.service
-  echo "[Install]" >> /etc/systemd/system/socat.service
-  echo "WantedBy=multi-user.target" >> /etc/systemd/system/socat.service
+	# Create socat.service. 
+  curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/socat-serviceBASE
+  cp /data/inet/socat-serviceBASE /etc/systemd/system/socat.service
+  chmod +x /etc/systemd/system/socat.service
 
-	chmod +x /etc/systemd/system/socat.service
-
-	# Create a one-time startup job to init minikube, [ yes this is different than above.. ]
+	# Create one-time startup service job to init minikube, anything else..
   curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/one-time-startup-serviceBASE
   cp /data/inet/one-time-startup-serviceBASE /etc/systemd/system/one-time-startup.service
   chmod +x /etc/systemd/system/one-time-startup.service
