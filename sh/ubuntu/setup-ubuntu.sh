@@ -591,9 +591,9 @@ export NUTANIX_ARTIFACT_HOST="https://downloads.d2iq.com/dkp/$NUTANIX_VERSION"
 	#
 	# github-runner
 	#
-	#curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-github-runner.sh
-	#cp /data/inet/install-github-runner.sh /dev2/sh/install-github-runner.sh
-	#chmod +x /dev2/sh/install-github-runner.sh
+	curl -LO  --output-dir /data/inet   https://raw.githubusercontent.com/ericm48/cmdzNThangs/refs/heads/main/sh/ubuntu/install-github-runner.sh
+	cp /data/inet/install-github-runner.sh /dev2/sh/install-github-runner.sh
+	chmod +x /dev2/sh/install-github-runner.sh
 
 	# This will pull down and expand the .tar.gz.  More steps needed.
 	#/dev2/sh/install-github-runner.sh
